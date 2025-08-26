@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             icon: Iconz.logoPng,
             // iconColor: Colorz.googleRed,
             // color: Colorz.white255,
-            iconSizeFactor: 1,
+            // iconSizeFactor: 1,
             // corners: 50,
             margins: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           ),
