@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 
 abstract class Colorz {
   // --------------------
-  static const Color majorelleBlue        = Color.fromARGB(255, 93, 66, 242); // #5d42f2
-  static const Color majorelleBlueDark1   = Color.fromARGB(255, 79, 58, 216); // #4f3ad8
-  static const Color majorelleBlueDark2   = Color.fromARGB(255, 66, 47, 190); // #422fbe
-  static const Color majorelleBlueDark3   = Color.fromARGB(255, 53, 36, 164); // #3524a4
-  static const Color majorelleBlueDark4   = Color.fromARGB(255, 38, 24, 130); // #261882
-  static const Color majorelleBlueDark5   = Color.fromARGB(255, 23, 13, 88);  // #170d58
+  static const Color light    = Color.fromARGB(255, 250, 250, 250); // #FAFAFA
+  static const Color light2   = Color.fromARGB(255, 245, 245, 245); // #F5F5F5
+  static const Color light3   = Color.fromARGB(255, 238, 238, 238); // #EEEEEE
+  static const Color light4   = Color.fromARGB(255, 224, 224, 224); // #E0E0E0
+  static const Color light5   = Color.fromARGB(255, 189, 189, 189); // #BDBDBD
+  static const Color light6   = Color.fromARGB(255, 158, 158, 158); // #9E9E9E
   // --------------------
-  static const Color lightSeaGreen        = Color.fromARGB(255, 0, 184, 175); // #00b8af
-  static const Color lightSeaGreenDark1   = Color.fromARGB(255, 0, 157, 150); // #009d96
-  static const Color lightSeaGreenDark2   = Color.fromARGB(255, 0, 131, 125); // #00837d
-  static const Color lightSeaGreenDark3   = Color.fromARGB(255, 0, 105, 100); // #006964
-  static const Color lightSeaGreenDark4   = Color.fromARGB(255, 0, 79, 75);   // #004f4b
-  static const Color lightSeaGreenDark5   = Color.fromARGB(255, 0, 52, 50);   // #003432
-  // --------------------
-  static const Color blue        = Color.fromARGB(255, 0, 25, 247); // #0019f7
-  static const Color blueDark1   = Color.fromARGB(255, 0, 21, 210); // #0015d2
-  static const Color blueDark2   = Color.fromARGB(255, 0, 17, 175); // #0011af
-  static const Color blueDark3   = Color.fromARGB(255, 0, 14, 140); // #000e8c
-  static const Color blueDark4   = Color.fromARGB(255, 0, 10, 105); // #000a69
-  static const Color blueDark5   = Color.fromARGB(255, 0, 7, 70);   // #000746
+  static const Color dark         = Color.fromARGB(255, 48, 48, 48);   // #303030
+  static const Color dark2        = Color.fromARGB(255, 66, 66, 66);   // #424242
+  static const Color dark3        = Color.fromARGB(255, 97, 97, 97);   // #616161
+  static const Color dark4        = Color.fromARGB(255, 117, 117, 117); // #757575
+  static const Color dark5        = Color.fromARGB(255, 130, 130, 130); // #828282
+  static const Color dark6        = Color.fromARGB(255, 144, 144, 144); // #909090
   // --------------------
   /// Black & White
   static const Color black = Color.fromARGB(255, 0, 0, 0);       // #000000

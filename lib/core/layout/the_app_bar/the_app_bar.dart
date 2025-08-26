@@ -48,7 +48,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
               onTap: () => Routing.goTo(route: Routing.routeHome),
               height: _appBarHeight,
               width: _appBarHeight,
-              icon: Iconz.iconColored,
+              icon: Iconz.logoPng,
               iconSizeFactor: 0.7,
               splashColor: Colorz.nothing,
               margins: const EdgeInsets.symmetric(horizontal: 10),
@@ -61,9 +61,9 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
 
             const SuperPopMenu(
               corners: BorderRadius.all(Radius.circular(15)),
-              borderColor: Colorz.majorelleBlueDark3,
+              borderColor: Colorz.dark2,
               // offset: const Offset(0, 0),
-              bubbleColor: Colorz.majorelleBlue,
+              bubbleColor: Colorz.dark2,
               enabled: true,
               popupChild: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -91,8 +91,8 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SuperImage(
                   height: Scale.appBarHeight,
                   width: Scale.appBarHeight,
-                  pic: Iconz.palette,
-                  iconColor: Colorz.majorelleBlue,
+                  pic: Icons.menu,
+                  iconColor: Colorz.light5,
                   loading: false,
                   scale: 0.6,
                 ),

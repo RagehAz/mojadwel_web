@@ -14,15 +14,15 @@ class TheLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colorz.majorelleBlue,
-        statusBarColor: Colorz.majorelleBlue,
-        systemNavigationBarDividerColor: Colorz.majorelleBlue,
+        systemNavigationBarColor: Colorz.light3,
+        statusBarColor: Colorz.light3,
+        systemNavigationBarDividerColor: Colorz.light3,
         systemNavigationBarIconBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
       child: Scaffold(
-        backgroundColor: backgroundColor ?? Colorz.majorelleBlue,
+        backgroundColor: backgroundColor ?? Colorz.light3,
         appBar: const TheAppBar(),
         body: child,
       ),
