@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
             textHeight: 100,
             lineSpacingFactor: 0.6,
             font: MojadwelFonts.montreal,
-            textColor: Colorz.light6,
+            textColor: Colorz.light3,
           ),
 
           SuperText(

@@ -110,7 +110,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                   height: Scale.appBarHeight,
                   width: Scale.appBarHeight,
                   pic: Icons.menu,
-                  iconColor: Colorz.light5,
+                  iconColor: Colorz.light3,
                   loading: false,
                   scale: 0.6,
                 ),

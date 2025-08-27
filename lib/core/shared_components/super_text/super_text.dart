@@ -3,6 +3,7 @@ library super_text;
 // -----------------------------------------------------------------------------
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
+import 'package:mojadwel_web/core/theme/fonts.dart';
 // -----------------------------------------------------------------------------
 part 'src/super_text_structure/c_leading_dot.dart';
 part 'src/super_text_structure/e_red_dot.dart';

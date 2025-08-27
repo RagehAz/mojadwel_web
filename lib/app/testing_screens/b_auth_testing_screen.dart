@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
+import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'components/test_button.dart';
@@ -16,7 +17,30 @@ class AuthTestingScreen extends StatefulWidget {
 }
 
 class _AuthTestingScreenState extends State<AuthTestingScreen> {
+  // --------------------------------------------------------------------------
+  Future<bool> signOutBldrs() async {
 
+    // final bool _success = await OfficialAuthing.signOut(
+    //     onError: (String? error) async {
+    //       await BldrsCenterDialog.showCenterDialog(
+    //         headlineVerse: const Verse(
+    //           id: 'phid_trouble_signing_out',
+    //           translate: true,
+    //         ),
+    //         bodyVerse: Verse(
+    //           id: error,
+    //           translate: false,
+    //         ),
+    //       );
+    //     }
+    // );
+    //
+    // if (_success == true){
+    //   UserPro.proSetMyUserModel(userModel: null, notify: true);
+    // }
+
+    return true;
+  }
   // -----------------------------------------------------------------------------
   final String _emailToRegister = 'bro@bldrs.net';
   final String _passwordToRegister = '123456';
@@ -26,10 +50,10 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: Column(
+      child: VerticalFloatingList(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        columnChildren: [
 
           // --------------------------------------------------------------------------
 
@@ -344,7 +368,7 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
                 text: 'RE-AUTH BY GOOGLE',
                 function: () async {
                   // --------------------
-                  final bool _signedOut = await SignOut.signOutBldrs();
+                  final bool _signedOut = await signOutBldrs();
                   blog('signedOut($_signedOut)');
                   // --------------------
                   setState(() {});
@@ -388,7 +412,7 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
                   // );
                   // blog('reAuthed($_reAuthed)');
                   // --------------------
-                  final bool _signedOut2 = await SignOut.signOutBldrs();
+                  final bool _signedOut2 = await signOutBldrs();
                   blog('_signedOut2($_signedOut2)');
                   // --------------------
                   // setState(() {});
@@ -497,34 +521,5 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
     );
     // --------------------
   }
-}
-
-/// => TAMAM
-abstract class SignOut {
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  static Future<bool> signOutBldrs() async {
-
-    // final bool _success = await OfficialAuthing.signOut(
-    //     onError: (String? error) async {
-    //       await BldrsCenterDialog.showCenterDialog(
-    //         headlineVerse: const Verse(
-    //           id: 'phid_trouble_signing_out',
-    //           translate: true,
-    //         ),
-    //         bodyVerse: Verse(
-    //           id: error,
-    //           translate: false,
-    //         ),
-    //       );
-    //     }
-    // );
-    //
-    // if (_success == true){
-    //   UserPro.proSetMyUserModel(userModel: null, notify: true);
-    // }
-
-    return true;
-  }
-// --------------------
+  // --------------------------------------------------------------------------
 }

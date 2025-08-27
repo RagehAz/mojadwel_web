@@ -5,19 +5,13 @@ abstract class Colorz {
   static const Color bloodTest = Color.fromARGB(100, 255, 0, 0);
   static const Color errorColor = Color.fromARGB(255, 203, 31, 31);
   // --------------------
-  static const Color light    = Color.fromARGB(255, 250, 250, 250); // #FAFAFA
-  static const Color light2   = Color.fromARGB(255, 245, 245, 245); // #F5F5F5
-  static const Color light3   = Color.fromARGB(255, 238, 238, 238); // #EEEEEE
-  static const Color light4   = Color.fromARGB(255, 224, 224, 224); // #E0E0E0
-  static const Color light5   = Color.fromARGB(255, 189, 189, 189); // #BDBDBD
-  static const Color light6   = Color.fromARGB(255, 158, 158, 158); // #9E9E9E
+  static const Color light1    = Color.fromARGB(255, 250, 250, 250); // #FAFAFA
+  static const Color light2   = Color.fromARGB(255, 224, 224, 224); // #E0E0E0
+  static const Color light3   = Color.fromARGB(255, 158, 158, 158); // #9E9E9E
   // --------------------
-  static const Color dark         = Color.fromARGB(255, 48, 48, 48);   // #303030
-  static const Color dark2        = Color.fromARGB(255, 66, 66, 66);   // #424242
   static const Color dark3        = Color.fromARGB(255, 97, 97, 97);   // #616161
-  static const Color dark4        = Color.fromARGB(255, 117, 117, 117); // #757575
-  static const Color dark5        = Color.fromARGB(255, 130, 130, 130); // #828282
-  static const Color dark6        = Color.fromARGB(255, 144, 144, 144); // #909090
+  static const Color dark2        = Color.fromARGB(255, 117, 117, 117); // #757575
+  static const Color dark1        = Color.fromARGB(255, 144, 144, 144); // #909090
   // --------------------
   /// Black & White
   static const Color black = Color.fromARGB(255, 0, 0, 0);       // #000000

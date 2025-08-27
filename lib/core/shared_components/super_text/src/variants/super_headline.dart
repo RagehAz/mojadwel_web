@@ -5,7 +5,7 @@ class SuperHeadline extends StatelessWidget {
   const SuperHeadline({
     required this.text,
     this.width,
-    this.color = Colorz.white255,
+    this.color = Colorz.black255,
     this.textHeight = 30,
     this.margin = 20,
     super.key
@@ -29,6 +29,7 @@ class SuperHeadline extends StatelessWidget {
       centered: false,
       margins: margin,
       italic: true,
+      font: MojadwelFonts.montreal,
     );
 
   }

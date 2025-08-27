@@ -21,7 +21,7 @@ class TestingHome extends StatelessWidget {
           /// AUTH TESTING
           SuperBox(
             height: 50,
-            color: Colorz.dark6,
+            color: Colorz.dark3,
             icon: Iconz.logoPng,
             iconSizeFactor: 0.6,
             text: 'Auth Testing screen',
@@ -42,7 +42,7 @@ class TestingHome extends StatelessWidget {
           /// FIRE TESTING
           SuperBox(
             height: 50,
-            color: Colorz.dark6,
+            color: Colorz.dark3,
             icon: Iconz.logoPng,
             iconSizeFactor: 0.6,
             text: 'Fire Testing screen',

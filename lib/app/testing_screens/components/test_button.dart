@@ -301,9 +301,10 @@ class _TestButtonState extends State<TestButton> {
                 ),
                 bubbleWidth: _bubbleWidth,
                 onTileTap: _onAction,
-                bubbleColor: _success == false ? Colorz.bloodTest : Colorz.light2,
+                bubbleColor: _success == false ? Colorz.bloodTest : Colorz.dark1,
                 bulletPoints: _showDetails == false ? null : _reports,
                 bulletPointsMaxLines: 100,
+                textColor: Colorz.black255,
                 child: Column(
                   children: <Widget>[
 
