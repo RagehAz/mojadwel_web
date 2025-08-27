@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
+import 'package:mojadwel_web/core/layout/the_layout.dart';
+import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
+import 'package:mojadwel_web/core/theme/colorz.dart';
+import 'package:mojadwel_web/core/theme/iconz.dart';
+
+class TestingHome extends StatelessWidget {
+  // --------------------------------------------------------------------------
+  const TestingHome({super.key});
+  // -----------------------------------------------------------------------------
+  @override
+  Widget build(BuildContext context) {
+    // --------------------
+    return TheLayout(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          /// AUTH TESTING
+          SuperBox(
+            height: 50,
+            color: Colorz.dark6,
+            icon: Iconz.logoPng,
+            iconSizeFactor: 0.6,
+            text: 'Auth Testing screen',
+            // iconColor: Colorz.googleRed,
+            // color: Colorz.white255,
+            // iconSizeFactor: 1,
+            // corners: 50,
+            margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            onTap: () async {
+
+              await Routing.goTo(
+                route: Routing.routeAuthTesting,
+              );
+
+            },
+          ),
+
+          /// FIRE TESTING
+          SuperBox(
+            height: 50,
+            color: Colorz.dark6,
+            icon: Iconz.logoPng,
+            iconSizeFactor: 0.6,
+            text: 'Fire Testing screen',
+            // iconColor: Colorz.googleRed,
+            // color: Colorz.white255,
+            // iconSizeFactor: 1,
+            // corners: 50,
+            margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            onTap: () async {
+
+              await Routing.goTo(
+                route: Routing.routeFireTesting,
+              );
+
+            },
+          ),
+
+        ],
+      ),
+    );
+    // --------------------
+  }
+// -----------------------------------------------------------------------------
+}

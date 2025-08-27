@@ -14,7 +14,7 @@ extension ExtraWire<T> on Wire<T> {
     required T value,
     bool mounted = true,
   }){
-    return _setNotifier(notifier: this, mounted: mounted, value: value);
+    return setNotifier(notifier: this, mounted: mounted, value: value);
   }
   // -----------------------------------------------------------------------------
 
@@ -214,7 +214,7 @@ class UnNullify<T> extends StatelessWidget {
 // --------------------------------------------------------------------------
 }
 
-bool _setNotifier({
+bool setNotifier({
   required ValueNotifier<dynamic>? notifier,
   required bool mounted,
   required dynamic value,

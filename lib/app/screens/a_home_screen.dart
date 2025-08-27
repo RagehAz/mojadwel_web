@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
+import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
@@ -20,15 +21,35 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          const SuperBox(
+          SuperBox(
             height: 100,
-            width: 100,
+            // width: 100,
             icon: Iconz.logoPng,
             // iconColor: Colorz.googleRed,
             // color: Colorz.white255,
             // iconSizeFactor: 1,
             // corners: 50,
-            margins: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            onTap: () async {
+
+              blog('wtf');
+
+              final String? _id = await OfficialFire.createDoc(
+                  coll: 'users',
+                  input: {
+                    'bro': 'wtf',
+                    'fire': 'works man',
+                  },
+              );
+
+              blog('done._id($_id)');
+
+              final bool _delete = await OfficialFire.deleteDoc(coll: 'users', doc: _id);
+
+              blog('deleted ($_delete)');
+
+
+            },
           ),
 
           SuperText(
@@ -40,7 +61,7 @@ class HomeScreen extends StatelessWidget {
             margins: const EdgeInsets.symmetric(horizontal: 20),
             textHeight: 100,
             lineSpacingFactor: 0.6,
-            font: InfinityFont.montreal,
+            font: MojadwelFonts.montreal,
             textColor: Colorz.light6,
           ),
 
@@ -52,7 +73,7 @@ class HomeScreen extends StatelessWidget {
             maxLines: 5,
             margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             textHeight: 30,
-            font: InfinityFont.regular,
+            font: MojadwelFonts.regular,
             textColor: Colorz.black255,
           ),
 

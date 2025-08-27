@@ -1,0 +1,16 @@
+library super_text_field;
+// -----------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
+import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
+import 'package:mojadwel_web/core/theme/colorz.dart';
+import 'package:mojadwel_web/core/utilities/wire.dart';
+// -----------------------------------------------------------------------------
+part 'src/text_field/a_super_text_field.dart';
+part 'src/text_field/x_super_text_field_controller.dart';
+part 'src/validation/super_validator.dart';
+part 'src/helpers/helpers.dart';
+part 'src/text_field/b_super_text_field_box.dart';
+part 'src/text_field/c_text_field_form_switcher.dart';
+// -----------------------------------------------------------------------------

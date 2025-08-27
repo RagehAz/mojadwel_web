@@ -1,8 +1,13 @@
+// ignore_for_file: prefer_single_quotes
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/app_scroll_behavior.dart';
+
+import 'core/services/fire/fire.dart';
 // --------------------------------------------------------------------------
 
 /// MAIN
@@ -11,6 +16,23 @@ import 'package:mojadwel_web/core/utilities/app_scroll_behavior.dart';
 Future<void> main() async {
   // final WidgetsBinding _binding =
   WidgetsFlutterBinding.ensureInitialized();
+
+  await OfficialFirebase.initialize(
+    socialKeys: const SocialKeys(
+      // supportApple: false,
+      supportEmail: true,
+      googleClientID: '410652668976-8k2p2fio3s51farp3pdukbt2ndjfbcic.apps.googleusercontent.com',
+      // facebookAppID: null,
+    ),
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyC4pBl-XB9KVzIrwM2HWPiZX3Y2xEqZFvA",
+      authDomain: "mojadwelagent.firebaseapp.com",
+      projectId: "mojadwelagent",
+      storageBucket: "mojadwelagent.firebasestorage.app",
+      messagingSenderId: "410652668976",
+      appId: "1:410652668976:web:52772a762917a4eff4e9f5"
+    ),
+  );
 
   runApp(const Starter());
 

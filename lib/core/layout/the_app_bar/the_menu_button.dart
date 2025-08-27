@@ -30,7 +30,7 @@ class TheMenuButton extends StatelessWidget {
       height: Scale.appBarHeight,
       width: Scale.popUpButtonWidth,
       text: text,
-      textFont: InfinityFont.montreal,
+      textFont: MojadwelFonts.montreal,
       textScaleFactor: 0.9,
       // verseItalic: true,
       icon: icon,

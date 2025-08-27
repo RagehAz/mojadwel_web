@@ -459,9 +459,9 @@ class OfficialGoogleAuthing {
   /// GOOGLE SIGN IN SINGLETON
 
   // --------------------
-  // GoogleSignIn? _googleSignIn;
-  // GoogleSignIn get googleSignIn => _googleSignIn ??= GoogleSignIn();
-  // static GoogleSignIn getGoogleSignInInstance() => OfficialGoogleAuthing.instance.googleSignIn;
+  GoogleSignIn? _googleSignIn;
+  GoogleSignIn get googleSignIn => _googleSignIn ??= GoogleSignIn.instance;
+  static GoogleSignIn getGoogleSignInInstance() => OfficialGoogleAuthing.instance.googleSignIn;
   // -----------------------------------------------------------------------------
 
   /// GOOGLE AUTH PROVIDER SINGLETON
@@ -476,153 +476,111 @@ class OfficialGoogleAuthing {
 
   // --------------------
   /// TESTED : WORKS PERFECT
-  // static Future<AuthClient?> scopedSignIn({
-  //   List<String>? scopes,
-  //   // String clientID,
-  // }) async {
-  //   AuthClient? client;
-  //
-  //   if (checkCanLoop(scopes) == true) {
-  //
-  //     final GoogleSignIn _googleSignIn = GoogleSignIn(
-  //       scopes: scopes!,
-  //       // clientId: clientID,
-  //       // forceCodeForRefreshToken: ,
-  //       // hostedDomain: ,
-  //       // serverClientId: ,
-  //       // signInOption: ,
-  //     );
-  //
-  //     await tryAndCatch(
-  //       invoker: 'googleSignIn',
-  //       functions: () async {
-  //
-  //         await _googleSignIn.signIn();
-  //         client = await _googleSignIn.authenticatedClient();
-  //
-  //       },
-  //     );
-  //
-  //   }
-  //
-  //   return client;
-  // }
+  static Future<AuthClient?> scopedSignIn({
+    List<String>? scopes,
+    String? clientId,
+    String? serverClientId,
+  }) async {
+    AuthClient? client;
+
+    if (checkCanLoop(scopes) == true) {
+
+      // Initialize once (safe to call multiple times)
+      await getGoogleSignInInstance().initialize(
+        clientId: clientId,
+        serverClientId: serverClientId,
+        // hostedDomain: ,
+        // nonce: ,
+      );
+
+      // final Stream<GoogleSignInAuthenticationEvent> sub =
+      getGoogleSignInInstance().authenticationEvents
+          .listen(_handleAuthenticationEvent)
+          .onError(_handleAuthenticationError);
+
+
+      // await tryAndCatch(
+      //   invoker: 'googleSignIn',
+      //   functions: () async {
+      //
+      //     if (signIn.supportsAuthenticate() == true) {
+      //       await signIn.authenticate();
+      //     }
+      //
+      //     else {
+      //       account = await signIn.signIn();
+      //     }
+      //
+      //     account ??= signIn.currentUser;
+      //
+      //     if (account == null) return null;
+      //
+      //     // Request authorization for the given scopes
+      //     final GoogleSignInClientAuthorization auth =
+      //     await account.authorizationClient.authorizeScopes(scopes);
+      //
+      //     return auth;
+      //   },
+      // );
+
+    }
+
+    return client;
+  }
+// --------------------
+  ///
+  static void _handleAuthenticationEvent(GoogleSignInAuthenticationEvent onEvent){
+    blog('_handleAuthenticationEvent.onEvent($onEvent)');
+
+  }
+  // --------------------
+  ///
+  static void _handleAuthenticationError(Object object, StackTrace trace){
+    blog('_handleAuthenticationError.trace($trace)');
+    blog('_handleAuthenticationError.object($object)');
+  }
   // -----------------------------------------------------------------------------
 
   /// EMAIL SIGN IN
 
   // --------------------
   /// TESTED : WORKS PERFECT
-  // static Future<AuthModel?> emailSignIn({
-  //   Function(String? error)? onError,
-  // }) async {
-  //   AuthModel? _output;
-  //
-  //   await getGoogleSignInInstance().signOut();
-  //
-  //   if (kIsWeb == true) {
-  //     _output = await _webGoogleAuth(onError: onError,);
-  //   }
-  //
-  //   else {
-  //     _output = await _appGoogleAuth(onError: onError,);
-  //   }
-  //
-  //   return _output;
-  // }
+  static Future<AuthModel?> emailSignIn({
+    Function(String? error)? onError,
+  }) async {
+
+    await getGoogleSignInInstance().signOut();
+
+    return _webGoogleAuth(onError: onError,);
+  }
   // --------------------
   /// TESTED : WORKS PERFECT
-  // static Future<AuthModel?> _webGoogleAuth({
-  //   Function(String? error)? onError,
-  // }) async {
-  //   AuthModel? _output;
-  //
-  //   await tryAndCatch(
-  //     invoker: 'webGoogleAuth',
-  //       onError: onError,
-  //       functions: () async {
-  //
-  //       /// get [auth provider]
-  //       final f_a.GoogleAuthProvider _googleAuthProvider = getGoogleAuthProviderInstance();
-  //
-  //       final f_a.FirebaseAuth? _firebaseAuth = OfficialFirebase.getAuth();
-  //
-  //       /// get [user credential] from [auth provider]
-  //       final f_a.UserCredential? _userCredential = await _firebaseAuth?.signInWithPopup(_googleAuthProvider);
-  //
-  //       _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
-  //         cred: _userCredential,
-  //       );
-  //
-  //     },
-  //   );
-  //
-  //   return _output;
-  // }
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  // static Future<AuthModel?> _appGoogleAuth({
-  //   Function(String? error)? onError,
-  // }) async {
-  //   AuthModel? _output;
-  //
-  //   await tryAndCatch(
-  //     invoker: '_appGoogleAuth',
-  //     onError: onError,
-  //     functions: () async {
-  //
-  //       /// get [google sign in account]
-  //       final GoogleSignInAccount? _googleSignInAccount = await getGoogleSignInInstance().signIn();
-  //
-  //       if (_googleSignInAccount != null) {
-  //
-  //             /// get [google sign in auth] from [google sign in account]
-  //             final GoogleSignInAuthentication _googleSignInAuthentication = await
-  //             _googleSignInAccount.authentication;
-  //
-  //             /// get [auth credential] from [google sign in auth]
-  //             final f_a.AuthCredential _authCredential = f_a.GoogleAuthProvider.credential(
-  //               accessToken: _googleSignInAuthentication.accessToken,
-  //               idToken: _googleSignInAuthentication.idToken,
-  //             );
-  //
-  //             final f_a.FirebaseAuth? _firebaseAuth = OfficialFirebase.getAuth();
-  //
-  //             /// C - get [user credential] from [auth credential]
-  //             final f_a.UserCredential? _userCredential = await _firebaseAuth?.signInWithCredential(_authCredential);
-  //
-  //             _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
-  //               cred: _userCredential,
-  //               addData: _createGoogleAuthDataMap(
-  //                 googleSignInAuthentication: _googleSignInAuthentication,
-  //                 authCredential: _authCredential,
-  //               ),
-  //             );
-  //
-  //           }
-  //
-  //     },
-  //   );
-  //
-  //   return _output;
-  // }
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  // static Map<String, dynamic>? _createGoogleAuthDataMap({
-  //   GoogleSignInAuthentication? googleSignInAuthentication,
-  //   f_a.AuthCredential? authCredential,
-  // }){
-  //
-  //   final Map<String, dynamic> _map = {
-  //     'googleSignInAuthentication.accessToken': googleSignInAuthentication?.accessToken,
-  //     'googleSignInAuthentication.idToken': googleSignInAuthentication?.idToken,
-  //     'authCredential.signInMethod' : authCredential?.signInMethod,
-  //     'authCredential.providerId' : authCredential?.providerId,
-  //     'authCredential.accessToken' : authCredential?.accessToken,
-  //     'authCredential.token' : authCredential?.token,
-  //   };
-  //
-  //   return cleanNullPairs(map: _map);
-  // }
+  static Future<AuthModel?> _webGoogleAuth({
+    Function(String? error)? onError,
+  }) async {
+    AuthModel? _output;
+
+    await tryAndCatch(
+      invoker: 'webGoogleAuth',
+        onError: onError,
+        functions: () async {
+
+        /// get [auth provider]
+        final f_a.GoogleAuthProvider _googleAuthProvider = getGoogleAuthProviderInstance();
+
+        final f_a.FirebaseAuth? _firebaseAuth = OfficialFirebase.getAuth();
+
+        /// get [user credential] from [auth provider]
+        final f_a.UserCredential? _userCredential = await _firebaseAuth?.signInWithPopup(_googleAuthProvider);
+
+        _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
+          cred: _userCredential,
+        );
+
+      },
+    );
+
+    return _output;
+  }
   // -----------------------------------------------------------------------------
 }

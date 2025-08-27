@@ -24,7 +24,13 @@ abstract class Iconz {
   }
   // --------------------
   /// artworks
-  static const String logoPng = 'assets/logo.png' ;
-  // static const String logoSvg = 'assets/logo.svg' ;
+  // static const String logoSvg = 'assets/logo.svg';
+  static const String logoPng = 'assets/logo.png';
+  static const String power = 'assets/logo.png';
+  static const String check = 'assets/logo.png';
+  static const String xSmall = 'assets/logo.png';
+  static const String more = 'assets/logo.png';
+  static const String viewsIcon = 'assets/logo.png';
+  static const String paste = 'assets/logo.png';
   // -----------------------------------------------------------------------------
 }

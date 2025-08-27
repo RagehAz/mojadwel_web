@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 abstract class Colorz {
   // --------------------
+  static const Color bloodTest = Color.fromARGB(100, 255, 0, 0);
+  static const Color errorColor = Color.fromARGB(255, 203, 31, 31);
+  // --------------------
   static const Color light    = Color.fromARGB(255, 250, 250, 250); // #FAFAFA
   static const Color light2   = Color.fromARGB(255, 245, 245, 245); // #F5F5F5
   static const Color light3   = Color.fromARGB(255, 238, 238, 238); // #EEEEEE
@@ -55,6 +58,13 @@ abstract class Colorz {
   static const Color white200 = Color.fromARGB(200, _whiteR, _whiteG, _whiteB);
   static const Color white230 = Color.fromARGB(230, _whiteR, _whiteG, _whiteB);
   static const Color white255 = Color.fromARGB(255, _whiteR, _whiteG, _whiteB);
+  // --------------------
+  static const Color green20 = Color.fromARGB(20, 24, 157, 14);
+  static const Color green50 = Color.fromARGB(50, 24, 157, 14);
+  static const Color green80 = Color.fromARGB(80, 24, 157, 14);
+  static const Color green125 = Color.fromARGB(125, 24, 157, 14);
+  static const Color green230 = Color.fromARGB(230, 24, 157, 14);
+  static const Color green255 = Color.fromARGB(255, 24, 157, 14);
   // --------------------
   static const Color facebook = Color.fromARGB(255, 59, 89, 152);
   static const Color linkedIn = Color.fromARGB(255, 0, 115, 176);

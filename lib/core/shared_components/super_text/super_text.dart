@@ -2,6 +2,7 @@ library super_text;
 
 // -----------------------------------------------------------------------------
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/core/theme/colorz.dart';
 // -----------------------------------------------------------------------------
 part 'src/super_text_structure/c_leading_dot.dart';
 part 'src/super_text_structure/e_red_dot.dart';
@@ -18,4 +19,5 @@ part 'src/text_style_creator/create_style_method.dart';
 part 'src/bullet_points/bullet_points.dart';
 // --------------------
 part 'src/helpers/helpers.dart';
+part 'src/variants/super_headline.dart';
 // -----------------------------------------------------------------------------
