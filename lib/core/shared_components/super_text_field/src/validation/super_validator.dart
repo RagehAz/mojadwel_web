@@ -54,7 +54,6 @@ class SuperValidator extends StatelessWidget {
         maxLines: 5,
         centered: false,
         italic: true,
-        appIsLTR: true,
         // textDirection: ,
       );
     }

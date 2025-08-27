@@ -1,5 +1,4 @@
-// ignore_for_file: avoid_catches_without_on_clauses
-
+// ignore_for_file: avoid_catches_without_on_clauses, unused_catch_stack
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +12,6 @@ import 'package:mojadwel_web/core/theme/iconz.dart';
 import 'package:mojadwel_web/core/utilities/dimensions.dart';
 import 'package:mojadwel_web/core/utilities/scale.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
-
-class WideButton {
-  // --------------------------------------------------------------------------
-  static const double height = 50;
-  static EdgeInsets margins = const EdgeInsets.only(bottom: 10);
-  // --------------------------------------------------------------------------
-}
 
 class TestButton extends StatefulWidget {
   // -----------------------------------------------------------------------------
@@ -260,7 +252,7 @@ class _TestButtonState extends State<TestButton> {
   @override
   Widget build(BuildContext context) {
 
-    final double _bubbleWidth = Scale.screenWidth(context) - WideButton.height - 25;
+    final double _bubbleWidth = Scale.screenWidth(context) - _WideButton.height - 25;
     final double _clearBubbleWidth = _bubbleWidth - 50;
     final double _resultBoxHeight = _theResult == 'true' ? 20 : 150;
     final bool _isMap = _theResult is Map;
@@ -282,8 +274,8 @@ class _TestButtonState extends State<TestButton> {
 
               /// CHECK - X
               SuperBox(
-                width: WideButton.height,
-                height: WideButton.height * 0.7,
+                width: _WideButton.height,
+                height: _WideButton.height * 0.7,
                 loading: loading,
                 loadingIsPulse: true,
                 icon: _success == null ? Iconz.power : _Helpers.boolIsTrue(_success) == true ? Iconz.check : Iconz.xSmall,
@@ -331,7 +323,8 @@ class _TestButtonState extends State<TestButton> {
                               text: _theResult,
                               maxLines: 500,
                               centered: _theResult == 'true',
-                              textHeight: 15,
+                              textHeight: 25,
+
                               // weight: VerseWeight.thin,
                             ),
 
@@ -676,4 +669,10 @@ Errorized : Invoker : [ $invoker ]
 
   }
   // -----------------------------------------------------------------------------
+}
+
+class _WideButton {
+  // --------------------------------------------------------------------------
+  static const double height = 50;
+  // --------------------------------------------------------------------------
 }

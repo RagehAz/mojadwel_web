@@ -96,7 +96,7 @@ class TileBubble extends StatelessWidget {
           child: BulletPoints(
             textColor: bulletsColor,
             bulletPoints: bulletPoints,
-            textHeight: 18,
+            textHeight: 25,
             boxWidth: _childWidth,
             appIsLTR: appIsLTR,
             textDirection: textDirection ?? TextDirection.ltr,

@@ -12,8 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart' as f_a;
 import 'package:cloud_firestore/cloud_firestore.dart' as cloud;
 import 'package:firebase_database/firebase_database.dart' as f_db;
 import 'package:firebase_storage/firebase_storage.dart' as f_s;
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:googleapis_auth/auth_browser.dart';
 import 'package:http/http.dart'as http;
 // --------------------
 /// OFFICIAL

@@ -336,6 +336,10 @@ class AuthModel {
     }
 
   }
+  // --------------------
+  String? getGoogleAccessToken(){
+    return data?['credential.credential.accessToken'];
+  }
   // -----------------------------------------------------------------------------
 
   /// OVERRIDES

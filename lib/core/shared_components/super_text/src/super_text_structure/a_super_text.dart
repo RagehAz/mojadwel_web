@@ -36,7 +36,7 @@ class SuperText extends StatelessWidget {
     /// DIRECTION
     this.centered = true,
     this.textDirection = TextDirection.ltr,
-    this.appIsLTR = false,
+    this.appIsLTR = true,
     /// GESTURES
     this.onTap,
     this.onDoubleTap,

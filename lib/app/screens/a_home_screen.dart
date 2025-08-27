@@ -55,7 +55,6 @@ class HomeScreen extends StatelessWidget {
           SuperText(
             boxWidth: context.screenWidth,
             centered: false,
-            appIsLTR: true,
             text: 'Mojadwel',
             maxLines: 4,
             margins: const EdgeInsets.symmetric(horizontal: 20),
@@ -68,7 +67,6 @@ class HomeScreen extends StatelessWidget {
           SuperText(
             boxWidth: context.screenWidth,
             centered: false,
-            appIsLTR: true,
             text: 'Ai\nyour Whatsapp receptionist',
             maxLines: 5,
             margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),

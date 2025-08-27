@@ -31,8 +31,9 @@ class OfficialFirebase {
             appName: appName,
           );
 
-          _initializeSocialAuthing(
+          await _initializeSocialAuthing(
             socialKeys: socialKeys,
+            options: options,
           );
 
         },
@@ -75,9 +76,10 @@ class OfficialFirebase {
   static f_a.FirebaseAuth? getAuth() => OfficialFirebase.instance.auth;
   // --------------------
   /// TESTED : WORKS PERFECT
-  static void _initializeSocialAuthing({
+  static Future<void> _initializeSocialAuthing({
     required SocialKeys? socialKeys,
-  }) {
+    required FirebaseOptions options,
+  }) async {
 
     // blog('Social Authing is FEATURE need serious work AGAIN');
 

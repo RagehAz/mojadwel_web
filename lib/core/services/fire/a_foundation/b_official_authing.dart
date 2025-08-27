@@ -49,33 +49,25 @@ abstract class OfficialAuthing {
     Function(String? error)? onError,
   }) async {
 
-    // final bool _success = await tryCatchAndReturnBool(
-    //   invoker: 'OfficialAuthing.signOut',
-    //   onError: onError,
-    //   functions: () async {
-    //     final SignInMethod? signInMethod = getCurrentSignInMethod();
-    //
-    //     /// GOOGLE SIGN OUT
-    //     if (signInMethod == SignInMethod.google) {
-    //       if (kIsWeb == false) {
-    //         final GoogleSignIn _instance = OfficialGoogleAuthing.getGoogleSignInInstance();
-    //         await _instance.disconnect();
-    //         await _instance.signOut();
-    //       }
-    //     }
-    //
-    //     /// FACEBOOK SIGN OUT
-    //     else if (signInMethod == SignInMethod.facebook) {
-    //       await OfficialFacebookAuthing.getFacebookAuthInstance().logOut();
-    //     }
-    //
-    //     /// FIREBASE SIGN OUT
-    //     await OfficialFirebase.getAuth()?.signOut();
-    //   },
-    // );
+    final bool _success = await tryCatchAndReturnBool(
+      invoker: 'OfficialAuthing.signOut',
+      onError: onError,
+      functions: () async {
+        // final SignInMethod? signInMethod = getCurrentSignInMethod();
 
-    // return _success;
-    return false;
+        /// GOOGLE SIGN OUT
+        // if (signInMethod == SignInMethod.google) {
+        //     final GoogleSignIn _instance = OfficialGoogleAuthing.getGoogleSignInInstance();
+        //     await _instance.disconnect();
+        //     await _instance.signOut();
+        // }
+
+        /// FIREBASE SIGN OUT
+        await OfficialFirebase.getAuth()?.signOut();
+      },
+    );
+
+    return _success;
   }
   // -----------------------------------------------------------------------------
 
@@ -189,265 +181,6 @@ abstract class OfficialAuthing {
   // -----------------------------------------------------------------------------
 }
 
-/// => UPDATE_EMAIL_TASK
-class OfficialEmailAuthing {
-  // -----------------------------------------------------------------------------
-
-  const OfficialEmailAuthing();
-
-  // -----------------------------------------------------------------------------
-
-  /// SIGN IN
-
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  static Future<AuthModel?> signIn({
-    required String? email,
-    required String? password,
-    Function(String? error)? onError,
-  }) async {
-    AuthModel? _output;
-
-    if (
-        isEmpty(email) == false
-        &&
-        isEmpty(password) == false
-    ) {
-      await tryAndCatch(
-        invoker: 'signInByEmail',
-        functions: () async {
-
-          final f_a.UserCredential? _userCredential = await OfficialFirebase.getAuth()?.signInWithEmailAndPassword(
-            email: email!.trim(),
-            password: password!,
-          );
-
-          _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
-            cred: _userCredential,
-          );
-
-        },
-        onError: onError,
-      );
-    }
-
-    return _output;
-  }
-  // -----------------------------------------------------------------------------
-
-  /// REGISTER
-
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  static Future<AuthModel?> register({
-    required String? email,
-    required String? password,
-    required bool autoSendVerificationEmail,
-    Function(String? error)? onError,
-  }) async {
-    AuthModel? _output;
-
-    if (
-        isEmpty(email) == false
-        &&
-        isEmpty(password) == false
-    ) {
-
-      await tryAndCatch(
-          invoker: 'registerByEmail',
-          functions: () async {
-
-            final f_a.UserCredential? _userCredential = await OfficialFirebase.getAuth()?.createUserWithEmailAndPassword(
-              email: email!.trim(),
-              password: password!,
-            );
-
-            if (autoSendVerificationEmail == true){
-              await OfficialAuthing.getUser()?.sendEmailVerification();
-            }
-
-            _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
-                cred: _userCredential,
-            );
-
-          },
-          onError: onError,
-      );
-
-    }
-
-    return _output;
-  }
-  // -----------------------------------------------------------------------------
-
-  /// CHECKERS
-
-  // --------------------
-    /// TESTED : WORKS PERFECT
-  static Future<bool> checkPasswordIsCorrect({
-    required String? password,
-    required String? email,
-  }) async {
-
-    f_a.UserCredential? _credential;
-
-    final bool _credentialsAreGood = await tryCatchAndReturnBool(
-        functions: () async {
-
-          if (
-              isEmpty(email) == false
-              &&
-              isEmpty(password) == false
-          ) {
-
-            final f_a.AuthCredential? _authCredential = f_a.EmailAuthProvider.credential(
-              email: email!,
-              password: password!,
-            );
-
-            if (_authCredential != null){
-              _credential = await OfficialFirebase.getAuth()
-                ?.currentUser
-                ?.reauthenticateWithCredential(_authCredential);
-            }
-
-          }
-        });
-
-    if (_credentialsAreGood == true && _credential != null){
-      return true;
-    }
-    else {
-      return false;
-    }
-
-  }
-  // -----------------------------------------------------------------------------
-
-  /// UPDATE EMAIL - PASSWORD
-
-  // --------------------
-  /// UPDATE_EMAIL_TASK
-  static Future<bool> updateUserEmail({
-    required String? newEmail,
-    Function(String? error)? onError,
-  }) async {
-    blog('updateUserEmail : START');
-
-    bool _success = false;
-
-      final f_a.FirebaseAuth? _auth = OfficialFirebase.getAuth();
-      final String? _oldEmail = _auth?.currentUser?.email;
-
-      blog('updateUserEmail : new : $newEmail : old : $_oldEmail');
-
-      if (newEmail != null && _oldEmail != null && _oldEmail != newEmail) {
-        _success = await tryCatchAndReturnBool(
-          invoker: 'updateUserEmail',
-          onError: onError,
-          functions: () async {
-
-            await _auth?.currentUser?.verifyBeforeUpdateEmail(newEmail);
-            // await _auth?.currentUser?.updateEmail(newEmail);
-            blog('updateUserEmail : END');
-          },
-        );
-      }
-
-    return _success;
-  }
-  // --------------------
-  /// UPDATE_EMAIL_TASK
-  static Future<bool> updateUserPassword({
-    required String? newPassword,
-    Function(String? error)? onError,
-  }) async {
-    blog('updateUserPassword : START');
-
-    bool _success = false;
-
-      final f_a.FirebaseAuth? _auth = OfficialFirebase.getAuth();
-
-      if (newPassword != null ) {
-        _success = await tryCatchAndReturnBool(
-          invoker: 'updateUserPassword',
-          onError: onError,
-          functions: () async {
-            await _auth?.currentUser?.updatePassword(newPassword);
-            blog('updateUserPassword : END');
-          },
-        );
-      }
-
-    return _success;
-  }
-  // -----------------------------------------------------------------------------
-
-  /// CHANGE PASSWORD
-
-  // --------------------
-  /// TESTED : WORKS PERFECT : UPDATE_EMAIL_TASK
-  static Future<bool> sendPasswordResetEmail({
-    required String? email,
-    required Function(String? error)? onError,
-  }) async {
-    bool _success = false;
-
-    if (isEmpty(email) == false){
-
-      await tryAndCatch(
-        invoker: 'sendPasswordResetEmail',
-        functions: () async {
-
-          final f_a.FirebaseAuth _auth = OfficialFirebase.getAuth()!;
-          await _auth.sendPasswordResetEmail(
-            email: email!,
-            // actionCodeSettings: ActionCodeSettings(
-            //   url: ,
-            //   androidInstallApp: ,
-            //   androidMinimumVersion: ,
-            //   androidPackageName: BldrsKeys.androidPackageID,
-            //   dynamicLinkDomain: ,
-            //   handleCodeInApp: ,
-            //   iOSBundleId: BldrsKeys.iosBundleID,
-            // ),
-          );
-
-          _success = true;
-          },
-        onError: onError,
-      );
-
-    }
-
-    return _success;
-  }
-  // --------------------
-  /// UPDATE_EMAIL_TASK
-  static Future<bool> sendVerificationEmail({
-    required String? email,
-    required Function(String? error)? onError,
-  }) async {
-    bool _success = false;
-
-    if (isEmpty(email) == false){
-
-      await tryAndCatch(
-        invoker: 'sendVerificationEmail',
-        onError: onError,
-        functions: () async {
-          await OfficialAuthing.getUser()?.sendEmailVerification();
-          _success = true;
-          },
-      );
-
-    }
-
-    return _success;
-  }
-  // --------------------
-}
-
 /// => TAMAM
 class OfficialGoogleAuthing {
   // --------------------
@@ -456,131 +189,142 @@ class OfficialGoogleAuthing {
   static OfficialGoogleAuthing get instance => _singleton;
   // -----------------------------------------------------------------------------
 
-  /// GOOGLE SIGN IN SINGLETON
-
-  // --------------------
-  GoogleSignIn? _googleSignIn;
-  GoogleSignIn get googleSignIn => _googleSignIn ??= GoogleSignIn.instance;
-  static GoogleSignIn getGoogleSignInInstance() => OfficialGoogleAuthing.instance.googleSignIn;
-  // -----------------------------------------------------------------------------
-
   /// GOOGLE AUTH PROVIDER SINGLETON
 
   // --------------------
   f_a.GoogleAuthProvider? _googleAuthProvider;
   f_a.GoogleAuthProvider get googleAuthProvider => _googleAuthProvider ??=  f_a.GoogleAuthProvider();
   static f_a.GoogleAuthProvider getGoogleAuthProviderInstance() => OfficialGoogleAuthing.instance.googleAuthProvider;
-  // -----------------------------------------------------------------------------
-
-  /// SCOPED SIGN IN
-
   // --------------------
   /// TESTED : WORKS PERFECT
-  static Future<AuthClient?> scopedSignIn({
-    List<String>? scopes,
-    String? clientId,
-    String? serverClientId,
-  }) async {
-    AuthClient? client;
-
-    if (checkCanLoop(scopes) == true) {
-
-      // Initialize once (safe to call multiple times)
-      await getGoogleSignInInstance().initialize(
-        clientId: clientId,
-        serverClientId: serverClientId,
-        // hostedDomain: ,
-        // nonce: ,
-      );
-
-      // final Stream<GoogleSignInAuthenticationEvent> sub =
-      getGoogleSignInInstance().authenticationEvents
-          .listen(_handleAuthenticationEvent)
-          .onError(_handleAuthenticationError);
-
-
-      // await tryAndCatch(
-      //   invoker: 'googleSignIn',
-      //   functions: () async {
-      //
-      //     if (signIn.supportsAuthenticate() == true) {
-      //       await signIn.authenticate();
-      //     }
-      //
-      //     else {
-      //       account = await signIn.signIn();
-      //     }
-      //
-      //     account ??= signIn.currentUser;
-      //
-      //     if (account == null) return null;
-      //
-      //     // Request authorization for the given scopes
-      //     final GoogleSignInClientAuthorization auth =
-      //     await account.authorizationClient.authorizeScopes(scopes);
-      //
-      //     return auth;
-      //   },
-      // );
-
-    }
-
-    return client;
-  }
-// --------------------
-  ///
-  static void _handleAuthenticationEvent(GoogleSignInAuthenticationEvent onEvent){
-    blog('_handleAuthenticationEvent.onEvent($onEvent)');
-
-  }
-  // --------------------
-  ///
-  static void _handleAuthenticationError(Object object, StackTrace trace){
-    blog('_handleAuthenticationError.trace($trace)');
-    blog('_handleAuthenticationError.object($object)');
-  }
-  // -----------------------------------------------------------------------------
-
-  /// EMAIL SIGN IN
-
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  static Future<AuthModel?> emailSignIn({
-    Function(String? error)? onError,
-  }) async {
-
-    await getGoogleSignInInstance().signOut();
-
-    return _webGoogleAuth(onError: onError,);
-  }
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  static Future<AuthModel?> _webGoogleAuth({
-    Function(String? error)? onError,
-  }) async {
+  static Future<AuthModel?> googleAuth() async {
     AuthModel? _output;
 
     await tryAndCatch(
       invoker: 'webGoogleAuth',
-        onError: onError,
-        functions: () async {
-
-        /// get [auth provider]
-        final f_a.GoogleAuthProvider _googleAuthProvider = getGoogleAuthProviderInstance();
-
+      functions: () async {
+        final provider = f_a.GoogleAuthProvider();
+        const List<String> scopes = [
+          'https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/calendar.events',
+          'https://www.googleapis.com/auth/spreadsheets',
+        ];
+        scopes.forEach(provider.addScope);
         final f_a.FirebaseAuth? _firebaseAuth = OfficialFirebase.getAuth();
-
-        /// get [user credential] from [auth provider]
-        final f_a.UserCredential? _userCredential = await _firebaseAuth?.signInWithPopup(_googleAuthProvider);
-
+        final f_a.UserCredential? _userCredential = await _firebaseAuth?.signInWithPopup(provider);
         _output = OfficialModelling.getAuthModelFromOfficialUserCredential(
           cred: _userCredential,
         );
-
       },
     );
 
     return _output;
   }
   // -----------------------------------------------------------------------------
+}
+
+/// => TAMAM
+abstract class OfficialAuthBlog {
+  // -----------------------------------------------------------------------------
+
+  /// FIREBASE
+
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static void blogUserCredential({
+    required f_a.UserCredential? cred,
+  }){
+
+    if (cred == null){
+      blog('blogUserCredential : USER CREDENTIAL IS NULL');
+    }
+
+    else {
+      blog('USER CREDENTIAL :----> ');
+      blog('credential.user.displayName : ${cred.user?.displayName}');
+      blog('credential.user.email : ${cred.user?.email}');
+      blog('credential.user.emailVerified : ${cred.user?.emailVerified}');
+      blog('credential.user.isAnonymous : ${cred.user?.isAnonymous}');
+      blog('credential.user.metadata : ${cred.user?.metadata}');
+      blog('credential.user.phoneNumber : ${cred.user?.phoneNumber}');
+      blog('credential.user.photoURL : ${cred.user?.photoURL}');
+      blog('credential.user.providerData : ${cred.user?.providerData}');
+      blog('credential.user.refreshToken : ${cred.user?.refreshToken}');
+      blog('credential.user.tenantId : ${cred.user?.tenantId}');
+      blog('credential.user.uid : ${cred.user?.uid}');
+      blog('credential.user.multiFactor : ${cred.user?.multiFactor}');
+      blog('CREDENTIAL :-');
+      blog('credential.credential.accessToken : ${cred.credential?.accessToken}');
+      blog('credential.credential.providerId : ${cred.credential?.providerId}');
+      blog('credential.credential.signInMethod : ${cred.credential?.signInMethod}');
+      blog('credential.credential.token : ${cred.credential?.token}');
+      blog('ADDITIONAL USER INFO :-');
+      blog('credential.additionalUserInfo.providerId : ${cred.additionalUserInfo?.providerId}');
+      blog('credential.additionalUserInfo.isNewUser : ${cred.additionalUserInfo?.isNewUser}');
+      blog('credential.additionalUserInfo.profile : ${cred.additionalUserInfo?.profile}');
+      blog('credential.additionalUserInfo.username : ${cred.additionalUserInfo?.username}');
+      blog('blogUserCredential : USER CREDENTIAL BLOG END <-----');
+    }
+
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static void blogOfficialFirebaseUser({
+    required f_a.User? user,
+  }){
+
+    if (user == null){
+      blog('blogUserCredential : FIRE BASE USER IS NULL');
+    }
+
+    else {
+      blog('FIRE BASE USER :----> ');
+      blog('credential.user.displayName : ${user.displayName}');
+      blog('credential.user.email : ${user.email}');
+      blog('credential.user.emailVerified : ${user.emailVerified}');
+      blog('credential.user.isAnonymous : ${user.isAnonymous}');
+      blog('credential.user.metadata : ${user.metadata}');
+      blog('credential.user.phoneNumber : ${user.phoneNumber}');
+      blog('credential.user.photoURL : ${user.photoURL}');
+      blog('credential.user.providerData : ${user.providerData}');
+      blog('credential.user.refreshToken : ${user.refreshToken}');
+      blog('credential.user.tenantId : ${user.tenantId}');
+      blog('credential.user.uid : ${user.uid}');
+      blog('credential.user.multiFactor : ${user.multiFactor}');
+    }
+
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static void blogCurrentOfficialFirebaseUser(){
+
+    final f_a.User ?_user = OfficialAuthing.getUser();
+
+    if (_user == null){
+      blog('blogCurrentFirebaseUser : user is null');
+    }
+    else {
+      blogOfficialFirebaseUser(user: _user);
+    }
+
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static void blogAuthCred(f_a.AuthCredential? authCred){
+
+    if (authCred == null){
+      blog('blogAuthCred : AUTH CREDENTIAL IS NULL');
+    }
+
+    else {
+      blog('AUTH CREDENTIAL :----> ');
+      blog('authCred.signInMethod : ${authCred.signInMethod}');
+      blog('authCred.providerId : ${authCred.providerId}');
+      blog('authCred.accessToken : ${authCred.accessToken}');
+      blog('authCred.token : ${authCred.token}');
+
+    }
+
+  }
+// -----------------------------------------------------------------------------
 }
