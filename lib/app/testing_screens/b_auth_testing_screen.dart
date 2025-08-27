@@ -5,6 +5,7 @@ import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
+import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'components/test_button.dart';
 
 class AuthTestingScreen extends StatefulWidget {
@@ -53,6 +54,19 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
           SuperBox(
             height: 50,
             text: 'userID : (${OfficialAuthing.getUserID()})',
+          ),
+
+          SuperBox(
+            height: 50,
+            text: 'Print access token .. ',
+            color: Colorz.black255,
+            onTap: () async {
+
+              blog('OfficialAuthing.getUser()?.getIdToken(${await OfficialAuthing.getUser()?.getIdToken()})');
+
+              OfficialAuthBlog.blogOfficialFirebaseUser(user: OfficialAuthing.getUser());
+
+            },
           ),
 
           // --------------------------------------------------------------------------
