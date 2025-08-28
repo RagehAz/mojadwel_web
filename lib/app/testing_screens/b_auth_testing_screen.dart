@@ -46,10 +46,10 @@ class _AuthTestingScreenState extends State<AuthTestingScreen> {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: VerticalFloatingList(
+      child: (double bodyWidth) =>VerticalFloatingList(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        columnChildren: [
+        children: [
 
           SuperBox(
             height: 50,

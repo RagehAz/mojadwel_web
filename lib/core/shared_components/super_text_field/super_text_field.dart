@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
+import 'package:mojadwel_web/core/utilities/scale.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
 // -----------------------------------------------------------------------------
 part 'src/text_field/a_super_text_field.dart';

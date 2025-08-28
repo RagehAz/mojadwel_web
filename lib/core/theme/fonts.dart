@@ -1,7 +1,7 @@
 
 abstract class MojadwelFonts {
   // -----------------------------------------------------------------------------
-  static const montreal = 'montreal';
-  static const regular = '';
+  static const headline = 'headline';
+  static const body = 'body';
   // -----------------------------------------------------------------------------
 }

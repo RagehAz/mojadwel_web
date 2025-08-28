@@ -29,7 +29,7 @@ class SuperHeadline extends StatelessWidget {
       centered: false,
       margins: margin,
       italic: true,
-      font: MojadwelFonts.montreal,
+      font: MojadwelFonts.headline,
     );
 
   }

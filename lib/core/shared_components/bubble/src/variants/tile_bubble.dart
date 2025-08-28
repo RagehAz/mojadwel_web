@@ -101,7 +101,7 @@ class TileBubble extends StatelessWidget {
             appIsLTR: appIsLTR,
             textDirection: textDirection ?? TextDirection.ltr,
             maxLines: bulletPointsMaxLines,
-            font: MojadwelFonts.montreal,
+            font: MojadwelFonts.body,
             showBottomLine: false,
           ),
         ),

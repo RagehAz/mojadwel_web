@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/utilities/app_scroll_behavior.dart';
-
-import '../super_text_field/super_text_field.dart';
+import 'package:mojadwel_web/core/utilities/scale.dart';
 
 class VerticalFloatingList extends StatelessWidget {
   // --------------------------------------------------------------------------
   const VerticalFloatingList({
-    required this.columnChildren,
+    required this.children,
     this.crossAxisAlignment,
     this.mainAxisAlignment,
     this.padding = EdgeInsets.zero,
@@ -21,7 +20,7 @@ class VerticalFloatingList extends StatelessWidget {
     super.key
   });
   // --------------------
-  final List<Widget>? columnChildren;
+  final List<Widget>? children;
   final MainAxisAlignment? mainAxisAlignment;
   final CrossAxisAlignment? crossAxisAlignment;
   final EdgeInsets padding;
@@ -63,7 +62,7 @@ class VerticalFloatingList extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
             crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
             children: <Widget>[
-              ...?columnChildren,
+              ...?children,
             ],
           ),
         ),

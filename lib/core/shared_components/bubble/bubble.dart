@@ -7,6 +7,7 @@ import 'package:mojadwel_web/core/shared_components/super_text_field/super_text_
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
+import 'package:mojadwel_web/core/utilities/scale.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
 
 part 'src/models/bubble_header_vm.dart';

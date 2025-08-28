@@ -316,7 +316,7 @@ class _TestButtonState extends State<TestButton> {
                           height: _resultBoxHeight,
                           width: _clearBubbleWidth,
                           boxCorners: _Helpers.constantCornersAll5,
-                          columnChildren: <Widget>[
+                          children: <Widget>[
 
                             SuperText(
                               boxWidth: _clearBubbleWidth,

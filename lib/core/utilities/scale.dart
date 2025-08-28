@@ -6,7 +6,7 @@ abstract class Scale {
   /// APP BAR
 
   // --------------------
-  static const double appBarHeight = 50;
+  static const double appBarHeight = 60;
   static const double popUpButtonWidth = 250;
   static const double popUpButtonSideMargin = 10;
   static const double popUpSeparatorWidth = popUpButtonWidth + popUpButtonSideMargin + popUpButtonSideMargin;
@@ -35,6 +35,17 @@ abstract class Scale {
   static double screenWidth(BuildContext context) {
     return context.mounted == true ? MediaQuery.sizeOf(context).width : 0;
     // return MediaQuery.of(context).size.width;
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static double theBodyWidth(BuildContext context){
+    final double _screenWidth = screenWidth(context);
+    if (_screenWidth > 600){
+      return _screenWidth * 0.8;
+    }
+    else {
+      return _screenWidth;
+    }
   }
   // --------------------
   /// TESTED : WORKS PERFECT

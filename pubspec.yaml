@@ -59,7 +59,10 @@ flutter:
 #    - assets/name.png
   # --------------------------------------------------------------------------------
   fonts:
-    - family: montreal
+    - family: headline
       fonts:
-        - asset: assets/fonts/montreal.ttf
+        - asset: assets/fonts/headline.ttf
+    - family: body
+      fonts:
+        - asset: assets/fonts/body.ttf
 # --------------------------------------------------------------------------------

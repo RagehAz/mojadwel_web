@@ -11,7 +11,7 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: Column(
+      child: (double bodyWidth) =>Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
