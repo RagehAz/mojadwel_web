@@ -64,10 +64,10 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
         
               const SuperPopMenu(
-                corners: BorderRadius.all(Radius.circular(15)),
-                borderColor: Colorz.dark2,
-                // offset: const Offset(0, 0),
-                bubbleColor: Colorz.dark2,
+                corners: BorderRadius.all(Radius.circular(20)),
+                borderColor: Colorz.light2,
+                offset: Offset(- 10, 0),
+                bubbleColor: Colorz.light1,
                 enabled: true,
                 popupChild: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -78,12 +78,6 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
 
                     /// HOME
                     TheMenuButton(text: 'HOME', route: Routing.routeHome),
-
-                    /// SPACING
-                    SizedBox(width: 10, height: 10),
-
-                    /// AUTH
-                    TheMenuButton(text: 'Auth', route: Routing.routeAuth),
 
                     /// SPACING
                     SizedBox(width: 10, height: 10),

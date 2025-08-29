@@ -4,6 +4,7 @@ import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
+import 'package:mojadwel_web/core/utilities/contextual.dart';
 
 class TestingHome extends StatelessWidget {
   // --------------------------------------------------------------------------
@@ -13,23 +14,14 @@ class TestingHome extends StatelessWidget {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: (double bodyWidth) =>Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: (double bodyWidth) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
           /// AUTH TESTING
-          SuperBox(
-            height: 50,
-            color: Colorz.dark3,
-            icon: Iconz.logoPng,
-            iconSizeFactor: 0.6,
+          MenuButton(
+            icon: Iconz.googleColor,
             text: 'Auth Testing screen',
-            // iconColor: Colorz.googleRed,
-            // color: Colorz.white255,
-            // iconSizeFactor: 1,
-            // corners: 50,
-            margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             onTap: () async {
 
               await Routing.goTo(
@@ -40,17 +32,9 @@ class TestingHome extends StatelessWidget {
           ),
 
           /// FIRE TESTING
-          SuperBox(
-            height: 50,
-            color: Colorz.dark3,
-            icon: Iconz.logoPng,
-            iconSizeFactor: 0.6,
+          MenuButton(
+            icon: Iconz.star,
             text: 'Fire Testing screen',
-            // iconColor: Colorz.googleRed,
-            // color: Colorz.white255,
-            // iconSizeFactor: 1,
-            // corners: 50,
-            margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             onTap: () async {
 
               await Routing.goTo(
@@ -66,4 +50,40 @@ class TestingHome extends StatelessWidget {
     // --------------------
   }
 // -----------------------------------------------------------------------------
+}
+
+class MenuButton extends StatelessWidget {
+  // --------------------------------------------------------------------------
+  const MenuButton({
+    required this.text,
+    required this.icon,
+    required this.onTap,
+    super.key
+  });
+  // --------------------
+  final Function onTap;
+  final dynamic icon;
+  final String text;
+  // -----------------------------------------------------------------------------
+  @override
+  Widget build(BuildContext context) {
+    // --------------------
+    return SuperBox(
+      height: 50,
+      width: context.screenWidth * 0.5,
+      color: Colorz.dark1,
+      icon: icon,
+      iconSizeFactor: 0.6,
+      text: text,
+      textCentered: false,
+      // iconColor: Colorz.googleRed,
+      // color: Colorz.white255,
+      // iconSizeFactor: 1,
+      // corners: 50,
+      margins: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      onTap: onTap,
+    );
+    // --------------------
+  }
+  // -----------------------------------------------------------------------------
 }

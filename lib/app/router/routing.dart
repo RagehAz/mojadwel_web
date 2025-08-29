@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mojadwel_web/app/screens/a_home_screen.dart';
-import 'package:mojadwel_web/app/screens/b_auth_screen.dart';
-import 'package:mojadwel_web/app/screens/c_dash_board_screen.dart';
+import 'package:mojadwel_web/app/screens/b_dash_board_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/a_testing_home.dart';
 import 'package:mojadwel_web/app/testing_screens/b_auth_testing_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/c_fire_testing_screen.dart';
@@ -32,7 +31,6 @@ abstract class Routing {
 
   // --------------------
   static const routeHome = 'home';
-  static const routeAuth = 'auth';
   static const routeDashboard = 'dashboard';
   // --------------------
   static const routeTestingHome = 'testing_home';
@@ -54,15 +52,6 @@ abstract class Routing {
         path: '/',
         name: routeHome,
         builder: (context, state) => const HomeScreen(),
-      ),
-
-      /// AUTH
-      GoRoute(
-        path: '/$routeAuth',
-        name: routeAuth,
-        builder: (context, state) {
-          return const AuthScreen();
-        },
       ),
 
       /// DASHBOARD

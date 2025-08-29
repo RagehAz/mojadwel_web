@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
@@ -75,6 +76,18 @@ class HomeScreen extends StatelessWidget {
                   /// DESCRIPTION
                   const HomePageSecondLine(
                     text: 'Transform your scheduling system to an advanced ai chat agent\nconnected to your calendar and customers sheet',
+                  ),
+
+                  /// START
+                  SuperBox(
+                    height: 90,
+                    width: bodyWidth * 0.4,
+                    text: 'Start ..',
+                    color: Colorz.black255,
+                    textFont: MojadwelFonts.headline,
+                    margins: 20,
+                    splashColor: Colorz.green255,
+                    onTap: () => Routing.goTo(route: Routing.routeDashboard),
                   ),
 
                   /// VIDEO
