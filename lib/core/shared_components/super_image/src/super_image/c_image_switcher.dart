@@ -252,17 +252,15 @@ class ImageSwitcher extends StatelessWidget {
 
       /// SVG
       else if (_Helpers.objectIsSVG(pic) == true){
-        assert(_Helpers.objectIsSVG(pic) == false, 'svg is not supported');
-        return Container();
-        // return WebsafeSvg.asset(
-        //   pic,
-        //   fit: _boxFit,
-        //   colorFilter: iconColor == null ? null : ColorFilter.mode(iconColor!, BlendMode.srcIn),
-        //   width: width,
-        //   height: height,
-        //   package: package,
-        //
-        // );
+        return WebsafeSvg.asset(
+          pic,
+          fit: _boxFit,
+          colorFilter: iconColor == null ? null : ColorFilter.mode(iconColor!, BlendMode.srcIn),
+          width: width,
+          height: height,
+          package: package,
+
+        );
       }
 
       /// UI.IMAGE

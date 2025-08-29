@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'How it works',
                   ),
 
-                  /// HEADLINE
+                  /// SECOND LINE
                   HomePageSecondLine(
                     text: 'Simple steps for the Ai to be your personal receptionist',
                   ),
@@ -127,19 +127,19 @@ class HomeScreen extends StatelessWidget {
                       HowItWorksCard(
                         headline: 'Ai-Powered Chat',
                         text: 'Customers chat with Mojadwel on Whatsapp like a real person',
-                        icon: Iconz.more,
+                        icon: Iconz.whatsapp,
                       ),
 
                       HowItWorksCard(
                         headline: 'Smart Scheduling',
                         text: 'Your Calendar is automatically updated with new appointments',
-                        icon: Iconz.more,
+                        icon: Iconz.calendar,
                       ),
 
                       HowItWorksCard(
                         headline: 'Auto-Reminders',
                         text: 'Both you and your customer get booking confirmations & reminders',
-                        icon: Iconz.more,
+                        icon: Iconz.notification,
                       ),
 
                     ],
@@ -160,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'Frequently Asked Questions',
                   ),
 
-                  /// HEADLINE
+                  /// SECOND LINE
                   const HomePageSecondLine(
                     text: 'Find answers to common questions about our ai receptionist system',
                   ),
@@ -350,6 +350,7 @@ class HowItWorksCard extends StatelessWidget {
             width: 50,
             margins: 20,
             icon: icon,
+            iconSizeFactor: 0.9,
             textCentered: false,
           ),
 

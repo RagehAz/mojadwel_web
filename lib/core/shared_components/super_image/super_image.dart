@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
+import 'package:websafe_svg/websafe_svg.dart';
 import '../super_text/super_text.dart';
 // --------------------------------------------------------------------------
 // part 'src/super_filter/color_filter_generator.dart';

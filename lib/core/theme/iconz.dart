@@ -23,14 +23,19 @@ abstract class Iconz {
     return _exists;
   }
   // --------------------
-  /// artworks
-  // static const String logoSvg = 'assets/logo.svg';
+  static const String logoSvg = 'assets/logo.svg';
   static const String logoPng = 'assets/logo.png';
-  static const String power = 'assets/logo.png';
-  static const String check = 'assets/logo.png';
-  static const String xSmall = 'assets/logo.png';
+  static const String paste = 'assets/paste.svg';
+  static const String xBig = 'assets/x_big.svg';
+  static const String check = 'assets/check.svg';
+  static const String star = 'assets/star.svg';
+  static const String calendar = 'assets/calendar.svg';
+  static const String notification = 'assets/notification.svg';
+  static const String sheets = 'assets/sheets.svg';
+  static const String whatsapp = 'assets/whatsapp.svg';
+  // --------------------
+  /// NOT DONE YET
   static const String more = 'assets/logo.png';
   static const String viewsIcon = 'assets/logo.png';
-  static const String paste = 'assets/logo.png';
   // -----------------------------------------------------------------------------
 }

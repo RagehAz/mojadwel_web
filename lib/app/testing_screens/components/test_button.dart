@@ -278,7 +278,7 @@ class _TestButtonState extends State<TestButton> {
                 height: _WideButton.height * 0.7,
                 loading: loading,
                 loadingIsPulse: true,
-                icon: _success == null ? Iconz.power : _Helpers.boolIsTrue(_success) == true ? Iconz.check : Iconz.xSmall,
+                icon: _success == null ? Iconz.star : _Helpers.boolIsTrue(_success) == true ? Iconz.check : Iconz.xBig,
                 iconColor: _success == null ? Colorz.white10 : _Helpers.boolIsTrue(_success) == true ? Colorz.green255 : Colorz.bloodTest,
                 iconSizeFactor: 0.7,
                 color: Colorz.white20,
