@@ -88,12 +88,6 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                     /// SPACING
                     SizedBox(width: 10, height: 10),
 
-                    /// SIGN UP
-                    TheMenuButton(text: 'Signup', route: Routing.routeSignUp),
-
-                    /// SPACING
-                    SizedBox(width: 10, height: 10),
-
                     /// DASHBOARD
                     TheMenuButton(text: 'Dashboard', route: Routing.routeDashboard),
 

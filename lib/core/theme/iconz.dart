@@ -34,6 +34,11 @@ abstract class Iconz {
   static const String sheets = 'assets/sheets.svg';
   static const String whatsapp = 'assets/whatsapp.svg';
   // --------------------
+  static const String whatsappColor = 'assets/whatsapp_color.svg';
+  static const String googleColor = 'assets/google_color.svg';
+  static const String googleSheetsColor = 'assets/sheets_color.svg';
+  static const String googleCalendarColor = 'assets/google_calendar_color.svg';
+  // --------------------
   /// NOT DONE YET
   static const String more = 'assets/logo.png';
   static const String viewsIcon = 'assets/logo.png';
