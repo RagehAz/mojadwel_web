@@ -126,7 +126,7 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
       debugShowCheckedModeBanner: false,
 
       /// THEME
-      title: 'Infinity youtube player',
+      title: 'Mojadwel',
       theme: ThemeData(
         canvasColor: Colorz.nothing,
         textSelectionTheme: const TextSelectionThemeData(
