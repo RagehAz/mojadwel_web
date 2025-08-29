@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mojadwel_web/app/screens/a_home_screen.dart';
-import 'package:mojadwel_web/app/screens/b_dash_board_screen.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/a_testing_home.dart';
 import 'package:mojadwel_web/app/testing_screens/b_auth_testing_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/c_fire_testing_screen.dart';

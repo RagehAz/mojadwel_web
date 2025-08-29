@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                   Builder(
                       builder: (context) {
 
-                        final double _width = bodyWidth * 0.8;
+                        final double _width = bodyWidth * 0.7;
                         final double _height = _width * 9 / 16;
 
                         return Container(
