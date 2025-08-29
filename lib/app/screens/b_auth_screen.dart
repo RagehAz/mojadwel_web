@@ -16,6 +16,13 @@ class AuthScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
+          /// GOOGLE AUTH
+          /// WHATS APP NUMBER
+          /// GOOGLE SHEETS
+          /// GOOGLE CALENDAR
+
+          /// BUSINESS NAME
+
           SuperBox(
             height: 100,
             // width: 100,

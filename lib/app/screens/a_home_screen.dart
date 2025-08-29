@@ -345,6 +345,7 @@ class HowItWorksCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
 
+          /// ICON
           SuperBox(
             height: 50,
             width: 50,
