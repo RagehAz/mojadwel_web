@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
@@ -24,8 +25,6 @@ class ProfileView extends StatelessWidget {
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
-
-
     // --------------------
     return VerticalFloatingList(
       width: context.screenWidth - DashboardScreen.menuWidth,
@@ -108,18 +107,12 @@ class ProfileView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  const SuperText(
+                  /// PAGE HEADLINE
+                  const PageHeadline(
                     text: 'Profile',
-                    textHeight: 100,
-                    font: MojadwelFonts.headline,
-                    textColor: Colorz.black255,
-                    maxLines: 2,
-                    lineSpacingFactor: 0.6,
-                    margins: 30,
-                    centered: false,
                   ),
 
-                  // if (controller.userModel == null)
+                  if (controller.userModel == null)
                     ProfileTile(
                       headline: '',
                       value: 'Create account',
@@ -171,4 +164,3 @@ class ProfileView extends StatelessWidget {
   }
   // -----------------------------------------------------------------------------
 }
-

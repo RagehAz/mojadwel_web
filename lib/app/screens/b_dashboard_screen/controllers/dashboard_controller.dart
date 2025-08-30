@@ -48,8 +48,8 @@ class DashboardController {
         if (_theUser != null){
           userModel = _theUser;
           authModel = _theUser.authModel;
-          refresh!();
         }
+        refresh!();
         // -----------------------------
         await triggerLoading(setTo: false);
       });
@@ -105,10 +105,10 @@ class DashboardController {
         userModel = _bz;
       }
 
-      authModel = _authModel;
-      refresh!();
-
     }
+
+    authModel = _authModel;
+    refresh!();
 
   }
   // --------------------
@@ -136,6 +136,18 @@ class DashboardController {
 
     }
 
+  }
+  // -----------------------------------------------------------------------------
+
+  /// AUTH
+
+  // --------------------
+  Future<void> onSelectStarterPlan() async {
+    blog('onSelectStarterPlan : start');
+  }
+  // --------------------
+  Future<void> onSelectProPlan() async {
+    blog('onSelectProPlan : haa');
   }
   // -----------------------------------------------------------------------------
   void x(){}

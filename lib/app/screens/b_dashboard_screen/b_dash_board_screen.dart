@@ -87,16 +87,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onSelected: controller.setView,
             ),
 
-            /// PAGE
-            Builder(
-                builder: (_){
-                  switch(_view){
-                    case DashboardView.profile: return ProfileView(controller: controller);
-                    case DashboardView.plan: return const PlanView();
-                    case DashboardView.tune: return const TuneView();
-                  }
-                },
-            ),
+
+            if (_view == DashboardView.profile)
+              ProfileView(controller: controller),
+
+            if (_view == DashboardView.plan)
+              PlanView(controller: controller),
+
+            if (_view == DashboardView.tune)
+              const TuneView(),
 
           ],
         ),
