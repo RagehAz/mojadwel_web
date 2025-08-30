@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
@@ -9,6 +10,7 @@ import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
+
 import '../b_dash_board_screen.dart' show DashboardScreen;
 
 class ProfileView extends StatelessWidget {
@@ -31,7 +33,7 @@ class ProfileView extends StatelessWidget {
       boxColor: Colorz.light2,
       boxAlignment: Alignment.topLeft,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
+      children: controller.canBuild == false ? [] : <Widget>[
 
         if (controller.authModel == null)
           Builder(
@@ -119,33 +121,43 @@ class ProfileView extends StatelessWidget {
 
                   // if (controller.userModel == null)
                     ProfileTile(
-                      text: 'Create account',
+                      headline: '',
+                      value: 'Create account',
                       icon: Iconz.createAccount,
                       onTap: controller.onCreateAccount,
+                      redDot: false,
                     ),
 
                   /// NAME
                   ProfileTile(
-                    text: _userModel?.ownerName ?? 'Owner name',
+                    headline: 'Owner name',
+                    value: _userModel?.ownerName,
                     icon: Iconz.user,
+                    redDot: _userModel?.ownerName == null,
                   ),
 
                   /// COMPANY NAME
                   ProfileTile(
-                    text: _userModel?.businessName ?? 'Company name ...',
+                    headline: 'Company name',
+                    value: _userModel?.businessName,
                     icon: Iconz.company,
+                    redDot: _userModel?.businessName == null,
                   ),
 
                   /// Email
                   ProfileTile(
-                    text: _userModel?.email ?? 'Email ...',
+                    headline: 'Email',
+                    value: _userModel?.email,
                     icon: Iconz.email,
+                    redDot: _userModel?.email == null,
                   ),
 
                   /// PHONE
                   ProfileTile(
-                    text: _userModel?.phone ?? 'Phone ...',
+                    headline: 'Phone',
+                    value: _userModel?.phone,
                     icon: Iconz.whatsapp,
+                    redDot: _userModel?.phone == null,
                   ),
 
                 ],
@@ -160,41 +172,3 @@ class ProfileView extends StatelessWidget {
   // -----------------------------------------------------------------------------
 }
 
-class ProfileTile extends StatelessWidget {
-  // --------------------------------------------------------------------------
-  const ProfileTile({
-    required this.text,
-    required this.icon,
-    this.onTap,
-    super.key
-  });
-  // --------------------
-  final String text;
-  final dynamic icon;
-  final Function? onTap;
-  // -----------------------------------------------------------------------------
-  @override
-  Widget build(BuildContext context) {
-// --------------------
-    final double tileWidth = context.screenWidth * 0.7;
-    // --------------------
-    return SuperBox(
-      height: 80,
-      width: tileWidth,
-      text: text,
-      icon: icon,
-      iconColor: Colorz.black255,
-      iconSizeFactor: 0.5,
-      color: Colorz.light1,
-      textCentered: false,
-      textColor: Colorz.black255,
-      margins: const EdgeInsets.only(
-        bottom: 10,
-        left: 30,
-      ),
-      onTap: onTap,
-    );
-    // --------------------
-  }
-  // -----------------------------------------------------------------------------
-}

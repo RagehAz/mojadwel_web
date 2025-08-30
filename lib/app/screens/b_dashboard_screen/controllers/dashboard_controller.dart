@@ -33,20 +33,18 @@ class DashboardController {
     refresh = onSetState;
   }
   // --------------------
-  bool _isInit = true;
+  bool canBuild = false;
   void didChangeDependencies() {
 
     Routing.waitTheNav();
 
-    if (_isInit == true && mounted.value == true) {
-
-      _isInit = false;
-
+    if (canBuild == false && mounted.value == true) {
       triggerLoading(setTo: true).then((_) async {
         // -------------------------------
         final UserModel? _theUser = await UserProtocols.fetch(
           id: OfficialAuthing.getUserID(),
         );
+        canBuild = true;
         if (_theUser != null){
           userModel = _theUser;
           authModel = _theUser.authModel;
