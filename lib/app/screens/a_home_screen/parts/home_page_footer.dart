@@ -3,7 +3,6 @@ import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/expander.dart';
 import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
-import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
@@ -35,12 +34,12 @@ class HomePageFooter extends StatelessWidget {
         /// FOLLOW US
         SizedBox(
           width: width,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
 
               /// FOLLOW US
-              SuperBox(
+              const SuperBox(
                 height: 30,
                 // width: _appBarHeight,
                 // icon: Iconz.logoPng,
@@ -62,7 +61,10 @@ class HomePageFooter extends StatelessWidget {
                 iconColor: Colorz.black255,
                 splashColor: Colorz.facebook,
                 color: Colorz.white255,
-                margins: EdgeInsets.symmetric(horizontal: 5),
+                margins: const EdgeInsets.symmetric(horizontal: 5),
+                onTap: (){
+                  blog('should go facebook page');
+                },
               ),
 
               /// INSTAGRAM
@@ -73,7 +75,10 @@ class HomePageFooter extends StatelessWidget {
                 iconColor: Colorz.white255,
                 splashColor: Colorz.instagram,
                 color: Colorz.black255,
-                margins: EdgeInsets.symmetric(horizontal: 5),
+                margins: const EdgeInsets.symmetric(horizontal: 5),
+                onTap: (){
+                  blog('should go instagram page');
+                },
               ),
 
             ],
@@ -161,10 +166,15 @@ class _SmallText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // --------------------
-    return SuperText(
+    return SuperBox(
       text: text,
       textColor: Colorz.black255,
-      textHeight: 15,
+      height: 25,
+      corners: 4,
+      textScaleFactor: 1.1,
+      textFont: MojadwelFonts.body,
+      onTap: onTap,
+      splashColor: Colorz.bloodTest,
     );
     // --------------------
   }
