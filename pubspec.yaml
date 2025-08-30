@@ -30,6 +30,7 @@ dependencies:
   websafe_svg: ^3.0.1+10
   sembast_web: ^2.4.2
   sembast: ^3.8.5+1
+  another_flushbar: ^1.12.30
 #  package_info_plus: ^8.3.1
   # ------------------------------------
 dev_dependencies:

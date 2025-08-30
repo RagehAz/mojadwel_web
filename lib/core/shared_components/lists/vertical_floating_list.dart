@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/utilities/app_scroll_behavior.dart';
 import 'package:mojadwel_web/core/utilities/scale.dart';
@@ -230,4 +231,65 @@ class HorizontalFloatingList extends StatelessWidget {
     // --------------------
   }
   // --------------------------------------------------------------------------
+}
+
+class SingleChildScrollViewX extends StatelessWidget {
+
+  const SingleChildScrollViewX({
+    required this.child,
+    this.scrollDirection = Axis.vertical,
+    this.controller,
+    this.physics,
+    this.reverse = false,
+    this.padding,
+    this.primary = false,
+    this.clipBehavior = Clip.hardEdge,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.skip = false,
+    Key? key,
+  }) : super(key: key);
+
+  final Widget child;
+  final Axis scrollDirection;
+  final ScrollController? controller;
+  final ScrollPhysics? physics;
+  final bool reverse;
+  final EdgeInsetsGeometry? padding;
+  final bool primary;
+  final Clip clipBehavior;
+  final DragStartBehavior dragStartBehavior;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final String? restorationId;
+  final bool skip;
+
+  @override
+  Widget build(BuildContext context) {
+
+    if (skip == true){
+      return child;
+    }
+
+    else {
+      return ScrollConfiguration(
+        behavior: const AppScrollBehavior(),
+        child: SingleChildScrollView(
+          scrollDirection: scrollDirection,
+          controller: controller,
+          physics: physics,
+          reverse: reverse,
+          padding: padding,
+          primary: primary,
+          clipBehavior: clipBehavior,
+          dragStartBehavior: dragStartBehavior,
+          keyboardDismissBehavior: keyboardDismissBehavior,
+          restorationId: restorationId,
+          child: child,
+        ),
+      );
+    }
+
+  }
+
 }

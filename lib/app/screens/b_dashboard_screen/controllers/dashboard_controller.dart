@@ -4,6 +4,7 @@ import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.
 import 'package:mojadwel_web/core/models/bz_model/user_fire_ops.dart';
 import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
+import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/keyboard/keyboarder.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
 
@@ -87,8 +88,11 @@ class DashboardController {
     final AuthModel? _authModel = await OfficialGoogleAuthing.googleAuth();
 
     if (_authModel == null){
-      /// ADD_TOP_DIALOG
-      blog('Failed to auth');
+      await Dialogs.stateDialog(
+        state: false,
+        failVerse: 'Failed to sign in',
+        body: 'Please try again',
+      );
     }
     else {
 
@@ -97,9 +101,12 @@ class DashboardController {
       );
 
       if (_bz == null){
-        /// ADD_TOP_DIALOG
-        blog('NO_BZ_FOUND_FOR_(${_authModel.id})');
         AuthModel.blogAuthModel(authModel: _authModel);
+        await Dialogs.stateDialog(
+          state: false,
+          failVerse: 'Account is not found',
+          body: '[${_authModel.name}] no record has been found in the database',
+        );
       }
 
       else {

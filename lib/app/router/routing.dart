@@ -154,6 +154,13 @@ abstract class Routing {
   static Future<void> waitTheNav() async {
     await Future.delayed(const Duration(milliseconds: 350));
   }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static Future<void> wait({
+    Duration duration = const Duration(milliseconds: 300),
+  }) async {
+    await Future.delayed(duration);
+  }
   // --------------------------------------------------------------------------
 }
 // --------------------------------------------------------------------------
