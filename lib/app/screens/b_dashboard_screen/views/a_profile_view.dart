@@ -97,7 +97,16 @@ class ProfileView extends StatelessWidget {
               }
               ),
 
-        if (controller.authModel != null)
+        if (controller.authModel != null && controller.userModel == null)
+          ProfileTile(
+            headline: '',
+            value: 'Create account',
+            icon: Iconz.createAccount,
+            onTap: controller.onCreateAccount,
+            redDot: false,
+          ),
+
+        if (controller.authModel != null && controller.userModel != null)
           Builder(
             builder: (context) {
 
@@ -112,14 +121,7 @@ class ProfileView extends StatelessWidget {
                     text: 'Profile',
                   ),
 
-                  if (controller.userModel == null)
-                    ProfileTile(
-                      headline: '',
-                      value: 'Create account',
-                      icon: Iconz.createAccount,
-                      onTap: controller.onCreateAccount,
-                      redDot: false,
-                    ),
+
 
                   /// NAME
                   ProfileTile(
@@ -151,6 +153,14 @@ class ProfileView extends StatelessWidget {
                     value: _userModel?.phone,
                     icon: Iconz.whatsapp,
                     redDot: _userModel?.phone == null,
+                  ),
+
+                  /// PLAN
+                  ProfileTile(
+                    headline: 'Plan',
+                    value: _userModel?.plan,
+                    icon: Iconz.plan,
+                    redDot: _userModel?.plan == null,
                   ),
 
                 ],
