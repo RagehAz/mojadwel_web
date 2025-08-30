@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/utilities/timers.dart';
 
 @immutable
@@ -14,6 +15,7 @@ class UserModel {
     required this.plan,
     required this.createdAt,
     required this.trialEndsAt,
+    required this.authModel,
   });
   // -----------------------------------------------------------------------------
   final String id;
@@ -24,6 +26,7 @@ class UserModel {
   final String? plan;
   final DateTime? createdAt;
   final DateTime? trialEndsAt;
+  final AuthModel? authModel;
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -39,6 +42,7 @@ class UserModel {
     String? plan,
     DateTime? createdAt,
     DateTime? trialEndsAt,
+    AuthModel? authModel,
   }){
     return UserModel(
       id: id ?? this.id,
@@ -49,6 +53,7 @@ class UserModel {
       plan: plan ?? this.plan,
       createdAt: createdAt ?? this.createdAt,
       trialEndsAt: trialEndsAt ?? this.trialEndsAt,
+      authModel: authModel ?? this.authModel,
     );
   }
   // -----------------------------------------------------------------------------
@@ -69,6 +74,7 @@ class UserModel {
       'plan': plan,
       'createdAt': Timers.cipherTime(time: createdAt, toJSON: toJSON),
       'trialEndsAt': Timers.cipherTime(time: trialEndsAt, toJSON: toJSON),
+      'authModel': authModel?.toMap(),
     };
   }
   // --------------------
@@ -114,6 +120,7 @@ class UserModel {
         plan: map['plan'],
         createdAt: Timers.decipherTime(time: map['createdAt'], fromJSON: fromJSON),
         trialEndsAt: Timers.decipherTime(time: map['trialEndsAt'], fromJSON: fromJSON),
+        authModel: AuthModel.decipher(map: map['authModel'], userID: map['id']),
       );
 
     }
@@ -198,126 +205,6 @@ class UserModel {
 
     return const DeepCollectionEquality().equals(map1, map2);
 
-    /*
-    bool _mapsAreIdentical = false;
-
-    /// BOTH ARE NULL
-    if (map1 == null && map2 == null) {
-      _mapsAreIdentical = true;
-    }
-
-    /// BOTH AREN'T NULL BUT AT LEAST ONE OF THEM IS NULL
-    else if (map1 == null || map2 == null){
-      _mapsAreIdentical = false;
-    }
-
-    /// NON OF THEM IS NULL
-    else if (map1 != null && map2 != null){
-
-      if (map1.toString() == map2.toString()){
-        _mapsAreIdentical = true;
-      }
-      else {
-        _mapsAreIdentical = false;
-      }
-
-      // final List<String> _map1Keys = map1.keys.toList();
-      // final List<String> _map2Keys = map2.keys.toList();
-      //
-      // /// KEYS LENGTH ARE DIFFERENT
-      // if (_map1Keys.length != _map2Keys.length) {
-      //   _mapsAreIdentical = false;
-      // }
-      //
-      // /// KEYS LENGTH ARE IDENTICAL
-      // else {
-      //
-      //   /// FOR EACH PAIR
-      //   for (int i = 0; i < _map1Keys.length; i++){
-      //
-      //     final String _key1 = _map1Keys[i];
-      //     final String _key2 = _map1Keys[i];
-      //
-      //     /// KEYS ARE DIFFERENT
-      //     if (_key1 != _key2){
-      //       _mapsAreIdentical = false;
-      //       break;
-      //     }
-      //
-      //     /// KEYS ARE IDENTICAL
-      //     else {
-      //
-      //       /// BOTH VALUES ARE NULL
-      //       if (map1[_key1] == null && map2[_key2] == null){
-      //         // continue looping
-      //       }
-      //
-      //       /// BOTH VALUES ARE NOT NULL BUT ONE OF THEM IS
-      //       else if (map1[_key1] == null || map2[_key2] == null){
-      //         _mapsAreIdentical = false;
-      //         break;
-      //       }
-      //
-      //       /// BOTH VALUES ARE NOT NULL
-      //       else {
-      //
-      //         /// VALUE TYPES ARE DIFFERENT
-      //         if (map1[_key1].runtimeType != map2[_key2].runtimeType){
-      //           _mapsAreIdentical = false;
-      //           break;
-      //         }
-      //
-      //         /// VALUE TYPES ARE IDENTICAL
-      //         else {
-      //
-      //           if (
-      //               map1[_key1] is String ||
-      //               map1[_key1] is int ||
-      //               map1[_key1] is double ||
-      //               map1[_key1] is bool
-      //           ){
-      //
-      //             if (map1[_key1] != map2[_key2]){
-      //               _mapsAreIdentical = false;
-      //               break;
-      //             }
-      //
-      //           }
-      //
-      //           else if (map1[_key1] is List){
-      //
-      //           }
-      //
-      //         }
-      //
-      //       }
-      //
-      //
-      //     }
-      //
-      //   }
-      //
-      //   // final List<dynamic> _map1Values = map1.values.toList();
-      //   // final List<dynamic> _map2Values = map2.values.toList();
-      //   //
-      //   // if (
-      //   //     checkListsAreIdentical(list1: _map1Keys, list2: _map2Keys) == true
-      //   //     &&
-      //   //     checkListsAreIdentical(list1: _map1Values, list2: _map2Values) == true
-      //   // ){
-      //   //   _mapsAreIdentical = true;
-      //   // }
-      //   //
-      //   // else {
-      //   //   _mapsAreIdentical = false;
-      //   // }
-      //
-      // }
-
-    }
-
-    return _mapsAreIdentical;
-     */
   }
   // --------------------
   /// AI TESTED
@@ -391,6 +278,7 @@ UserModel(
   plan: $plan,
   createdAt: $createdAt,
   trialEndsAt: $trialEndsAt,
+  authModel: $authModel,
 )  
 ''';
   // --------------------
@@ -414,6 +302,14 @@ UserModel(
   // --------------------
   @override
   int get hashCode =>
-      id.hashCode;
+      id.hashCode^
+      businessName.hashCode^
+      ownerName.hashCode^
+      email.hashCode^
+      phone.hashCode^
+      plan.hashCode^
+      createdAt.hashCode^
+      trialEndsAt.hashCode^
+      authModel.hashCode;
   // -----------------------------------------------------------------------------
 }

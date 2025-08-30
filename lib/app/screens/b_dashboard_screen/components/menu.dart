@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/menu_button.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
-import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
-import 'package:mojadwel_web/core/utilities/contextual.dart';
 
 class DashBoardMenu extends StatelessWidget {
   // --------------------------------------------------------------------------
@@ -22,9 +20,9 @@ class DashBoardMenu extends StatelessWidget {
     // --------------------
     return VerticalFloatingList(
       width: DashboardScreen.menuWidth,
-      height: context.screenHeight,
-      boxColor: Colorz.light1,
+      height: (DashboardScreen.menuButtonSize + 10) * 3,
       boxAlignment: Alignment.topCenter,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
 
         MenuButton(
@@ -37,10 +35,18 @@ class DashBoardMenu extends StatelessWidget {
 
         MenuButton(
           size: DashboardScreen.menuButtonSize,
-          text: 'Settings',
-          icon: Iconz.settings,
-          isSelected: selectedView == DashboardView.setting,
-          onTap: () => onSelected(DashboardView.setting),
+          text: 'Plan',
+          icon: Iconz.plan,
+          isSelected: selectedView == DashboardView.plan,
+          onTap: () => onSelected(DashboardView.plan),
+        ),
+
+        MenuButton(
+          size: DashboardScreen.menuButtonSize,
+          text: 'Tune',
+          icon: Iconz.brain,
+          isSelected: selectedView == DashboardView.tune,
+          onTap: () => onSelected(DashboardView.tune),
         ),
 
       ],

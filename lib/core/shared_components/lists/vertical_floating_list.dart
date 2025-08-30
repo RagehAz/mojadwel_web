@@ -41,6 +41,7 @@ class VerticalFloatingList extends StatelessWidget {
       child: SingleChildScrollView(
         physics: physics,
         controller: scrollController,
+
         child: Container(
           width: width ?? Scale.screenWidth(context),
           constraints: BoxConstraints(

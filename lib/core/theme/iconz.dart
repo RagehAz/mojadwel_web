@@ -49,5 +49,7 @@ abstract class Iconz {
   static const String createAccount = 'assets/create_account.svg';
   static const String viewsIcon = 'assets/views.svg';
   static const String settings = 'assets/settings.svg';
+  static const String plan = 'assets/plan.svg';
+  static const String brain = 'assets/brain.svg';
   // -----------------------------------------------------------------------------
 }

@@ -34,6 +34,8 @@ Future<void> main() async {
     ),
   );
 
+  print('starting');
+
   runApp(const Starter());
 
 }

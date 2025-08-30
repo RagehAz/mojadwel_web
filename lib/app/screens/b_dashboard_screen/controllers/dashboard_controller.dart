@@ -44,7 +44,14 @@ class DashboardController {
 
       triggerLoading(setTo: true).then((_) async {
         // -------------------------------
-
+        final UserModel? _theUser = await UserProtocols.fetch(
+          id: OfficialAuthing.getUserID(),
+        );
+        if (_theUser != null){
+          userModel = _theUser;
+          authModel = _theUser.authModel;
+          refresh!();
+        }
         // -----------------------------
         await triggerLoading(setTo: false);
       });
@@ -79,7 +86,6 @@ class DashboardController {
   Future<void> onGoogleAuth() async {
 
     final AuthModel? _authModel = await OfficialGoogleAuthing.googleAuth();
-    authModel = _authModel;
 
     if (_authModel == null){
       /// ADD_TOP_DIALOG
@@ -87,7 +93,7 @@ class DashboardController {
     }
     else {
 
-      final UserModel? _bz = await UserFireOps.read(
+      final UserModel? _bz = await UserProtocols.fetch(
         id: _authModel.id,
       );
 
@@ -101,9 +107,11 @@ class DashboardController {
         userModel = _bz;
       }
 
+      authModel = _authModel;
+      refresh!();
+
     }
 
-    refresh!();
   }
   // --------------------
   ///
@@ -111,7 +119,7 @@ class DashboardController {
 
     if (authModel?.id != null){
 
-      final UserModel? _bz = UserModel(
+      final UserModel? _userModel = UserModel(
         id: authModel!.id!,
         createdAt: DateTime.now(),
         ownerName: authModel!.name,
@@ -120,11 +128,12 @@ class DashboardController {
         plan: 'free',
         businessName: null,
         trialEndsAt: null,
+        authModel: authModel,
       );
 
-      await UserFireOps.create(model: _bz);
+      await UserProtocols.compose(model: _userModel);
 
-      userModel = _bz;
+      userModel = _userModel;
       refresh!();
 
     }

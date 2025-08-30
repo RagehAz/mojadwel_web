@@ -5,9 +5,9 @@ import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
 
-class SettingsView extends StatelessWidget {
+class TuneView extends StatelessWidget {
   // --------------------------------------------------------------------------
-  const SettingsView({
+  const TuneView({
     super.key
   });
   // -----------------------------------------------------------------------------

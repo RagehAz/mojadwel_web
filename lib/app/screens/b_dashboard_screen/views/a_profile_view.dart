@@ -29,56 +29,68 @@ class ProfileView extends StatelessWidget {
       width: context.screenWidth - DashboardScreen.menuWidth,
       height: context.screenHeight,
       boxColor: Colorz.light2,
+      boxAlignment: Alignment.topLeft,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
 
         if (controller.authModel == null)
           Builder(
               builder: (context) {
+
                 final double boxWidth = context.screenWidth * 0.5;
                 const double boxHeight = 500;
+
                 return Container(
-                  width: boxWidth,
-                  height: boxHeight,
-                  decoration: BoxDecoration(
-                    borderRadius: HelpersPop.cornerAll(10),
-                    color: Colorz.light1,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SuperText(
-                        boxWidth: boxWidth * 0.9,
-                        text: 'Sign in to create an account\nconnect your system',
-                        textHeight: 60,
-                        font: MojadwelFonts.headline,
-                        textColor: Colorz.black255,
-                        maxLines: 3,
-                        lineSpacingFactor: 0.6,
-                      ),
-                      const Spacing(size: 30),
-                      SuperBox(
-                        height: 80,
-                        width: boxWidth * 0.9,
-                        text: 'Continue by google',
-                        iconSizeFactor: 0.6,
-                        icon: Iconz.googleColor,
-                        onTap: controller.onGoogleAuth,
-                        textMaxLines: 2,
-                        color: Colorz.black,
-                        splashColor: Colorz.googleRed,
-                      ),
-                      const Spacing(size: 30),
-                      SuperText(
-                        boxWidth: boxWidth * 0.7,
-                        text: "By continuing, you agree to Mojadwel's Terms of Service\nRead our Privacy Policy.",
-                        textHeight: 27,
-                        font: MojadwelFonts.body,
-                        textColor: Colorz.black255,
-                        maxLines: 5,
-                        lineSpacingFactor: 0.8,
-                        margins: 5,
-                      )
-                    ],
+                  width: context.screenWidth - DashboardScreen.menuWidth,
+                  height: context.screenHeight,
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: boxWidth,
+                    height: boxHeight,
+                    decoration: BoxDecoration(
+                      borderRadius: HelpersPop.cornerAll(10),
+                      color: Colorz.light1,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        SuperText(
+                          boxWidth: boxWidth * 0.9,
+                          text: 'Sign in to create an account\nconnect your system',
+                          textHeight: 60,
+                          font: MojadwelFonts.headline,
+                          textColor: Colorz.black255,
+                          maxLines: 3,
+                          lineSpacingFactor: 0.6,
+                        ),
+
+                        const Spacing(size: 30),
+
+                        SuperBox(
+                          height: 80,
+                          width: boxWidth * 0.9,
+                          text: 'Continue by google',
+                          iconSizeFactor: 0.6,
+                          icon: Iconz.googleColor,
+                          onTap: controller.onGoogleAuth,
+                          textMaxLines: 2,
+                          color: Colorz.black,
+                          splashColor: Colorz.googleRed,
+                        ),
+                        const Spacing(size: 30),
+                        SuperText(
+                          boxWidth: boxWidth * 0.7,
+                          text: "By continuing, you agree to Mojadwel's Terms of Service\nRead our Privacy Policy.",
+                          textHeight: 27,
+                          font: MojadwelFonts.body,
+                          textColor: Colorz.black255,
+                          maxLines: 5,
+                          lineSpacingFactor: 0.8,
+                          margins: 5,
+                        )
+                      ],
+                    ),
                   ),
                 );
               }
@@ -94,7 +106,18 @@ class ProfileView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  if (controller.userModel == null)
+                  const SuperText(
+                    text: 'Profile',
+                    textHeight: 100,
+                    font: MojadwelFonts.headline,
+                    textColor: Colorz.black255,
+                    maxLines: 2,
+                    lineSpacingFactor: 0.6,
+                    margins: 30,
+                    centered: false,
+                  ),
+
+                  // if (controller.userModel == null)
                     ProfileTile(
                       text: 'Create account',
                       icon: Iconz.createAccount,
@@ -124,7 +147,6 @@ class ProfileView extends StatelessWidget {
                     text: _userModel?.phone ?? 'Phone ...',
                     icon: Iconz.whatsapp,
                   ),
-
 
                 ],
               );
@@ -166,7 +188,11 @@ class ProfileTile extends StatelessWidget {
       color: Colorz.light1,
       textCentered: false,
       textColor: Colorz.black255,
-      margins: const EdgeInsets.only(bottom: 10),
+      margins: const EdgeInsets.only(
+        bottom: 10,
+        left: 30,
+      ),
+      onTap: onTap,
     );
     // --------------------
   }

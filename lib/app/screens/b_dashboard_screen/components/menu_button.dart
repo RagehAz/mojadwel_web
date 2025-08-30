@@ -32,6 +32,7 @@ class MenuButton extends StatelessWidget {
       boxColor: isSelected ? Colorz.black255 : Colorz.light2,
       borderColor: Colorz.light3,
       corners: BorderRadius.all(Radius.circular(size * 0.2)),
+      splashColor: Colorz.green255,
       child: Column(
         children: [
 

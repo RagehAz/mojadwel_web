@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/menu.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/profile_view.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/settings_view.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/a_profile_view.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/b_plan_view.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/c_tune_view.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
-import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
 
 enum DashboardView {
   profile,
-  setting,
+  plan,
+  tune,
 }
 
 class DashboardScreen extends StatefulWidget {
@@ -73,11 +74,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final DashboardView _view = controller.selectedView;
     // --------------------
     return TheLayout(
-      child: (double bodyWidth) => Container(
+      child: (double bodyWidth) => SizedBox(
         width: context.screenWidth,
         height: context.screenHeight,
-        color: Colorz.bloodTest,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
 
             /// LEFT MENU
@@ -91,7 +92,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 builder: (_){
                   switch(_view){
                     case DashboardView.profile: return ProfileView(controller: controller);
-                    case DashboardView.setting: return const SettingsView();
+                    case DashboardView.plan: return const PlanView();
+                    case DashboardView.tune: return const TuneView();
                   }
                 },
             ),
