@@ -39,6 +39,7 @@ class MenuButton extends StatelessWidget {
             height: size * 0.7,
             width: size,
             icon: icon,
+            iconColor: isSelected ? Colorz.white255 : Colorz.black255,
             iconSizeFactor: 0.7,
           ),
 

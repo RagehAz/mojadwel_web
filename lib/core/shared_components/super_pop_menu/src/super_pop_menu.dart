@@ -38,7 +38,7 @@ class SuperPopMenu extends StatelessWidget {
         return Container(
           width: 20,
           height: 30,
-          color: _Helpers.youtube,
+          color: HelpersPop.youtube,
         );
       },
     );
@@ -52,7 +52,7 @@ class SuperPopMenu extends StatelessWidget {
       enabled: enabled,
       color: bubbleColor,
       shape: RoundedRectangleBorder(
-        borderRadius: _Helpers.superCorners(corners: corners),
+        borderRadius: HelpersPop.superCorners(corners: corners),
         side: borderColor == null ? BorderSide.none : BorderSide(
           color: borderColor!,
           width: 0.7,
@@ -63,7 +63,7 @@ class SuperPopMenu extends StatelessWidget {
       menuPadding: EdgeInsets.zero,
       popUpAnimationStyle: const AnimationStyle(curve: Curves.easeIn, duration: Duration(milliseconds: 300)),
       constraints: constraints ?? BoxConstraints(
-        maxWidth: _Helpers.screenWidth(context) - 20,
+        maxWidth: HelpersPop.screenWidth(context) - 20,
       ),
       elevation: 10,
       position: PopupMenuPosition.over,

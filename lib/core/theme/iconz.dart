@@ -39,8 +39,15 @@ abstract class Iconz {
   static const String googleSheetsColor = 'assets/sheets_color.svg';
   static const String googleCalendarColor = 'assets/google_calendar_color.svg';
   // --------------------
-  /// NOT DONE YET
-  static const String more = 'assets/logo.png';
-  static const String viewsIcon = 'assets/logo.png';
+  static const String menu = 'assets/menu.svg';
+  static const String clock = 'assets/clock.svg';
+  static const String company = 'assets/company.svg';
+  static const String email = 'assets/email.svg';
+  static const String facebook = 'assets/facebook.svg';
+  static const String instagram = 'assets/instagram.svg';
+  static const String user = 'assets/user.svg';
+  static const String createAccount = 'assets/create_account.svg';
+  static const String viewsIcon = 'assets/views.svg';
+  static const String settings = 'assets/settings.svg';
   // -----------------------------------------------------------------------------
 }

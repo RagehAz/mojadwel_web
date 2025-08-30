@@ -101,7 +101,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: SuperImage(
                     height: Scale.appBarHeight,
                     width: Scale.appBarHeight,
-                    pic: Iconz.more,
+                    pic: Iconz.menu,
                     iconColor: Colorz.black255,
                     loading: false,
                     scale: 0.6,

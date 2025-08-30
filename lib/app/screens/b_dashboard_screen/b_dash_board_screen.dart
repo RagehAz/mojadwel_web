@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/menu.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/profile_view.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/settings_view.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
-import 'package:mojadwel_web/core/shared_components/bubble/bubble.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
-import 'package:mojadwel_web/core/utilities/wire.dart';
 
 enum DashboardView {
   profile,
@@ -30,41 +29,26 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   // --------------------------------------------------------------------------
-  DashboardView _view = DashboardView.profile;
-  // -----------------------------------------------------------------------------
-  /// --- LOADING
-  final ValueNotifier<bool> _loading = ValueNotifier(false);
-  // --------------------
-  Future<void> _triggerLoading({required bool setTo}) async {
-    setNotifier(
-      notifier: _loading,
-      mounted: mounted,
-      value: setTo,
-    );
-  }
-  // -----------------------------------------------------------------------------
+  DashboardController controller = DashboardController();
+  // --------------------------------------------------------------------------
   @override
   void initState() {
     super.initState();
+    controller.init(
+      onSetState: onSetState,
+    );
   }
   // --------------------
-  bool _isInit = true;
+  void onSetState(){
+    if (mounted){
+      setState((){});
+    }
+  }
+  // --------------------
   @override
   void didChangeDependencies() {
-
-    if (_isInit && mounted) {
-      _isInit = false; // good
-
-      asyncInSync(() async {
-
-        await _triggerLoading(setTo: true);
-        /// GO BABY GO
-        await _triggerLoading(setTo: false);
-
-      });
-
-    }
     super.didChangeDependencies();
+    controller.didChangeDependencies();
   }
   // --------------------
   /*
@@ -79,34 +63,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // --------------------
   @override
   void dispose() {
-    _loading.dispose();
     super.dispose();
+    controller.dispose();
   }
   // ---------------------------------------------------------------------------
-
-  /// VIEW
-
-  // --------------------
-  void setView(DashboardView view){
-    if (mounted){
-      setState(() {
-        _view = view;
-      });
-    }
-  }
-  // --------------------
-  Widget _buildView(){
-
-    switch(_view){
-      case DashboardView.profile: return const ProfileView();
-      case DashboardView.setting: return const SettingsView();
-    }
-  }
-  // ---------------------------------------------------------------------------
-
   @override
   Widget build(BuildContext context) {
-
+    // --------------------
+    final DashboardView _view = controller.selectedView;
     // --------------------
     return TheLayout(
       child: (double bodyWidth) => Container(
@@ -119,11 +83,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
             /// LEFT MENU
             DashBoardMenu(
               selectedView: _view,
-              onSelected: setView,
+              onSelected: controller.setView,
             ),
 
             /// PAGE
-            _buildView(),
+            Builder(
+                builder: (_){
+                  switch(_view){
+                    case DashboardView.profile: return ProfileView(controller: controller);
+                    case DashboardView.setting: return const SettingsView();
+                  }
+                },
+            ),
 
           ],
         ),

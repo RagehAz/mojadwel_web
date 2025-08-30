@@ -1,6 +1,6 @@
 part of super_pop_menu;
 
-abstract class _Helpers {
+abstract class HelpersPop {
   // --------------------
   static const Color youtube = Color.fromRGBO(255, 0, 0, 1);
   // --------------------

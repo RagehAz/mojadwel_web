@@ -24,7 +24,7 @@ class BubbleHeaderVM {
     this.font,
     this.headlineHighlight,
     this.headlineHeight = 30,
-    this.moreButtonIcon = Iconz.more,
+    this.moreButtonIcon = Iconz.menu,
     this.moreButtonIconSizeFactor = 0.6,
     this.textDirection = TextDirection.ltr,
     this.appIsLTR = true,

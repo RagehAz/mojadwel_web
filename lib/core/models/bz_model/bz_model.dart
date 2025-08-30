@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mojadwel_web/core/utilities/timers.dart';
 
 @immutable
-class BusinessModel {
+class UserModel {
   // -----------------------------------------------------------------------------
-  const BusinessModel({
+  const UserModel({
     required this.id,
     required this.businessName,
     required this.ownerName,
@@ -17,11 +17,11 @@ class BusinessModel {
   });
   // -----------------------------------------------------------------------------
   final String id;
-  final String businessName;
-  final String ownerName;
+  final String? businessName;
+  final String? ownerName;
   final String? email;
-  final String phone;
-  final String plan;
+  final String? phone;
+  final String? plan;
   final DateTime? createdAt;
   final DateTime? trialEndsAt;
   // -----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class BusinessModel {
 
   // --------------------
   ///
-  BusinessModel copyWith({
+  UserModel copyWith({
     String? id,
     String? businessName,
     String? ownerName,
@@ -40,7 +40,7 @@ class BusinessModel {
     DateTime? createdAt,
     DateTime? trialEndsAt,
   }){
-    return BusinessModel(
+    return UserModel(
       id: id ?? this.id,
       businessName: businessName ?? this.businessName,
       ownerName: ownerName ?? this.ownerName,
@@ -74,14 +74,14 @@ class BusinessModel {
   // --------------------
   ///
   static List<Map<String, dynamic>> cipherToMaps({
-    required List<BusinessModel>? models,
+    required List<UserModel>? models,
     required bool toJSON,
   }){
     final List<Map<String, dynamic>> _output = [];
 
     if (_checkCanLoop(models) == true){
 
-      for (final BusinessModel model in models!){
+      for (final UserModel model in models!){
 
         final Map<String, dynamic> _map = model.toMap(
           toJSON: toJSON,
@@ -97,15 +97,15 @@ class BusinessModel {
   }
   // --------------------
   ///
-  static BusinessModel? decipherMap({
+  static UserModel? decipherMap({
     required Map<String, dynamic>? map,
     required bool fromJSON,
   }){
-    BusinessModel? _output;
+    UserModel? _output;
 
     if (map != null){
 
-      _output = BusinessModel(
+      _output = UserModel(
         id: map['id'],
         businessName: map['businessName'],
         ownerName: map['ownerName'],
@@ -122,17 +122,17 @@ class BusinessModel {
   }
   // --------------------
   ///
-  static List<BusinessModel> decipherMaps({
+  static List<UserModel> decipherMaps({
     required List<Map<String, dynamic>>? maps,
     required bool fromJSON,
    }){
-    final List<BusinessModel> _output = [];
+    final List<UserModel> _output = [];
 
     if (_checkCanLoop(maps) == true){
 
       for (final Map<String, dynamic> map in maps!){
 
-        final BusinessModel? _model = decipherMap(
+        final UserModel? _model = decipherMap(
           map: map,
           fromJSON: fromJSON,
         );
@@ -154,8 +154,8 @@ class BusinessModel {
   // --------------------
   /// TESTED : WORKS PERFECT
   static bool checkModelsAreIdentical({
-    required BusinessModel? model1,
-    required BusinessModel? model2,
+    required UserModel? model1,
+    required UserModel? model2,
   }){
 
     return _checkMapsAreIdentical(
@@ -166,8 +166,8 @@ class BusinessModel {
   // --------------------
   /// TESTED : WORKS PERFECT
   static bool checkModelsListsAreIdentical({
-    required List<BusinessModel>? models1,
-    required List<BusinessModel>? models2,
+    required List<UserModel>? models1,
+    required List<UserModel>? models2,
   }){
     return _checkMapsListsAreIdentical(
       maps1: cipherToMaps(models: models1, toJSON: true),
@@ -382,10 +382,17 @@ class BusinessModel {
   @override
   String toString() =>
       '''
-       TemplateModel(
-          id : $id,
-       )  
-       ''';
+UserModel(
+  id: $id,
+  businessName: $businessName,
+  ownerName: $ownerName,
+  email: $email,
+  phone: $phone,
+  plan: $plan,
+  createdAt: $createdAt,
+  trialEndsAt: $trialEndsAt,
+)  
+''';
   // --------------------
   @override
   bool operator == (Object other){
@@ -395,7 +402,7 @@ class BusinessModel {
     }
 
     bool _areIdentical = false;
-    if (other is BusinessModel){
+    if (other is UserModel){
       _areIdentical = checkModelsAreIdentical(
         model1: this,
         model2: other,
