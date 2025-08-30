@@ -4,6 +4,7 @@ import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.
 import 'package:mojadwel_web/core/models/bz_model/user_fire_ops.dart';
 import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
+import 'package:mojadwel_web/core/shared_components/dialogs/keyboard/keyboarder.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
 
 class DashboardController {
@@ -127,6 +128,7 @@ class DashboardController {
         businessName: null,
         trialEndsAt: null,
         authModel: authModel,
+        extraBzInfo: null,
       );
 
       await UserProtocols.compose(model: _userModel);
@@ -139,7 +141,7 @@ class DashboardController {
   }
   // -----------------------------------------------------------------------------
 
-  /// AUTH
+  /// PLAN SELECTION
 
   // --------------------
   Future<void> onSelectStarterPlan() async {
@@ -148,6 +150,120 @@ class DashboardController {
   // --------------------
   Future<void> onSelectProPlan() async {
     blog('onSelectProPlan : haa');
+  }
+  // -----------------------------------------------------------------------------
+
+  /// PROFILE EDITING
+
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> onOwnerNameTap() async {
+
+    final String? _name = await Keyboarder.getText(
+      context: getTheMainContext(),
+      initialText: userModel?.ownerName,
+      hintVerse: 'Owner name',
+    );
+
+    final UserModel? _updated = userModel?.copyWith(
+      ownerName: _name,
+    );
+
+    await _renovateTheModel(_updated);
+
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> onBusinessNameTap() async {
+
+    final String? _name = await Keyboarder.getText(
+      context: getTheMainContext(),
+      initialText: userModel?.businessName,
+      hintVerse: 'Business name',
+    );
+
+    final UserModel? _updated = userModel?.copyWith(
+      businessName: _name,
+    );
+
+    await _renovateTheModel(_updated);
+
+  }
+  // --------------------
+  /// CANCELLED
+  // Future<void> onEmailTap() async {
+  //   // blog('should change email');
+  // }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> onPhoneTap() async {
+
+    final String? _phone = await Keyboarder.getText(
+      context: getTheMainContext(),
+      initialText: userModel?.phone,
+      hintVerse: '+2 010 0000 0000',
+    );
+
+    final UserModel? _updated = userModel?.copyWith(
+      phone: _phone,
+    );
+
+    await _renovateTheModel(_updated);
+
+  }
+  // --------------------
+  /// DO_MULTI_BUTTON_SELECTOR_DIALOG
+  Future<void> onPlanTileTap() async {
+    blog('should change plan');
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> onExtraBzInfoTap() async {
+
+    final String? _phone = await Keyboarder.getParagraph(
+      context: getTheMainContext(),
+      initialText: userModel?.extraBzInfo,
+      hintVerse: 'Company info',
+    );
+
+    final UserModel? _updated = userModel?.copyWith(
+      extraBzInfo: _phone,
+    );
+
+    await _renovateTheModel(_updated);
+
+  }
+  // --------------------
+  /// DO_ME
+  Future<void> onSheetsTileTap() async {
+    blog('should change sheets');
+  }
+  // --------------------
+  /// DO_ME
+  Future<void> onCalendarTileTap() async {
+    blog('should change calendar');
+  }
+  // --------------------
+  /// DO_MULTI_BUTTON_SELECTOR_DIALOG
+  Future<void> onRemindersTileTap() async {
+    blog('should change reminders');
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> _renovateTheModel(UserModel? newUser) async {
+
+    if (newUser != null){
+
+      await UserProtocols.renovate(
+          oldModel: userModel,
+          newModel: newUser
+      );
+
+      userModel = newUser;
+      refresh!();
+
+    }
+
   }
   // -----------------------------------------------------------------------------
   void x(){}

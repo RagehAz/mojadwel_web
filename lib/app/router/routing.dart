@@ -6,6 +6,7 @@ import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.
 import 'package:mojadwel_web/app/testing_screens/a_testing_home.dart';
 import 'package:mojadwel_web/app/testing_screens/b_auth_testing_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/c_fire_testing_screen.dart';
+import 'package:mojadwel_web/core/theme/colorz.dart';
 // -----------------------------------------------------------------------------
 
 /// MAIN NAV KEY SUPER GLOBAL KEY
@@ -136,8 +137,10 @@ abstract class Routing {
   }) async {
 
     final dynamic _result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => screen,
+      PageRouteBuilder(
+        opaque: false,
+        barrierColor: Colorz.nothing,
+        pageBuilder: (_, __, ___) => screen,
       ),
     );
 

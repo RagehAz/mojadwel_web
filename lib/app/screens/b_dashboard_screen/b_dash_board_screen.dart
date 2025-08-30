@@ -3,14 +3,12 @@ import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/menu.dart
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/a_profile_view.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/b_plan_view.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/c_tune_view.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
 
 enum DashboardView {
   profile,
   plan,
-  tune,
 }
 
 class DashboardScreen extends StatefulWidget {
@@ -93,9 +91,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
             if (_view == DashboardView.plan)
               PlanView(controller: controller),
-
-            if (_view == DashboardView.tune)
-              const TuneView(),
 
           ],
         ),

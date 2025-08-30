@@ -28,7 +28,7 @@ class DashBoardMenu extends StatelessWidget {
         MenuButton(
           size: DashboardScreen.menuButtonSize,
           text: 'Profile',
-          icon: Iconz.company,
+          icon: Iconz.brain,
           isSelected: selectedView == DashboardView.profile,
           onTap: () => onSelected(DashboardView.profile),
         ),
@@ -39,14 +39,6 @@ class DashBoardMenu extends StatelessWidget {
           icon: Iconz.plan,
           isSelected: selectedView == DashboardView.plan,
           onTap: () => onSelected(DashboardView.plan),
-        ),
-
-        MenuButton(
-          size: DashboardScreen.menuButtonSize,
-          text: 'Tune',
-          icon: Iconz.brain,
-          isSelected: selectedView == DashboardView.tune,
-          onTap: () => onSelected(DashboardView.tune),
         ),
 
       ],

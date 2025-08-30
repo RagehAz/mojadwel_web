@@ -34,6 +34,7 @@ class ProfileView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: controller.canBuild == false ? [] : <Widget>[
 
+        /// GOOGLE SIGN IN BOX
         if (controller.authModel == null)
           Builder(
               builder: (context) {
@@ -97,6 +98,7 @@ class ProfileView extends StatelessWidget {
               }
               ),
 
+        /// ADD ACCOUNT BUTTON
         if (controller.authModel != null && controller.userModel == null)
           ProfileTile(
             headline: '',
@@ -106,6 +108,7 @@ class ProfileView extends StatelessWidget {
             redDot: false,
           ),
 
+        /// THE FIELDS
         if (controller.authModel != null && controller.userModel != null)
           Builder(
             builder: (context) {
@@ -121,14 +124,13 @@ class ProfileView extends StatelessWidget {
                     text: 'Profile',
                   ),
 
-
-
                   /// NAME
                   ProfileTile(
                     headline: 'Owner name',
                     value: _userModel?.ownerName,
                     icon: Iconz.user,
                     redDot: _userModel?.ownerName == null,
+                    onTap: controller.onOwnerNameTap,
                   ),
 
                   /// COMPANY NAME
@@ -137,6 +139,7 @@ class ProfileView extends StatelessWidget {
                     value: _userModel?.businessName,
                     icon: Iconz.company,
                     redDot: _userModel?.businessName == null,
+                    onTap: controller.onBusinessNameTap,
                   ),
 
                   /// Email
@@ -145,6 +148,7 @@ class ProfileView extends StatelessWidget {
                     value: _userModel?.email,
                     icon: Iconz.email,
                     redDot: _userModel?.email == null,
+                    // onTap: controller.onEmailTap,
                   ),
 
                   /// PHONE
@@ -153,6 +157,7 @@ class ProfileView extends StatelessWidget {
                     value: _userModel?.phone,
                     icon: Iconz.whatsapp,
                     redDot: _userModel?.phone == null,
+                    onTap: controller.onPhoneTap,
                   ),
 
                   /// PLAN
@@ -161,7 +166,47 @@ class ProfileView extends StatelessWidget {
                     value: _userModel?.plan,
                     icon: Iconz.plan,
                     redDot: _userModel?.plan == null,
+                    onTap: controller.onPlanTileTap,
                   ),
+
+                  /// EXTRA BZ INFO
+                  ProfileTile(
+                    headline: 'Extra Business info',
+                    value: _userModel?.extraBzInfo,
+                    icon: Iconz.info,
+                    redDot: _userModel?.extraBzInfo == null,
+                    onTap: controller.onExtraBzInfoTap,
+                  ),
+
+                  /// GOOGLE SHEET
+                  ProfileTile(
+                    headline: 'Google sheet',
+                    value: null,
+                    icon: Iconz.sheets,
+                    redDot: true,
+                    onTap: controller.onSheetsTileTap,
+                  ),
+
+                  /// GOOGLE CALENDAR
+                  ProfileTile(
+                    headline: 'Google Calendar',
+                    value: null,
+                    icon: Iconz.calendar,
+                    redDot: true,
+                    onTap: controller.onCalendarTileTap,
+                  ),
+
+                  /// REMINDERS
+                  ProfileTile(
+                    headline: 'Auto-reminders',
+                    value: null,
+                    icon: Iconz.notification,
+                    redDot: true,
+                    onTap: controller.onRemindersTileTap,
+                  ),
+
+                  /// SPACING
+                  const Spacing(size: 100),
 
                 ],
               );

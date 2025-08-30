@@ -16,6 +16,7 @@ class UserModel {
     required this.createdAt,
     required this.trialEndsAt,
     required this.authModel,
+    required this.extraBzInfo,
   });
   // -----------------------------------------------------------------------------
   final String id;
@@ -27,6 +28,7 @@ class UserModel {
   final DateTime? createdAt;
   final DateTime? trialEndsAt;
   final AuthModel? authModel;
+  final String? extraBzInfo;
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -43,6 +45,7 @@ class UserModel {
     DateTime? createdAt,
     DateTime? trialEndsAt,
     AuthModel? authModel,
+    String? extraBzInfo,
   }){
     return UserModel(
       id: id ?? this.id,
@@ -54,6 +57,7 @@ class UserModel {
       createdAt: createdAt ?? this.createdAt,
       trialEndsAt: trialEndsAt ?? this.trialEndsAt,
       authModel: authModel ?? this.authModel,
+      extraBzInfo: extraBzInfo ?? this.extraBzInfo,
     );
   }
   // -----------------------------------------------------------------------------
@@ -75,6 +79,7 @@ class UserModel {
       'createdAt': Timers.cipherTime(time: createdAt, toJSON: toJSON),
       'trialEndsAt': Timers.cipherTime(time: trialEndsAt, toJSON: toJSON),
       'authModel': authModel?.toMap(),
+      'extraBzInfo': extraBzInfo,
     };
   }
   // --------------------
@@ -121,6 +126,7 @@ class UserModel {
         createdAt: Timers.decipherTime(time: map['createdAt'], fromJSON: fromJSON),
         trialEndsAt: Timers.decipherTime(time: map['trialEndsAt'], fromJSON: fromJSON),
         authModel: AuthModel.decipher(map: map['authModel'], userID: map['id']),
+        extraBzInfo: map['extraBzInfo'],
       );
 
     }
@@ -279,6 +285,7 @@ UserModel(
   createdAt: $createdAt,
   trialEndsAt: $trialEndsAt,
   authModel: $authModel,
+  extraBzInfo: $extraBzInfo,
 )  
 ''';
   // --------------------
@@ -310,6 +317,7 @@ UserModel(
       plan.hashCode^
       createdAt.hashCode^
       trialEndsAt.hashCode^
+      extraBzInfo.hashCode^
       authModel.hashCode;
   // -----------------------------------------------------------------------------
 }

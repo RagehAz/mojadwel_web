@@ -180,7 +180,7 @@ abstract class BubbleScale {
     }
 
     if (_errorIsOn == true && canErrorize == true){
-      return _errorColor ?? Colorz.errorColor;
+      return _errorColor ?? Colorz.black255.withAlpha(100);
     }
     else {
       return defaultColor;

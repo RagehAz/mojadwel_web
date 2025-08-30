@@ -300,6 +300,7 @@ class TextFieldBubble extends StatelessWidget {
             width: _bubbleWidth,
             onBubbleTap: isDisabled == false ? null : onBubbleTap,
             margin: margin,
+            corners: 20,
             child: child,
         );
 
