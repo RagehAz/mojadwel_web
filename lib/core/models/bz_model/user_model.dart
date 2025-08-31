@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/core/models/bz_model/product_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/utilities/timers.dart';
 
@@ -18,6 +19,7 @@ class UserModel {
     required this.authModel,
     required this.extraBzInfo,
     required this.aiInstructions,
+    required this.products,
   });
   // -----------------------------------------------------------------------------
   final String id;
@@ -31,6 +33,7 @@ class UserModel {
   final AuthModel? authModel;
   final String? extraBzInfo;
   final String? aiInstructions;
+  final Map<String, ProductModel>? products;
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -49,6 +52,7 @@ class UserModel {
     AuthModel? authModel,
     String? extraBzInfo,
     String? aiInstructions,
+    Map<String, ProductModel>? products,
   }){
     return UserModel(
       id: id ?? this.id,
@@ -62,6 +66,7 @@ class UserModel {
       authModel: authModel ?? this.authModel,
       extraBzInfo: extraBzInfo ?? this.extraBzInfo,
       aiInstructions: aiInstructions ?? this.aiInstructions,
+      products: products ?? this.products,
     );
   }
   // -----------------------------------------------------------------------------
@@ -85,6 +90,7 @@ class UserModel {
       'authModel': authModel?.toMap(),
       'extraBzInfo': extraBzInfo,
       'aiInstructions': aiInstructions,
+      'products': ProductModel.cipherToMaps(models: products),
     };
   }
   // --------------------
@@ -133,6 +139,7 @@ class UserModel {
         authModel: AuthModel.decipher(map: map['authModel'], userID: map['id']),
         extraBzInfo: map['extraBzInfo'],
         aiInstructions: map['aiInstructions'],
+        products: ProductModel.decipherMaps(map: map['aiInstructions']),
       );
 
     }
@@ -293,6 +300,7 @@ UserModel(
   authModel: $authModel,
   extraBzInfo: $extraBzInfo,
   aiInstructions: $aiInstructions,
+  products: $products,
 )  
 ''';
   // --------------------
@@ -326,6 +334,7 @@ UserModel(
       trialEndsAt.hashCode^
       extraBzInfo.hashCode^
       aiInstructions.hashCode^
+      products.hashCode^
       authModel.hashCode;
   // -----------------------------------------------------------------------------
 }

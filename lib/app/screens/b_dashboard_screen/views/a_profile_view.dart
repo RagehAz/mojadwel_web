@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
-import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_pop_menu/super_pop_menu.dart';

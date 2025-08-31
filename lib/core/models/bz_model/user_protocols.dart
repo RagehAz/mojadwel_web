@@ -1,4 +1,4 @@
-import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/services/ldb/ldb.dart';
 
