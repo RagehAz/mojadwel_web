@@ -119,9 +119,8 @@ class ImageSwitcher extends StatelessWidget {
 
     /// LOADING
     if (loading == true){
-      return InfiniteLoadingBox(
-        width: width!,
-        height: height,
+      return Loading(
+        size: height,
         color: iconColor,
         backgroundColor: backgroundColor ?? const Color.fromARGB(50, 255, 255, 255),
       );

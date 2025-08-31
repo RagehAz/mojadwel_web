@@ -136,6 +136,7 @@ class DashboardController {
         trialEndsAt: null,
         authModel: authModel,
         extraBzInfo: null,
+        aiInstructions: null,
       );
 
       await UserProtocols.compose(model: _userModel);
@@ -254,6 +255,23 @@ class DashboardController {
   /// DO_MULTI_BUTTON_SELECTOR_DIALOG
   Future<void> onRemindersTileTap() async {
     blog('should change reminders');
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> onAiInstructionsTap() async {
+
+    final String? _name = await Keyboarder.getText(
+      context: getTheMainContext(),
+      initialText: userModel?.aiInstructions,
+      hintVerse: 'Ai Instructions',
+    );
+
+    final UserModel? _updated = userModel?.copyWith(
+      aiInstructions: _name,
+    );
+
+    await _renovateTheModel(_updated);
+
   }
   // --------------------
   /// TESTED : WORKS PERFECT

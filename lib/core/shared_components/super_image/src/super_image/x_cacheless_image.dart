@@ -163,9 +163,8 @@ class _CachelessImageState extends State<CachelessImage> {
         builder: (_, bool loading, Widget? child){
 
           if (loading == true){
-            return InfiniteLoadingBox(
-              width: widget.width,
-              height: widget.height,
+            return Loading(
+              size: widget.height,
               color: widget.color,
             );
           }

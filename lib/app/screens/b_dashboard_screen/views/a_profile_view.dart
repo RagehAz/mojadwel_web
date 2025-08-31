@@ -205,6 +205,15 @@ class ProfileView extends StatelessWidget {
                     onTap: controller.onRemindersTileTap,
                   ),
 
+                  /// AI INSTRUCTIONS
+                  ProfileTile(
+                    headline: 'Ai Instructions',
+                    value: null,
+                    icon: Iconz.scholar,
+                    redDot: true,
+                    onTap: controller.onAiInstructionsTap,
+                  ),
+
                   /// SPACING
                   const Spacing(size: 100),
 

@@ -34,9 +34,8 @@ class FutureImage extends StatelessWidget {
 
     /// LOADING
     if (_connectionIsLoading(snapshot) == true){
-      return InfiniteLoadingBox(
-        width: width,
-        height: height,
+      return Loading(
+        size: height,
       );
     }
 

@@ -47,9 +47,8 @@ class BoxIcon extends StatelessWidget {
       else {
         return ClipRRect(
           borderRadius: _Helpers.superCorners(corners: corners),
-          child: InfiniteLoadingBox(
-            width: size,
-            height: size,
+          child: Loading(
+            size: size,
             color: iconColor,
             backgroundColor: backgroundColor ?? _Helpers.white50,
           ),

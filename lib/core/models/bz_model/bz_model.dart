@@ -17,6 +17,7 @@ class UserModel {
     required this.trialEndsAt,
     required this.authModel,
     required this.extraBzInfo,
+    required this.aiInstructions,
   });
   // -----------------------------------------------------------------------------
   final String id;
@@ -29,6 +30,7 @@ class UserModel {
   final DateTime? trialEndsAt;
   final AuthModel? authModel;
   final String? extraBzInfo;
+  final String? aiInstructions;
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -46,6 +48,7 @@ class UserModel {
     DateTime? trialEndsAt,
     AuthModel? authModel,
     String? extraBzInfo,
+    String? aiInstructions,
   }){
     return UserModel(
       id: id ?? this.id,
@@ -58,6 +61,7 @@ class UserModel {
       trialEndsAt: trialEndsAt ?? this.trialEndsAt,
       authModel: authModel ?? this.authModel,
       extraBzInfo: extraBzInfo ?? this.extraBzInfo,
+      aiInstructions: aiInstructions ?? this.aiInstructions,
     );
   }
   // -----------------------------------------------------------------------------
@@ -80,6 +84,7 @@ class UserModel {
       'trialEndsAt': Timers.cipherTime(time: trialEndsAt, toJSON: toJSON),
       'authModel': authModel?.toMap(),
       'extraBzInfo': extraBzInfo,
+      'aiInstructions': aiInstructions,
     };
   }
   // --------------------
@@ -127,6 +132,7 @@ class UserModel {
         trialEndsAt: Timers.decipherTime(time: map['trialEndsAt'], fromJSON: fromJSON),
         authModel: AuthModel.decipher(map: map['authModel'], userID: map['id']),
         extraBzInfo: map['extraBzInfo'],
+        aiInstructions: map['aiInstructions'],
       );
 
     }
@@ -286,6 +292,7 @@ UserModel(
   trialEndsAt: $trialEndsAt,
   authModel: $authModel,
   extraBzInfo: $extraBzInfo,
+  aiInstructions: $aiInstructions,
 )  
 ''';
   // --------------------
@@ -318,6 +325,7 @@ UserModel(
       createdAt.hashCode^
       trialEndsAt.hashCode^
       extraBzInfo.hashCode^
+      aiInstructions.hashCode^
       authModel.hashCode;
   // -----------------------------------------------------------------------------
 }
