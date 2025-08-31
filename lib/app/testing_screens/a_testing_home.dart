@@ -14,7 +14,7 @@ class TestingHome extends StatelessWidget {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: (double bodyWidth) => Column(
+      child: (ScreenDim screen) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 

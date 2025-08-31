@@ -53,5 +53,6 @@ abstract class Iconz {
   static const String brain = 'assets/brain.svg';
   static const String info = 'assets/info.svg';
   static const String scholar = 'assets/scholar.svg';
+  static const String product = 'assets/product.svg';
   // -----------------------------------------------------------------------------
 }

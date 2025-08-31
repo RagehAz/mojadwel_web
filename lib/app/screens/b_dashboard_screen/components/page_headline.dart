@@ -21,7 +21,7 @@ class PageHeadline extends StatelessWidget {
     // --------------------
     return SuperText(
       boxWidth: width,
-      text: text,
+      text: text.toUpperCase(),
       textHeight: 100,
       font: MojadwelFonts.headline,
       textColor: Colorz.black255,
@@ -29,6 +29,7 @@ class PageHeadline extends StatelessWidget {
       lineSpacingFactor: 0.6,
       margins: 30,
       centered: centered,
+      italic: true,
     );
     // --------------------
   }

@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:mojadwel_web/app/router/routing.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
-import 'package:mojadwel_web/core/models/bz_model/user_protocols.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/b_plan_view.dart';
 import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/user_protocols.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/keyboard/keyboarder.dart';
@@ -12,8 +12,6 @@ class DashboardController {
   // --------------------------------------------------------------------------
   VoidCallback? refresh;
   final Wire<bool> mounted = Wire<bool>(true);
-  // --------------------
-  DashboardView selectedView = DashboardView.profile;
   // --------------------
   UserModel? userModel;
   AuthModel? authModel;
@@ -64,18 +62,6 @@ class DashboardController {
     mounted.set(value: false, mounted: true);
     loading.dispose();
     mounted.dispose();
-  }
-  // -----------------------------------------------------------------------------
-
-  /// VIEW
-
-  // --------------------
-  /// TESTED : WORKS PERFECT
-  void setView(DashboardView view){
-    if (mounted.value){
-      selectedView = view;
-      refresh!();
-    }
   }
   // -----------------------------------------------------------------------------
 
@@ -169,9 +155,10 @@ class DashboardController {
   Future<void> onOwnerNameTap() async {
 
     final String? _name = await Keyboarder.getText(
-      context: getTheMainContext(),
-      initialText: userModel?.ownerName,
-      hintVerse: 'Owner name',
+        context: getTheMainContext(),
+        initialText: userModel?.ownerName,
+        hintVerse: 'Owner name',
+        headline: 'Owner name'
     );
 
     final UserModel? _updated = userModel?.copyWith(
@@ -189,6 +176,7 @@ class DashboardController {
       context: getTheMainContext(),
       initialText: userModel?.businessName,
       hintVerse: 'Business name',
+      headline: 'Business name'
     );
 
     final UserModel? _updated = userModel?.copyWith(
@@ -208,9 +196,10 @@ class DashboardController {
   Future<void> onPhoneTap() async {
 
     final String? _phone = await Keyboarder.getText(
-      context: getTheMainContext(),
-      initialText: userModel?.phone,
-      hintVerse: '+2 010 0000 0000',
+        context: getTheMainContext(),
+        initialText: userModel?.phone,
+        hintVerse: '+2 010 0000 0000',
+        headline: 'Whats app number'
     );
 
     final UserModel? _updated = userModel?.copyWith(
@@ -221,18 +210,24 @@ class DashboardController {
 
   }
   // --------------------
-  /// DO_MULTI_BUTTON_SELECTOR_DIALOG
+  /// CREATE_PLAN_SELECTION_SCREEN
   Future<void> onPlanTileTap() async {
-    blog('should change plan');
+
+    await Routing.push(
+      context: getTheMainContext(),
+      screen: PlanView(controller: this),
+    );
+
   }
   // --------------------
   /// TESTED : WORKS PERFECT
   Future<void> onExtraBzInfoTap() async {
 
     final String? _phone = await Keyboarder.getParagraph(
-      context: getTheMainContext(),
-      initialText: userModel?.extraBzInfo,
-      hintVerse: 'Company info',
+        context: getTheMainContext(),
+        initialText: userModel?.extraBzInfo,
+        hintVerse: 'Company info',
+        headline: 'Company info'
     );
 
     final UserModel? _updated = userModel?.copyWith(
@@ -265,6 +260,7 @@ class DashboardController {
       context: getTheMainContext(),
       initialText: userModel?.aiInstructions,
       hintVerse: 'Ai Instructions',
+      headline: 'Ai Instructions',
     );
 
     final UserModel? _updated = userModel?.copyWith(
@@ -273,6 +269,10 @@ class DashboardController {
 
     await _renovateTheModel(_updated);
 
+  }
+  // --------------------
+  Future<void> onProductsTileTap() async {
+    blog('should go to products screen now');
   }
   // --------------------
   /// TESTED : WORKS PERFECT

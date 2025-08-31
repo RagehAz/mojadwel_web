@@ -138,7 +138,7 @@ class _FireTestingScreenState extends State<FireTestingScreen> {
   Widget build(BuildContext context) {
 
     return TheLayout(
-      child: (double width) => VerticalFloatingList(
+      child: (ScreenDim screen) => VerticalFloatingList(
         children: [
 
           /// OfficialEmailAuthing.signIn

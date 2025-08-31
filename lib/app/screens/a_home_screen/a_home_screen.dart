@@ -20,12 +20,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // --------------------
     return TheLayout(
-      child: (double bodyWidth){
+      child: (ScreenDim screen){
 
         // final double _tileWidth = bodyWidth * 0.6;
 
         return SizedBox(
-          width: bodyWidth,
+          width: screen.bodyWidth,
           child: VerticalFloatingList(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                       height: 50,
                       width: 50,
                       margins: 20,
-                      icon: Iconz.logoPng,
+                      icon: Iconz.brain,
                       textCentered: false,
                       // corners: 50,
                       onTap: () async {
@@ -61,18 +61,18 @@ class HomeScreen extends StatelessWidget {
 
                   /// HEADLINE
                   const HomePageHeadline(
-                    text: 'Ai serves your schedule',
+                    text: 'Custom Ai Chatting agent',
                   ),
 
                   /// DESCRIPTION
                   const HomePageSecondLine(
-                    text: 'Transform your scheduling system to an advanced ai chat agent\nconnected to your calendar and customers sheet',
+                    text: 'Create your own Ai chat agent and let it represent you',
                   ),
 
                   /// START
                   SuperBox(
                     height: 90,
-                    width: bodyWidth * 0.4,
+                    width: screen.bodyWidth * 0.4,
                     text: 'Start ..',
                     color: Colorz.black255,
                     textFont: MojadwelFonts.headline,
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                   Builder(
                       builder: (context) {
 
-                        final double _width = bodyWidth * 0.7;
+                        final double _width = screen.bodyWidth * 0.7;
                         final double _height = _width * 9 / 16;
 
                         return Container(
@@ -176,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                   Builder(
                     builder: (_){
 
-                      final double _tileWidth = bodyWidth * 0.6;
+                      final double _tileWidth = screen.bodyWidth * 0.6;
 
                       return Column(
                         children: <Widget>[
@@ -220,7 +220,7 @@ class HomeScreen extends StatelessWidget {
 
               /// FOOTER
               HomePageFooter(
-                width: bodyWidth,
+                width: screen.bodyWidth,
               ),
 
             ],

@@ -3,7 +3,7 @@ import 'package:mojadwel_web/core/shared_components/red_dot/red_dot_badge.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
-import 'package:mojadwel_web/core/utilities/contextual.dart';
+import 'package:mojadwel_web/core/utilities/scale.dart';
 
 class ProfileTile extends StatefulWidget {
   // --------------------------------------------------------------------------
@@ -55,12 +55,11 @@ class _ProfileTileState extends State<ProfileTile> {
     // --------------------
     final Function? _theOnTapFunction = widget.onTap == null ? null : _onTap;
     // --------------------
-    final double tileWidth = context.screenWidth * 0.7;
+    final double tileWidth = Scale.theBodyWidth(context) * 0.9;
     // --------------------
     return Padding(
       padding: const EdgeInsets.only(
         bottom: 10,
-        left: 30,
       ),
       child: RedDotBadge(
         redDotIsOn: widget.redDot,
@@ -74,6 +73,7 @@ class _ProfileTileState extends State<ProfileTile> {
           height: null,
           onTap: _theOnTapFunction,
           splashColor: Colorz.green255,
+          borderColor: widget.redDot ? Colorz.bloodTest : Colorz.light3,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -99,7 +99,7 @@ class _ProfileTileState extends State<ProfileTile> {
                     SuperText(
                       boxWidth: tileWidth - 80,
                       text: widget.headline,
-                      textHeight: 17,
+                      textHeight: 22,
                       textColor: Colorz.light3,
                       centered: false,
                     ),

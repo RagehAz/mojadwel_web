@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
@@ -53,7 +54,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: _appBarHeight,
                 // width: _appBarHeight,
                 // icon: Iconz.logoPng,
-                text: 'Mojadwel',
+                text: 'Mokh.ai',
                 textColor: Colorz.black255,
                 textFont: MojadwelFonts.headline,
                 textWeight: FontWeight.w500,
@@ -83,12 +84,14 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                     SizedBox(width: 10, height: 10),
 
                     /// DASHBOARD
-                    TheMenuButton(text: 'Dashboard', route: Routing.routeDashboard),
+                    TheMenuButton(text: 'PROFILE', route: Routing.routeDashboard),
 
                     /// SPACING
+                    if (kDebugMode)
                     SizedBox(width: 10, height: 10),
 
                     /// TESTING HOME
+                    if (kDebugMode)
                     TheMenuButton(text: 'Testing Home', route: Routing.routeTestingHome),
 
                     /// SPACING

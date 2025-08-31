@@ -139,7 +139,7 @@ class UserModel {
         authModel: AuthModel.decipher(map: map['authModel'], userID: map['id']),
         extraBzInfo: map['extraBzInfo'],
         aiInstructions: map['aiInstructions'],
-        products: ProductModel.decipherMaps(map: map['aiInstructions']),
+        products: ProductModel.decipherMaps(map: map['products']),
       );
 
     }
