@@ -107,11 +107,14 @@ class _ProfileTileState extends State<ProfileTile> {
                     SuperText(
                       boxWidth: tileWidth - 80,
                       text: widget.value ?? '...',
-                      textHeight: 30,
+                      textHeight: 28,
                       textColor: Colorz.black255,
                       weight: FontWeight.w800,
                       centered: false,
+                      maxLines: 100,
                     ),
+
+                    const Spacing(),
 
                   ],
                 ),

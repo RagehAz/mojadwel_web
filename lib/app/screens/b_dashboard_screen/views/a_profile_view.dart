@@ -208,9 +208,9 @@ class ProfileView extends StatelessWidget {
                   /// AI INSTRUCTIONS
                   ProfileTile(
                     headline: 'Ai Instructions',
-                    value: null,
+                    value: _userModel?.aiInstructions,
                     icon: Iconz.scholar,
-                    redDot: true,
+                    redDot: _userModel?.aiInstructions == null,
                     onTap: controller.onAiInstructionsTap,
                   ),
 
