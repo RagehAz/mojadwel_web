@@ -210,7 +210,7 @@ class DashboardController {
 
   }
   // --------------------
-  /// CREATE_PLAN_SELECTION_SCREEN
+  /// TESTED : WORKS PERFECT
   Future<void> onPlanTileTap() async {
 
     await Routing.push(

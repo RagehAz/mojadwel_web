@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
+import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:mojadwel_web/core/shared_components/lists/expander.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
@@ -27,9 +29,10 @@ class PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // --------------------
-    final double _zoneWidth = context.screenWidth - DashboardScreen.menuWidth;
-    final double _min = _zoneWidth - 122;
-    final double _boxWidth = _min < 350 ? _min : 350;
+    final double _zoneWidth = context.screenWidth;
+    const double _min = 350;
+    final double _value = _zoneWidth * 0.45;
+    final double _boxWidth = _value < _min ? _value : _min;
     // --------------------
     return Container(
       width: _boxWidth,
