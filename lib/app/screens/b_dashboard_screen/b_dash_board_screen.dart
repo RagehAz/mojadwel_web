@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
+import 'package:mojadwel_web/app/screens/c_terms_screens/legalizer.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
@@ -9,6 +11,7 @@ import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_pop_menu/super_pop_menu.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
+import 'package:mojadwel_web/core/theme/app_info.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
@@ -127,17 +130,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: Colorz.black,
                             splashColor: Colorz.googleRed,
                           ),
+
                           const Spacing(size: 30),
-                          SuperText(
-                            boxWidth: boxWidth * 0.7,
-                            text: "By continuing, you agree to Mojadwel's Terms of Service\nRead our Privacy Policy.",
-                            textHeight: 27,
-                            font: MojadwelFonts.body,
-                            textColor: Colorz.black255,
-                            maxLines: 5,
-                            lineSpacingFactor: 0.8,
-                            margins: 5,
-                          )
+
+                          LegalDisclaimerLine(
+                            onTermsTap: () => Routing.goTo(route: Routing.routeTerms),
+                            onPolicyTap: () => Routing.goTo(route: Routing.routePrivacy),
+                          ),
+
+                          const Spacing(),
+
+                          const CopyrightsLine(
+                            companyName: theCompanyName,
+                            isArabic: false,
+                          ),
+
                         ],
                       ),
                     ),

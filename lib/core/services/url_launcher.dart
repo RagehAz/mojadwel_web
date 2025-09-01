@@ -1,6 +1,5 @@
 import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:url_launcher/url_launcher.dart' as Launch;
-import 'package:url_launcher/url_launcher_string.dart' as Launch;
 
 import 'fire/fire.dart';
 
@@ -173,5 +172,5 @@ abstract class URLLaunching {
 
     return _go;
   }
-// -----------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------
 }

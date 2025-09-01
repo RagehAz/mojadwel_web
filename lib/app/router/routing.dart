@@ -1,11 +1,15 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mojadwel_web/app/screens/a_home_screen/a_home_screen.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
+import 'package:mojadwel_web/app/screens/c_terms_screens/legalizer.dart';
 import 'package:mojadwel_web/app/testing_screens/a_testing_home.dart';
 import 'package:mojadwel_web/app/testing_screens/b_auth_testing_screen.dart';
 import 'package:mojadwel_web/app/testing_screens/c_fire_testing_screen.dart';
+import 'package:mojadwel_web/core/theme/app_info.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 // -----------------------------------------------------------------------------
 
@@ -33,6 +37,8 @@ abstract class Routing {
   // --------------------
   static const routeHome = 'home';
   static const routeDashboard = 'dashboard';
+  static const routeTerms = 'terms';
+  static const routePrivacy = 'privacy';
   // --------------------
   static const routeTestingHome = 'testing_home';
   static const routeAuthTesting = 'testing_auth';
@@ -62,6 +68,28 @@ abstract class Routing {
         builder: (context, state) {
           return const DashboardScreen();
         },
+      ),
+
+      /// TERMS
+      GoRoute(
+        path: '/$routeTerms',
+        name: routeTerms,
+        builder: (context, state) => const TermsScreen(
+          company: theCompanyName,
+          domain: theDomainName,
+          email: thePublicEmail,
+        ),
+      ),
+
+      /// PRIVACY
+      GoRoute(
+        path: '/$routePrivacy',
+        name: routePrivacy,
+        builder: (context, state) => const PrivacyScreen(
+          company: theCompanyName,
+          domain: theDomainName,
+          email: thePublicEmail,
+        ),
       ),
 
       // --------------------

@@ -3,6 +3,7 @@ import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/expander.dart';
 import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
+import 'package:mojadwel_web/core/theme/app_info.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
@@ -81,6 +82,9 @@ class HomePageFooter extends StatelessWidget {
                 },
               ),
 
+              /// SPACING
+              const Spacing(size: 20),
+
             ],
           ),
         ),
@@ -99,7 +103,7 @@ class HomePageFooter extends StatelessWidget {
                 height: 40,
                 // width: _appBarHeight,
                 // icon: Iconz.logoPng,
-                text: 'Mojadwel',
+                text: theBrandName,
                 textColor: Colorz.black255,
                 textFont: MojadwelFonts.headline,
                 textWeight: FontWeight.w500,
@@ -114,11 +118,11 @@ class HomePageFooter extends StatelessWidget {
 
               /// COPY RIGHTS
               const _SmallText(
-                text: '© 2025 Bldrs.net',
+                text: '©2025 $theCompanyName',
               ),
 
               /// SPACING
-              const Spacing(),
+              const Spacing(size: 5),
 
               /// LEGAL
               _SmallText(
@@ -129,7 +133,7 @@ class HomePageFooter extends StatelessWidget {
               ),
 
               /// SPACING
-              const Spacing(),
+              const Spacing(size: 5),
 
               /// PRIVACY
               _SmallText(
@@ -138,6 +142,9 @@ class HomePageFooter extends StatelessWidget {
                   blog('should go to privacy policy page');
                 },
               ),
+
+              /// SPACING
+              const Spacing(size: 20),
 
             ],
           ),

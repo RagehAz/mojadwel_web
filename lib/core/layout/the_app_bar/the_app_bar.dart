@@ -6,6 +6,7 @@ import 'package:mojadwel_web/core/layout/the_app_bar/the_menu_button.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_image/super_image.dart';
 import 'package:mojadwel_web/core/shared_components/super_pop_menu/super_pop_menu.dart';
+import 'package:mojadwel_web/core/theme/app_info.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
@@ -54,7 +55,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: _appBarHeight,
                 // width: _appBarHeight,
                 // icon: Iconz.logoPng,
-                text: 'Mokh.ai',
+                text: theBrandName,
                 textColor: Colorz.black255,
                 textFont: MojadwelFonts.headline,
                 textWeight: FontWeight.w500,
