@@ -1,9 +1,9 @@
 
 
-const String theCompanyName = 'Mokh.ai';
+const String theCompanyName = 'kallemhooly.llc';
 
-const String theBrandName = 'Mokh';
+const String theBrandName = 'kallemhooly';
 
-const String theDomainName = 'Mokh.ai';
+const String theDomainName = 'kallemhooly.com';
 
 const String thePublicEmail = 'rageh.az@gmail.com';
