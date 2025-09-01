@@ -74,7 +74,7 @@ class PlanView extends StatelessWidget {
                               '✅ Ai Booking & reminders',
                               '✅ Analytics dashboard',
                             ],
-                            price: '999 EGP / month',
+                            price: '500 EGP / month',
                             onTap: controller.onSelectStarterPlan,
                           ),
 
@@ -87,7 +87,7 @@ class PlanView extends StatelessWidget {
                               '✅ 3 WhatsApp numbers',
                               '✅ Detailed performance & cost analytics',
                             ],
-                            price: '1999 EGP / month',
+                            price: '2000 EGP / month',
                             onTap: controller.onSelectProPlan,
                           ),
 

@@ -10,6 +10,7 @@ import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/shared_components/widget_fader/widget_fader.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
+import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
 
@@ -1064,7 +1065,7 @@ class CenterDialog extends StatelessWidget {
 
   // --------------------
   static const Color activeButtonColor = Colorz.black255;
-  static const Color defaultButtonColor = Colorz.white50;
+  static const Color defaultButtonColor = Colorz.light2;
   // -----------------------------------------------------------------------------
 
   /// LAUNCHERS
@@ -1288,6 +1289,9 @@ class CenterDialog extends StatelessWidget {
                           // textHeight: 50,
                           italic: true,
                           maxLines: 2,
+                          textColor: Colorz.black,
+                          font: MojadwelFonts.headline,
+                          // textHeight: 50,
                           // labelColor: Colorz.Yellow,
                           margins: const EdgeInsets.only(
                             top: 20,
@@ -1306,8 +1310,11 @@ class CenterDialog extends StatelessWidget {
                           child: SuperText(
                             boxWidth: _dialogWidth * 0.9,
                             text: bodyVerse,
+                            font: MojadwelFonts.body,
+                            textHeight: 27,
                             maxLines: 20,
                             // weight: VerseWeight.thin,
+                            textColor: Colorz.black,
                             margins: const EdgeInsets.symmetric(
                               vertical: 5,
                               horizontal: 10 * 2,
@@ -1773,6 +1780,7 @@ class _DialogBoolStrip extends StatelessWidget {
               width: 80,
               text: noVerse,
               color: defaultButtonColor,
+              textColor: activeButtonColor,
               onTap: onNo,
             ),
 
@@ -1780,7 +1788,7 @@ class _DialogBoolStrip extends StatelessWidget {
           _DialogButton(
             width: yesButtonWidth ?? 80,
             text: confirmButtonVerse,
-            textColor: invertButtons == true ? Colorz.white255 : Colorz.black230,
+            textColor: invertButtons == true ? activeButtonColor : defaultButtonColor,
             color: invertButtons == true ? defaultButtonColor : activeButtonColor,
             isDisabled: confirmDisabled,
             onTap: onYes,
@@ -1791,7 +1799,7 @@ class _DialogBoolStrip extends StatelessWidget {
             _DialogButton(
               width: noButtonWidth,
               text: noVerse,
-              textColor: Colorz.black230,
+              textColor: defaultButtonColor,
               color: activeButtonColor,
               onTap: onNo,
             ),

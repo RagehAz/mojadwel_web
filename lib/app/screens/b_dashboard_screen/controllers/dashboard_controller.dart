@@ -4,6 +4,7 @@ import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/b_plan_view.da
 import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
 import 'package:mojadwel_web/core/models/bz_model/user_protocols.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
+import 'package:mojadwel_web/core/services/url_launcher.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/keyboard/keyboarder.dart';
 import 'package:mojadwel_web/core/utilities/wire.dart';
@@ -140,11 +141,54 @@ class DashboardController {
 
   // --------------------
   Future<void> onSelectStarterPlan() async {
-    blog('onSelectStarterPlan : start');
+    await _onOpenInstapay(
+      price: '500 EGP',
+    );
   }
   // --------------------
   Future<void> onSelectProPlan() async {
-    blog('onSelectProPlan : haa');
+    await _onOpenInstapay(
+      price: '2000 EGP',
+    );
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  Future<void> _onOpenInstapay({
+    required String price,
+  }) async {
+
+    const String _url = 'https://ipn.eg/S/ragehazzazy/instapay/5sHiEu';
+
+    final bool _go = await Dialogs.confirmProceed(
+      headlineVerse: 'Transfer payment by Instapay',
+      bodyVerse: 'send $price to\n$_url\n then send the receipt on whatsapp to +201554555107',
+      yesVerse: 'Open Instapay',
+    );
+
+    if (_go == true){
+
+      await URLLaunching.launchURL(
+        url: _url,
+      );
+
+      final bool _openWhatsApp = await Dialogs.confirmProceed(
+        headlineVerse: 'Open Whatsapp ?',
+        bodyVerse: 'If you have completed the transaction, send the receipt to +201554555107',
+        yesVerse: 'Open Whatsapp',
+      );
+
+      if (_openWhatsApp == true){
+
+        const String number = '201554555107';
+        final String message = 'Hello Rageh\nWe have paid the ($price) by instapay for the ai agent subscription, please activate the service to me\n\nAnd I will send you the payment receipt';
+        await URLLaunching.launchURL(
+          url: 'https://wa.me/$number?text=$message',
+        );
+
+      }
+
+    }
+
   }
   // -----------------------------------------------------------------------------
 
