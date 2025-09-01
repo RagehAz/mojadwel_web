@@ -140,12 +140,14 @@ class DashboardController {
   /// PLAN SELECTION
 
   // --------------------
+  /// TESTED : WORKS PERFECT
   Future<void> onSelectStarterPlan() async {
     await _onOpenInstapay(
       price: '500 EGP',
     );
   }
   // --------------------
+  /// TESTED : WORKS PERFECT
   Future<void> onSelectProPlan() async {
     await _onOpenInstapay(
       price: '2000 EGP',
