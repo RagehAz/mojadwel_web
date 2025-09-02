@@ -72,21 +72,26 @@ abstract class Routing {
         builder: (context, state) {
           return const DashboardScreen();
         },
+        routes: [
+
+          /// PLANS
+          GoRoute(
+            path: '/$plans',
+            name: plans,
+            builder: (x, _) => const  PlanView(),
+          ),
+
+          /// PRODUCTS
+          GoRoute(
+            path: '/$products',
+            name: products,
+            builder: (x, _) => const ProductsScreen(),
+          ),
+
+        ],
       ),
 
-      /// PLANS
-      GoRoute(
-        path: '/$plans',
-        name: plans,
-        builder: (x, _) => const  PlanView(),
-      ),
 
-      /// PRODUCTS
-      GoRoute(
-        path: '/$products',
-        name: products,
-        builder: (x, _) => const ProductsScreen(),
-      ),
 
       /// TERMS
       GoRoute(

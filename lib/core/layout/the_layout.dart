@@ -10,17 +10,24 @@ class TheLayout extends StatelessWidget {
   const TheLayout({
     required this.child,
     this.backgroundColor,
+    this.hasAppBar = true,
+    this.showMenu = true,
+    this.title,
     super.key,
   });
   // --------------------
   final Widget Function(ScreenDim screen) child;
   final Color? backgroundColor;
+  final bool hasAppBar;
+  final bool showMenu;
+  final String? title;
   // --------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
     final double _bodyWidth = Scale.theBodyWidth(context);
     final topMargin = context.safeAreaTopPadding;
+    final double _appBarHeight = hasAppBar ? Scale.appBarHeight : 0;
     // --------------------
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -33,14 +40,17 @@ class TheLayout extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: backgroundColor ?? Colorz.light1,
-        appBar: const TheAppBar(),
+        appBar: hasAppBar ? TheAppBar(
+          title: title,
+          showMenu: showMenu,
+        ) : null,
         body: Center(
             child: child(ScreenDim(
               screenWidth: context.screenWidth,
               screenHeight: context.screenHeight,
               bodyWidth: _bodyWidth,
-              appBarHeight: Scale.appBarHeight,
-              bodyHeight: context.screenHeight - (Scale.appBarHeight + topMargin),
+              appBarHeight: _appBarHeight,
+              bodyHeight: context.screenHeight - (_appBarHeight + topMargin),
               safeAreaTopPadding: topMargin,
             ))
         ),

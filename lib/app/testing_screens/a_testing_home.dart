@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
+import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
@@ -40,6 +41,17 @@ class TestingHome extends StatelessWidget {
               await Routing.goTo(
                 route: Routing.routeFireTesting,
               );
+
+            },
+          ),
+
+          /// TOP DIALOG
+          MenuButton(
+            icon: Iconz.star,
+            text: 'Top dialog test',
+            onTap: () async {
+
+              await Dialogs.stateDialog(state: true);
 
             },
           ),

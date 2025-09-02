@@ -3,6 +3,7 @@ import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/plan_card.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
+import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
@@ -21,9 +22,10 @@ class PlanView extends StatelessWidget {
     final double _zoneWidth = context.screenWidth;
     const double _spacing = 10;
     // --------------------
-    return Material(
-      color: Colorz.light1.withAlpha(230),
-      child: TapLayer(
+    return TheLayout(
+      backgroundColor: Colorz.light1.withAlpha(230),
+      hasAppBar: false,
+      child: (ScreenDim screen) => TapLayer(
         width: _zoneWidth,
         height: context.screenHeight,
         splashColor: Colorz.greyDark,

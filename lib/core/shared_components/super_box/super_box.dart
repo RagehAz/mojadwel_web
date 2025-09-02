@@ -1,8 +1,6 @@
 library super_box;
 // -----------------------------------------------------------------------------
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../super_image/super_image.dart';
 import '../super_text/super_text.dart';
 // -----------------------------------------------------------------------------

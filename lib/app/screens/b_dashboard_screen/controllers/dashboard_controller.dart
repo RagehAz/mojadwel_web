@@ -11,7 +11,8 @@ import 'package:mojadwel_web/core/utilities/wire.dart';
 class DashboardController {
   // --------------------------------------------------------------------------
   VoidCallback? refresh;
-  final Wire<bool> mounted = Wire<bool>(true);
+  Wire<bool>? mountedWire;
+  bool get mounted => mountedWire?.value ?? false;
   // --------------------
   BzModel? userModel;
   AuthModel? authModel;
@@ -22,7 +23,7 @@ class DashboardController {
   Future<void> triggerLoading({required bool setTo}) async {
     setNotifier(
       notifier: loading,
-      mounted: mounted.value,
+      mounted: mounted,
       value: setTo,
     );
   }
@@ -30,6 +31,7 @@ class DashboardController {
   void init({
     required VoidCallback onSetState,
   }) {
+    mountedWire = Wire<bool>(true);
     refresh = onSetState;
   }
   // --------------------
@@ -38,7 +40,7 @@ class DashboardController {
 
     Routing.waitTheNav();
 
-    if (canBuild == false && mounted.value == true) {
+    if (canBuild == false && mounted == true) {
       triggerLoading(setTo: true).then((_) async {
         // -------------------------------
         final BzModel? _theUser = await BzProtocols.fetch(
@@ -59,9 +61,13 @@ class DashboardController {
   }
   // --------------------
   void dispose() {
-    mounted.set(value: false, mounted: true);
-    loading.dispose();
-    mounted.dispose();
+    blog('Disposing the controller');
+    if (mountedWire != null && mounted == true){
+      mountedWire?.set(value: false, mounted: true);
+      loading.dispose();
+      mountedWire?.dispose();
+      mountedWire = null;
+    }
   }
   // -----------------------------------------------------------------------------
 
@@ -329,7 +335,11 @@ class DashboardController {
   }
   // --------------------
   Future<void> onProductsTileTap() async {
-    blog('should go to products screen now');
+
+    // await Routing.push(
+    //   context: getTheMainContext(),
+    //   screen: (x) => const ProductsScreen(),
+    // );
 
     await Routing.goTo(
       route: Routing.products,

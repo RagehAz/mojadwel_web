@@ -79,59 +79,54 @@ class _ProductsScreenState extends State<ProductsScreen> {
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
-
+    // --------------------
     final DashboardController controller = DashPro.getController(
       context: context,
       listen: true,
     );
-
+    // --------------------
     final List<ProductModel> _products = ProductModel.toList(
       productsMap: controller.userModel?.products,
     );
-
+    // --------------------
     _products.add(const ProductModel(id: 'id', name: 'name', description: 'description', price: 120.55, currency: 'EGP'));
-
     // --------------------
     return TheLayout(
-        child: (ScreenDim screen) => SuperListView(
-          width: screen.screenWidth,
-          height: screen.bodyHeight,
-          itemCount: _products.length + 1,
-          itemBuilder: (int index){
+      showMenu: false,
+      title: 'Products',
+      child: (ScreenDim screen) => SuperListView(
+        width: screen.screenWidth,
+        height: screen.bodyHeight,
+        itemCount: _products.length + 1,
+        itemBuilder: (int index){
 
-            if (_products.length == index){
-
-              return TheTile(
-                headline: ' ',
-                value: 'Add product',
-                bigIcon: true,
-                icon: '+',
-                onTap: (){
-                  blog('should add product');
+          if (_products.length == index){
+            return TheTile(
+              headline: ' ',
+              value: 'Add product',
+              bigIcon: true,
+              icon: '+',
+              onTap: (){
+                blog('should add product');
                 },
-              );
+            );
+          }
 
-            }
-
-            else {
-
-              final ProductModel _product = _products[index];
-
-              return TheTile(
-                headline: _product.id,
-                value: _product.name,
-                icon: Iconz.product,
-                bigIcon: true,
-                onTap: (){
-                  blog('product is tapped id(${_product.id})');
+          else {
+            final ProductModel _product = _products[index];
+            return TheTile(
+              headline: _product.id,
+              value: _product.name,
+              icon: Iconz.product,
+              bigIcon: true,
+              onTap: (){
+                blog('product is tapped id(${_product.id})');
                 },
-              );
-
-            }
-
+            );
+          }
 
           },
-        ),
+      ),
     );
     // --------------------
   }

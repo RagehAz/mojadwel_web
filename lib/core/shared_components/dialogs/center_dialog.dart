@@ -795,9 +795,9 @@ class TopDialog extends StatelessWidget {
       /// TITLE ----------------------------------------------
       titleText: Container(
         width: _bubbleWidth,
-        constraints: BoxConstraints(
-          minHeight: _BldrsAppBar.collapsedHeight() - 5,
-        ),
+        // constraints: BoxConstraints(
+        //   minHeight: _BldrsAppBar.collapsedHeight() - 5,
+        // ),
         decoration: const BoxDecoration(
           // color: Colorz.Black255,
           borderRadius: _BldrsAppBar.corners,
@@ -813,6 +813,7 @@ class TopDialog extends StatelessWidget {
               textColor: textColor,
               maxLines: 3,
               margins: 5,
+              font: MojadwelFonts.headline,
             ),
 
             /// SECOND LINE
@@ -893,7 +894,7 @@ class TopDialog extends StatelessWidget {
       shouldIconPulse: false,
       // positionOffset: 0,
       // userInputForm: ,
-    ).show(getTheMainContext());
+    ).show(context);
 
   }
   // --------------------
@@ -1888,20 +1889,6 @@ abstract class _BldrsAppBar {
   // --------------------
   static double width(BuildContext context) {
     return context.screenWidth - (2 * 10);
-  }
-  // --------------------
-  static double collapsedHeight() {
-
-    // if (appBarType == AppBarType.search){
-    //   return Ratioz.appBarBigHeight;
-    // }
-    // else if (appBarType == AppBarType.non){
-    return 0;
-    // }
-    // else {
-    //   return Ratioz.appBarSmallHeight;
-    // }
-
   }
   // --------------------
   static const BorderRadius corners = BorderRadius.all(Radius.circular(10));

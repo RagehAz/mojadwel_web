@@ -80,13 +80,13 @@ class TapLayer extends StatelessWidget {
 
     if (onTap != null){
 
-      switch (type ?? vibrationType){
-        case VibrationType.heavy: await HapticFeedback.heavyImpact();
-        case VibrationType.medium: await HapticFeedback.mediumImpact();
-        case VibrationType.light: await HapticFeedback.lightImpact();
-        case VibrationType.selection: await HapticFeedback.selectionClick();
-        case VibrationType.vibration: await HapticFeedback.vibrate();
-      }
+      // switch (type ?? vibrationType){
+      //   case VibrationType.heavy: await HapticFeedback.heavyImpact();
+      //   case VibrationType.medium: await HapticFeedback.mediumImpact();
+      //   case VibrationType.light: await HapticFeedback.lightImpact();
+      //   case VibrationType.selection: await HapticFeedback.selectionClick();
+      //   case VibrationType.vibration: await HapticFeedback.vibrate();
+      // }
 
       await onTap();
 

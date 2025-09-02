@@ -15,7 +15,14 @@ import 'package:mojadwel_web/core/utilities/scale.dart';
 
 class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
   // --------------------------------------------------------------------------
-  const TheAppBar({super.key});
+  const TheAppBar({
+    this.showMenu = true,
+    this.title,
+    super.key,
+  });
+  // --------------------
+  final bool showMenu;
+  final String? title;
   // --------------------
   @override
   Size get preferredSize => const Size.fromHeight(Scale.appBarHeight);
@@ -55,7 +62,7 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: _appBarHeight,
                 // width: _appBarHeight,
                 // icon: Iconz.logoPng,
-                text: theBrandName,
+                text: title ?? theBrandName,
                 textColor: Colorz.black255,
                 textFont: MojadwelFonts.headline,
                 textWeight: FontWeight.w500,
@@ -64,7 +71,8 @@ class TheAppBar extends StatelessWidget implements PreferredSizeWidget {
                 splashColor: Colorz.nothing,
                 margins: const EdgeInsets.symmetric(horizontal: 10),
               ),
-        
+
+              if (showMenu)
               const SuperPopMenu(
                 corners: BorderRadius.all(Radius.circular(20)),
                 borderColor: Colorz.light2,
