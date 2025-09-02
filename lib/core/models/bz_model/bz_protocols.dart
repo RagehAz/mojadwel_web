@@ -1,10 +1,10 @@
-import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/services/ldb/ldb.dart';
 
-abstract class UserFireOps {
+abstract class BzFireOps {
   // -----------------------------------------------------------------------------
-  static const String _fireColl = 'users';
+  static const String _fireColl = 'bzz';
   // -----------------------------------------------------------------------------
 
   /// CREATE
@@ -12,7 +12,7 @@ abstract class UserFireOps {
   // --------------------
   ///
   static Future<void> create({
-    required UserModel? model,
+    required BzModel? model,
   }) async {
 
     if (model != null){
@@ -34,10 +34,10 @@ abstract class UserFireOps {
 
   // --------------------
   ///
-  static Future<UserModel?> read({
+  static Future<BzModel?> read({
     required String? id,
   }) async {
-    UserModel? _output;
+    BzModel? _output;
 
     if (id != null){
 
@@ -46,7 +46,7 @@ abstract class UserFireOps {
         doc: id,
       );
 
-      _output = UserModel.decipherMap(
+      _output = BzModel.decipherMap(
         map: _map,
         fromJSON: false,
       );
@@ -57,13 +57,13 @@ abstract class UserFireOps {
   }
   // --------------------
   ///
-  static Future<List<UserModel>> readAll() async {
+  static Future<List<BzModel>> readAll() async {
 
     final List<Map<String, dynamic>> _maps = await OfficialFire.readAllColl(
       coll: _fireColl,
     );
 
-    return UserModel.decipherMaps(
+    return BzModel.decipherMaps(
       maps: _maps,
       fromJSON: false,
     );
@@ -75,13 +75,13 @@ abstract class UserFireOps {
   // --------------------
   ///
   static Future<void> update({
-    required UserModel? oldModel,
-    required UserModel? newModel,
+    required BzModel? oldModel,
+    required BzModel? newModel,
   }) async {
 
     if (newModel != null){
 
-      final bool _identical = UserModel.checkModelsAreIdentical(
+      final bool _identical = BzModel.checkModelsAreIdentical(
         model1: oldModel,
         model2: newModel,
       );
@@ -118,7 +118,7 @@ abstract class UserFireOps {
 // -----------------------------------------------------------------------------
 }
 
-abstract class UserLDBOps {
+abstract class BzLDBOps {
   // -----------------------------------------------------------------------------
   static const String _ldbDoc = 'tempLDBDoc';
   static const String _primaryKey = 'id';
@@ -129,7 +129,7 @@ abstract class UserLDBOps {
   // --------------------
   ///
   static Future<void> insert({
-    required UserModel? model,
+    required BzModel? model,
   }) async {
 
     if (model != null){
@@ -147,12 +147,12 @@ abstract class UserLDBOps {
   // --------------------
   ///
   static Future<void> insertAll({
-    required List<UserModel> models,
+    required List<BzModel> models,
   }) async {
 
     if (Lister.checkCanLoop(models) == true){
 
-      final List<Map<String, dynamic>> _maps = UserModel.cipherToMaps(
+      final List<Map<String, dynamic>> _maps = BzModel.cipherToMaps(
         models: models,
         toJSON: true,
       );
@@ -172,10 +172,10 @@ abstract class UserLDBOps {
 
   // --------------------
   ///
-  static Future<UserModel?> read({
+  static Future<BzModel?> read({
     required String? id,
   }) async {
-    UserModel? _output;
+    BzModel? _output;
 
     if (id != null){
 
@@ -185,7 +185,7 @@ abstract class UserLDBOps {
         id: id,
       );
 
-      _output = UserModel.decipherMap(
+      _output = BzModel.decipherMap(
         map: _map,
         fromJSON: true,
       );
@@ -196,13 +196,13 @@ abstract class UserLDBOps {
   }
   // --------------------
   ///
-  static Future<List<UserModel>> readAll() async {
+  static Future<List<BzModel>> readAll() async {
 
     final List<Map<String, dynamic>> _maps = await LDBOps.readAllMaps(
       docName: _ldbDoc,
     );
 
-    return UserModel.decipherMaps(
+    return BzModel.decipherMaps(
       maps: _maps,
       fromJSON: true,
     );
@@ -231,7 +231,7 @@ abstract class UserLDBOps {
 // -----------------------------------------------------------------------------
 }
 
-abstract class UserProtocols {
+abstract class BzProtocols {
   // -----------------------------------------------------------------------------
 
   /// COMPOSE
@@ -239,16 +239,16 @@ abstract class UserProtocols {
   // --------------------
   ///
   static Future<void> compose({
-    required UserModel? model,
+    required BzModel? model,
   }) async {
 
     if (model != null){
 
       await Future.wait(<Future>[
 
-        UserFireOps.create(model: model),
+        BzFireOps.create(model: model),
 
-        UserLDBOps.insert(model: model),
+        BzLDBOps.insert(model: model),
 
       ]);
 
@@ -261,22 +261,22 @@ abstract class UserProtocols {
 
   // --------------------
   ///
-  static Future<UserModel?> fetch({
+  static Future<BzModel?> fetch({
     required String? id,
   }) async {
-    UserModel? _output;
+    BzModel? _output;
 
     if (id != null){
 
-      _output = await UserLDBOps.read(id: id);
+      _output = await BzLDBOps.read(id: id);
 
       if (_output == null){
 
-        _output = await UserFireOps.read(id: id);
+        _output = await BzFireOps.read(id: id);
 
         if (_output != null){
 
-          await UserLDBOps.insert(model: _output);
+          await BzLDBOps.insert(model: _output);
 
         }
 
@@ -288,17 +288,17 @@ abstract class UserProtocols {
   }
   // --------------------
   ///
-  static Future<List<UserModel>> fetchAll() async {
+  static Future<List<BzModel>> fetchAll() async {
 
-    List<UserModel> _models = await UserLDBOps.readAll();
+    List<BzModel> _models = await BzLDBOps.readAll();
 
     if (Lister.checkCanLoop(_models) == false){
 
-      _models = await UserFireOps.readAll();
+      _models = await BzFireOps.readAll();
 
       if (Lister.checkCanLoop(_models) == true){
 
-        await UserLDBOps.insertAll(
+        await BzLDBOps.insertAll(
           models: _models,
         );
 
@@ -315,13 +315,13 @@ abstract class UserProtocols {
   // --------------------
   ///
   static Future<void> renovate({
-    required UserModel? oldModel,
-    required UserModel? newModel,
+    required BzModel? oldModel,
+    required BzModel? newModel,
   }) async {
 
     if (newModel != null){
 
-      final bool _identical = UserModel.checkModelsAreIdentical(
+      final bool _identical = BzModel.checkModelsAreIdentical(
         model1: oldModel,
         model2: newModel,
       );
@@ -349,9 +349,9 @@ abstract class UserProtocols {
 
       await Future.wait([
 
-        UserFireOps.delete(id: id),
+        BzFireOps.delete(id: id),
 
-        UserLDBOps.delete(id: id),
+        BzLDBOps.delete(id: id),
 
       ]);
 

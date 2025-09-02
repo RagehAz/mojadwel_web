@@ -50,11 +50,10 @@ class StatusModelling {
 
 }
 
-
 @immutable
-class UserModel {
+class BzModel {
   // -----------------------------------------------------------------------------
-  const UserModel({
+  const BzModel({
     required this.id,
     required this.businessName,
     required this.ownerName,
@@ -91,7 +90,7 @@ class UserModel {
 
   // --------------------
   ///
-  UserModel copyWith({
+  BzModel copyWith({
     String? id,
     String? businessName,
     String? ownerName,
@@ -107,7 +106,7 @@ class UserModel {
     AccountStatus? accountStatus,
     AgentStatus? agentStatus,
   }){
-    return UserModel(
+    return BzModel(
       id: id ?? this.id,
       businessName: businessName ?? this.businessName,
       ownerName: ownerName ?? this.ownerName,
@@ -153,14 +152,14 @@ class UserModel {
   // --------------------
   ///
   static List<Map<String, dynamic>> cipherToMaps({
-    required List<UserModel>? models,
+    required List<BzModel>? models,
     required bool toJSON,
   }){
     final List<Map<String, dynamic>> _output = [];
 
     if (_checkCanLoop(models) == true){
 
-      for (final UserModel model in models!){
+      for (final BzModel model in models!){
 
         final Map<String, dynamic> _map = model.toMap(
           toJSON: toJSON,
@@ -176,15 +175,15 @@ class UserModel {
   }
   // --------------------
   ///
-  static UserModel? decipherMap({
+  static BzModel? decipherMap({
     required Map<String, dynamic>? map,
     required bool fromJSON,
   }){
-    UserModel? _output;
+    BzModel? _output;
 
     if (map != null){
 
-      _output = UserModel(
+      _output = BzModel(
         id: map['id'],
         businessName: map['businessName'],
         ownerName: map['ownerName'],
@@ -207,17 +206,17 @@ class UserModel {
   }
   // --------------------
   ///
-  static List<UserModel> decipherMaps({
+  static List<BzModel> decipherMaps({
     required List<Map<String, dynamic>>? maps,
     required bool fromJSON,
    }){
-    final List<UserModel> _output = [];
+    final List<BzModel> _output = [];
 
     if (_checkCanLoop(maps) == true){
 
       for (final Map<String, dynamic> map in maps!){
 
-        final UserModel? _model = decipherMap(
+        final BzModel? _model = decipherMap(
           map: map,
           fromJSON: fromJSON,
         );
@@ -239,8 +238,8 @@ class UserModel {
   // --------------------
   /// TESTED : WORKS PERFECT
   static bool checkModelsAreIdentical({
-    required UserModel? model1,
-    required UserModel? model2,
+    required BzModel? model1,
+    required BzModel? model2,
   }){
 
     return _checkMapsAreIdentical(
@@ -251,8 +250,8 @@ class UserModel {
   // --------------------
   /// TESTED : WORKS PERFECT
   static bool checkModelsListsAreIdentical({
-    required List<UserModel>? models1,
-    required List<UserModel>? models2,
+    required List<BzModel>? models1,
+    required List<BzModel>? models2,
   }){
     return _checkMapsListsAreIdentical(
       maps1: cipherToMaps(models: models1, toJSON: true),
@@ -373,7 +372,7 @@ UserModel(
     }
 
     bool _areIdentical = false;
-    if (other is UserModel){
+    if (other is BzModel){
       _areIdentical = checkModelsAreIdentical(
         model1: this,
         model2: other,

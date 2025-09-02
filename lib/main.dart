@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
+import 'package:mojadwel_web/core/models/the_providers.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/app_scroll_behavior.dart';
 
@@ -113,30 +114,32 @@ class _StarterState extends State<Starter> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     superContext = context;
 
-    return MaterialApp.router(
-      /// KEYS
-      // key: ,
-      // scaffoldMessengerKey: ,
-      // restorationScopeId: ,
-      // useInheritedMediaQuery: true,
-      /// SCROLLING
-      scrollBehavior: const AppScrollBehavior(),
+    return TheProviders(
+      child: MaterialApp.router(
+        /// KEYS
+        // key: ,
+        // scaffoldMessengerKey: ,
+        // restorationScopeId: ,
+        // useInheritedMediaQuery: true,
+        /// SCROLLING
+        scrollBehavior: const AppScrollBehavior(),
 
-      /// DEBUG
-      debugShowCheckedModeBanner: false,
+        /// DEBUG
+        debugShowCheckedModeBanner: false,
 
-      /// THEME
-      title: 'Mojadwel',
-      theme: ThemeData(
-        canvasColor: Colorz.nothing,
-        textSelectionTheme: const TextSelectionThemeData(
-          selectionHandleColor: Colorz.youtube,
-          selectionColor: Colorz.white50,
+        /// THEME
+        title: 'Mojadwel',
+        theme: ThemeData(
+          canvasColor: Colorz.nothing,
+          textSelectionTheme: const TextSelectionThemeData(
+            selectionHandleColor: Colorz.youtube,
+            selectionColor: Colorz.white50,
+          ),
         ),
-      ),
 
-      /// ROUTES
-      routerConfig: Routing.router,
+        /// ROUTES
+        routerConfig: Routing.router,
+      ),
     );
   }
 // -----------------------------------------------------------------------------

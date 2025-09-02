@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/products_screen.dart';
-import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
-import 'package:mojadwel_web/core/models/bz_model/user_protocols.dart';
+import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/bz_protocols.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/services/url_launcher.dart';
 import 'package:mojadwel_web/core/shared_components/dialogs/center_dialog.dart';
@@ -14,7 +13,7 @@ class DashboardController {
   VoidCallback? refresh;
   final Wire<bool> mounted = Wire<bool>(true);
   // --------------------
-  UserModel? userModel;
+  BzModel? userModel;
   AuthModel? authModel;
   // --------------------------------------------------------------------------
   /// --- LOADING
@@ -42,7 +41,7 @@ class DashboardController {
     if (canBuild == false && mounted.value == true) {
       triggerLoading(setTo: true).then((_) async {
         // -------------------------------
-        final UserModel? _theUser = await UserProtocols.fetch(
+        final BzModel? _theUser = await BzProtocols.fetch(
           id: OfficialAuthing.getUserID(),
         );
         canBuild = true;
@@ -83,7 +82,7 @@ class DashboardController {
     }
     else {
 
-      final UserModel? _bz = await UserProtocols.fetch(
+      final BzModel? _bz = await BzProtocols.fetch(
         id: _authModel.id,
       );
 
@@ -112,7 +111,7 @@ class DashboardController {
 
     if (authModel?.id != null){
 
-      final UserModel? _userModel = UserModel(
+      final BzModel? _userModel = BzModel(
         id: authModel!.id!,
         createdAt: DateTime.now(),
         ownerName: authModel!.name,
@@ -129,7 +128,7 @@ class DashboardController {
         accountStatus: null,
       );
 
-      await UserProtocols.compose(model: _userModel);
+      await BzProtocols.compose(model: _userModel);
 
       userModel = _userModel;
       refresh!();
@@ -209,7 +208,7 @@ class DashboardController {
         headline: 'Owner name'
     );
 
-    final UserModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = userModel?.copyWith(
       ownerName: _name,
     );
 
@@ -227,7 +226,7 @@ class DashboardController {
       headline: 'Business name'
     );
 
-    final UserModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = userModel?.copyWith(
       businessName: _name,
     );
 
@@ -250,7 +249,7 @@ class DashboardController {
         headline: 'Whats app number'
     );
 
-    final UserModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = userModel?.copyWith(
       phone: _phone,
     );
 
@@ -288,7 +287,7 @@ class DashboardController {
         headline: 'Company info'
     );
 
-    final UserModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = userModel?.copyWith(
       extraBzInfo: _phone,
     );
 
@@ -321,7 +320,7 @@ class DashboardController {
       headline: 'Ai Instructions',
     );
 
-    final UserModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = userModel?.copyWith(
       aiInstructions: _name,
     );
 
@@ -332,21 +331,18 @@ class DashboardController {
   Future<void> onProductsTileTap() async {
     blog('should go to products screen now');
 
-    await Routing.push(
-      context: getTheMainContext(),
-      screen: (x) => ProductsScreen(
-        controller: this,
-      ),
+    await Routing.goTo(
+      route: Routing.products,
     );
 
   }
   // --------------------
   /// TESTED : WORKS PERFECT
-  Future<void> _renovateTheModel(UserModel? newUser) async {
+  Future<void> _renovateTheModel(BzModel? newUser) async {
 
     if (newUser != null){
 
-      await UserProtocols.renovate(
+      await BzProtocols.renovate(
           oldModel: userModel,
           newModel: newUser
       );

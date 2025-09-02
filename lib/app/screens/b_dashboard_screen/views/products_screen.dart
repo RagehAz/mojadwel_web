@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dash_provider.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
 import 'package:mojadwel_web/core/models/bz_model/product_model.dart';
@@ -15,11 +16,8 @@ import 'package:mojadwel_web/core/utilities/wire.dart';
 class ProductsScreen extends StatefulWidget {
   // --------------------------------------------------------------------------
   const ProductsScreen({
-    required this.controller,
     super.key
   });
-  // --------------------
-  final DashboardController controller;
   // --------------------
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -82,8 +80,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
 
+    final DashboardController controller = DashPro.getController(
+      context: context,
+      listen: true,
+    );
+
     final List<ProductModel> _products = ProductModel.toList(
-      productsMap: widget.controller.userModel?.products,
+      productsMap: controller.userModel?.products,
     );
 
     _products.add(const ProductModel(id: 'id', name: 'name', description: 'description', price: 120.55, currency: 'EGP'));

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dash_provider.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/app/screens/c_terms_screens/legalizer.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
-import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
+import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/vertical_floating_list.dart';
 import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
@@ -34,14 +35,18 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   // --------------------------------------------------------------------------
-  DashboardController controller = DashboardController();
+  late DashboardController controller;
   // --------------------------------------------------------------------------
   @override
   void initState() {
     super.initState();
+
+    controller = DashPro.getController();
+
     controller.init(
       onSetState: onSetState,
     );
+
   }
   // --------------------
   void onSetState(){
@@ -159,7 +164,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               value: 'Create account',
               icon: Iconz.createAccount,
               onTap: controller.onCreateAccount,
-              redDot: false,
             ),
 
           /// THE FIELDS
@@ -167,7 +171,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Builder(
                 builder: (_) {
 
-                  final UserModel? _userModel = controller.userModel;
+                  final BzModel? _userModel = controller.userModel;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

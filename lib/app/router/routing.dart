@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mojadwel_web/app/screens/a_home_screen/a_home_screen.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/b_dash_board_screen.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/plan_screen.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/products_screen.dart';
 import 'package:mojadwel_web/app/screens/c_terms_screens/legalizer.dart';
 import 'package:mojadwel_web/app/testing_screens/a_testing_home.dart';
 import 'package:mojadwel_web/app/testing_screens/b_auth_testing_screen.dart';
@@ -41,6 +42,7 @@ abstract class Routing {
   static const routeTerms = 'terms';
   static const routePrivacy = 'privacy';
   static const plans = 'plans';
+  static const products = 'products';
   // --------------------
   static const routeTestingHome = 'testing_home';
   static const routeAuthTesting = 'testing_auth';
@@ -72,6 +74,20 @@ abstract class Routing {
         },
       ),
 
+      /// PLANS
+      GoRoute(
+        path: '/$plans',
+        name: plans,
+        builder: (x, _) => const  PlanView(),
+      ),
+
+      /// PRODUCTS
+      GoRoute(
+        path: '/$products',
+        name: products,
+        builder: (x, _) => const ProductsScreen(),
+      ),
+
       /// TERMS
       GoRoute(
         path: '/$routeTerms',
@@ -91,15 +107,6 @@ abstract class Routing {
           company: theCompanyName,
           domain: theDomainName,
           email: thePublicEmail,
-        ),
-      ),
-
-      GoRoute(
-        path: '/$plans',
-        name: plans,
-        builder: (x, _) => PlanView(
-          x: x,
-          // controller: this,
         ),
       ),
 

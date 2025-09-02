@@ -12,19 +12,13 @@ import 'package:mojadwel_web/core/utilities/contextual.dart';
 class PlanView extends StatelessWidget {
   // --------------------------------------------------------------------------
   const PlanView({
-    // required this.controller,
-    required this.x,
     super.key
   });
-  // --------------------
-  // final DashboardController controller;
-  final BuildContext x;
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
-    final double _zoneWidth = x.screenWidth;
-    blog('_zoneWidth($_zoneWidth)');
+    final double _zoneWidth = context.screenWidth;
     const double _spacing = 10;
     // --------------------
     return Material(
