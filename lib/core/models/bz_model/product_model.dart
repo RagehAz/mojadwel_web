@@ -145,6 +145,34 @@ class ProductModel {
 
     return _output;
   }
+  // --------------------------------------------------------------------------
+
+  /// TO LIST
+
+  // --------------------
+  ///
+  static List<ProductModel> toList({
+    required Map<String, ProductModel>? productsMap,
+  }){
+    final List<ProductModel> _output = [];
+
+    final List<String>? _productsIDs = productsMap?.keys.toList();
+
+    if (_checkCanLoop(_productsIDs) == true){
+
+      for (final String productID in _productsIDs!){
+
+        if (productsMap?[productID] != null){
+          _output.add(productsMap![productID]!);
+        }
+
+      }
+
+    }
+
+    return _output;
+  }
+
   // -----------------------------------------------------------------------------
 
   /// EQUALITY

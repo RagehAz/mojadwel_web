@@ -1092,7 +1092,7 @@ class CenterDialog extends StatelessWidget {
     final bool? _result = await Routing.push(
       context: context,
       // pageTransitionType: PageTransitionType.fade,
-      screen: CenterDialog(
+      screen: (x) => CenterDialog(
         bodyVerse: bodyVerse,
         title: headlineVerse,
         height: height,

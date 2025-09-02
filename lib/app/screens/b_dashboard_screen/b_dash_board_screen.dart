@@ -154,7 +154,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
           /// ADD ACCOUNT BUTTON
           if (controller.authModel != null && controller.userModel == null)
-            ProfileTile(
+            TheTile(
               headline: '',
               value: 'Create account',
               icon: Iconz.createAccount,
@@ -165,7 +165,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           /// THE FIELDS
           if (controller.authModel != null && controller.userModel != null)
             Builder(
-                builder: (context) {
+                builder: (_) {
 
                   final UserModel? _userModel = controller.userModel;
 
@@ -179,7 +179,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// NAME
-                      ProfileTile(
+                      TheTile(
                         headline: 'Owner name',
                         value: _userModel?.ownerName,
                         icon: Iconz.user,
@@ -188,7 +188,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// COMPANY NAME
-                      ProfileTile(
+                      TheTile(
                         headline: 'Company name',
                         value: _userModel?.businessName,
                         icon: Iconz.company,
@@ -197,7 +197,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// Email
-                      ProfileTile(
+                      TheTile(
                         headline: 'Email',
                         value: _userModel?.email,
                         icon: Iconz.email,
@@ -206,7 +206,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// PHONE
-                      ProfileTile(
+                      TheTile(
                         headline: 'Phone',
                         value: _userModel?.phone,
                         icon: Iconz.whatsapp,
@@ -215,16 +215,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// PLAN
-                      ProfileTile(
+                      TheTile(
                         headline: 'Plan',
                         value: _userModel?.plan,
                         icon: Iconz.plan,
                         redDot: _userModel?.plan == null,
-                        onTap: controller.onPlanTileTap,
+                        onTap: () => controller.onPlanTileTap(
+                          context: context,
+                        ),
                       ),
 
                       /// EXTRA BZ INFO
-                      ProfileTile(
+                      TheTile(
                         headline: 'Extra Business info',
                         value: _userModel?.extraBzInfo,
                         icon: Iconz.info,
@@ -233,7 +235,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// GOOGLE SHEET
-                      ProfileTile(
+                      TheTile(
                         headline: 'Google sheet',
                         value: null,
                         icon: Iconz.sheets,
@@ -242,7 +244,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// GOOGLE CALENDAR
-                      ProfileTile(
+                      TheTile(
                         headline: 'Google Calendar',
                         value: null,
                         icon: Iconz.calendar,
@@ -251,7 +253,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// REMINDERS
-                      ProfileTile(
+                      TheTile(
                         headline: 'Auto-reminders',
                         value: null,
                         icon: Iconz.notification,
@@ -260,7 +262,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// AI INSTRUCTIONS
-                      ProfileTile(
+                      TheTile(
                         headline: 'Ai Instructions',
                         value: _userModel?.aiInstructions,
                         icon: Iconz.scholar,
@@ -269,7 +271,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
 
                       /// PRODUCTS
-                      ProfileTile(
+                      TheTile(
                         headline: 'Products',
                         value: '${_userModel?.products?.keys.length ?? 0} Products',
                         icon: Iconz.product,

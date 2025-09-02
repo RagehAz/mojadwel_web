@@ -13,7 +13,8 @@ class PlanCard extends StatelessWidget {
     required this.secondLine,
     required this.bullets,
     required this.price,
-    required this.onTap,
+    required this.zoneWidth,
+    this.onTap,
     super.key
   });
   // --------------------
@@ -21,18 +22,17 @@ class PlanCard extends StatelessWidget {
   final String secondLine;
   final List<String> bullets;
   final String price;
-  final Function onTap;
+  final Function? onTap;
+  final double zoneWidth;
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
-    final double _zoneWidth = context.screenWidth;
-    const double _min = 350;
-    final double _value = _zoneWidth * 0.45;
-    final double _boxWidth = _value < _min ? _value : _min;
+    final double _value = zoneWidth * 0.45;
+    final double _boxWidth = _value; //_value > _min ? _value : _min;
     // --------------------
     return Container(
-      width: _boxWidth,
+      width: context.screenWidth * 0.5,
       height: 600,
       decoration: BoxDecoration(
         color: Colorz.light1,

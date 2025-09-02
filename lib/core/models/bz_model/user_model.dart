@@ -4,6 +4,53 @@ import 'package:mojadwel_web/core/models/bz_model/product_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/utilities/timers.dart';
 
+enum AccountStatus {
+ active,
+ inactive,
+}
+
+enum AgentStatus {
+  authenticated,
+  unauthenticated,
+}
+
+class StatusModelling {
+
+  static String? accountStatusToString(AccountStatus? status){
+    switch(status){
+      case AccountStatus.active:    return 'active';
+      case AccountStatus.inactive:  return 'inactive';
+      default: return null;
+    }
+  }
+
+  static AccountStatus? accountStatusFromString(String? value) {
+    switch (value) {
+      case 'active':    return AccountStatus.active;
+      case 'inactive':  return AccountStatus.inactive;
+      default:          return null;
+    }
+  }
+
+  static String? agentStatusToString(AgentStatus? status) {
+    switch (status) {
+      case AgentStatus.authenticated:     return 'authenticated';
+      case AgentStatus.unauthenticated:   return 'unauthenticated';
+      default:                            return null;
+    }
+  }
+
+  static AgentStatus? agentStatusFromString(String? value) {
+    switch (value) {
+      case 'authenticated':     return AgentStatus.authenticated;
+      case 'unauthenticated':   return AgentStatus.unauthenticated;
+      default:                  return null;
+    }
+  }
+
+}
+
+
 @immutable
 class UserModel {
   // -----------------------------------------------------------------------------
@@ -20,6 +67,8 @@ class UserModel {
     required this.extraBzInfo,
     required this.aiInstructions,
     required this.products,
+    required this.accountStatus,
+    required this.agentStatus,
   });
   // -----------------------------------------------------------------------------
   final String id;
@@ -34,6 +83,8 @@ class UserModel {
   final String? extraBzInfo;
   final String? aiInstructions;
   final Map<String, ProductModel>? products;
+  final AccountStatus? accountStatus;
+  final AgentStatus? agentStatus;
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -53,6 +104,8 @@ class UserModel {
     String? extraBzInfo,
     String? aiInstructions,
     Map<String, ProductModel>? products,
+    AccountStatus? accountStatus,
+    AgentStatus? agentStatus,
   }){
     return UserModel(
       id: id ?? this.id,
@@ -67,6 +120,8 @@ class UserModel {
       extraBzInfo: extraBzInfo ?? this.extraBzInfo,
       aiInstructions: aiInstructions ?? this.aiInstructions,
       products: products ?? this.products,
+      accountStatus: accountStatus ?? this.accountStatus,
+      agentStatus: agentStatus ?? this.agentStatus,
     );
   }
   // -----------------------------------------------------------------------------
@@ -91,6 +146,8 @@ class UserModel {
       'extraBzInfo': extraBzInfo,
       'aiInstructions': aiInstructions,
       'products': ProductModel.cipherToMaps(models: products),
+      'accountStatus': StatusModelling.accountStatusToString(accountStatus),
+      'agentStatus': StatusModelling.agentStatusToString(agentStatus),
     };
   }
   // --------------------
@@ -140,6 +197,8 @@ class UserModel {
         extraBzInfo: map['extraBzInfo'],
         aiInstructions: map['aiInstructions'],
         products: ProductModel.decipherMaps(map: map['products']),
+        accountStatus: StatusModelling.accountStatusFromString(map['accountStatus']),
+        agentStatus: StatusModelling.agentStatusFromString(map['agentStatus']),
       );
 
     }
@@ -301,6 +360,8 @@ UserModel(
   extraBzInfo: $extraBzInfo,
   aiInstructions: $aiInstructions,
   products: $products,
+  accountStatus: $accountStatus,
+  agentStatus: $agentStatus,
 )  
 ''';
   // --------------------
@@ -335,6 +396,8 @@ UserModel(
       extraBzInfo.hashCode^
       aiInstructions.hashCode^
       products.hashCode^
+      accountStatus.hashCode^
+      agentStatus.hashCode^
       authModel.hashCode;
   // -----------------------------------------------------------------------------
 }

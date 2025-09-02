@@ -5,14 +5,15 @@ import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/utilities/scale.dart';
 
-class ProfileTile extends StatefulWidget {
+class TheTile extends StatefulWidget {
   // --------------------------------------------------------------------------
-  const ProfileTile({
+  const TheTile({
     required this.headline,
     required this.value,
     required this.icon,
-    required this.redDot,
+    this.redDot = false,
     this.onTap,
+    this.bigIcon = false,
     super.key
   });
   // --------------------
@@ -21,12 +22,14 @@ class ProfileTile extends StatefulWidget {
   final dynamic icon;
   final Function? onTap;
   final bool redDot;
+  final bool bigIcon;
   // --------------------
   @override
-  State<ProfileTile> createState() => _ProfileTileState();
+  State<TheTile> createState() => _TheTileState();
+  // --------------------------------------------------------------------------
 }
 
-class _ProfileTileState extends State<ProfileTile> {
+class _TheTileState extends State<TheTile> {
   // --------------------------------------------------------------------------
   bool loading = false;
   // --------------------
@@ -84,7 +87,7 @@ class _ProfileTileState extends State<ProfileTile> {
                 width: 80,
                 icon: widget.icon,
                 iconColor: Colorz.black255,
-                iconSizeFactor: 0.4,
+                iconSizeFactor: widget.bigIcon ? 1 : 0.4,
               ),
 
               /// TEXTS

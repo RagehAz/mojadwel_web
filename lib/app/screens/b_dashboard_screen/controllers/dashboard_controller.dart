@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/b_plan_view.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/products_screen.dart';
 import 'package:mojadwel_web/core/models/bz_model/user_model.dart';
 import 'package:mojadwel_web/core/models/bz_model/user_protocols.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
@@ -125,6 +125,8 @@ class DashboardController {
         extraBzInfo: null,
         aiInstructions: null,
         products: null,
+        agentStatus: null,
+        accountStatus: null,
       );
 
       await UserProtocols.compose(model: _userModel);
@@ -257,11 +259,21 @@ class DashboardController {
   }
   // --------------------
   /// TESTED : WORKS PERFECT
-  Future<void> onPlanTileTap() async {
+  Future<void> onPlanTileTap({
+    required BuildContext context,
+  }) async {
 
-    await Routing.push(
-      context: getTheMainContext(),
-      screen: PlanView(controller: this),
+    // await Routing.push(
+    //   context: context,
+    //   screen: (x) => PlanView(
+    //     x: x,
+    //     controller: this,
+    //   ),
+    // );
+
+    await Routing.goTo(
+      route: Routing.plans,
+      // arg: this,
     );
 
   }
@@ -319,6 +331,14 @@ class DashboardController {
   // --------------------
   Future<void> onProductsTileTap() async {
     blog('should go to products screen now');
+
+    await Routing.push(
+      context: getTheMainContext(),
+      screen: (x) => ProductsScreen(
+        controller: this,
+      ),
+    );
+
   }
   // --------------------
   /// TESTED : WORKS PERFECT

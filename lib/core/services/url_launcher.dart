@@ -19,9 +19,9 @@ abstract class URLLaunching {
 
     if (uri != null){
 
-      final bool _canLaunch = await Launch.canLaunchUrl(uri);
-
-      if (_canLaunch == true){
+      // final bool _canLaunch = await Launch.canLaunchUrl(uri);
+      //
+      // if (_canLaunch == true){
 
         await tryAndCatch(
           invoker: 'launchURI',
@@ -68,11 +68,11 @@ abstract class URLLaunching {
           );
         }
 
-      }
+      // }
 
-      else {
-        blog('Can Not launch link');
-      }
+      // else {
+      //   blog('Can Not launch link');
+      // }
 
     }
 

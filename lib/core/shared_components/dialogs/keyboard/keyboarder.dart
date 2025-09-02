@@ -137,7 +137,7 @@ class KeyboardDialog extends StatefulWidget {
     final String? _output = await Routing.push(
       context: context,
 
-      screen: KeyboardDialog(
+      screen: (x) => KeyboardDialog(
         keyboardModel: _keyboard,
         initialText: initialText,
         // confirmButtonIsOn: true,
