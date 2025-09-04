@@ -301,6 +301,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 textColor: Colorz.light1,
                                 textFont: MojadwelFonts.headline,
                                 color: Colorz.black,
+                                textMaxLines: 2,
                                 onTap: () async {
 
                                   await controller.refetchBzModel();
@@ -318,6 +319,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 textColor: Colorz.light1,
                                 textFont: MojadwelFonts.headline,
                                 color: Colorz.black,
+                                textMaxLines: 2,
                                 onTap: () async {
                                   await controller.signOut();
                                 },
