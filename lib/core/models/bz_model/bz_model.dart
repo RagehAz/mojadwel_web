@@ -260,6 +260,54 @@ class BzModel {
   }
   // -----------------------------------------------------------------------------
 
+  /// EDITORS
+
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static BzModel? insertProduct({
+    required BzModel? bzModel,
+    required ProductModel? product,
+  }){
+    BzModel? _output = bzModel;
+
+    if (product != null && _output != null){
+
+      final Map<String, ProductModel> _productsMap = {..._output.products ?? {}};
+
+      _productsMap[product.id] = product;
+
+      _output = _output.copyWith(
+        products: _productsMap,
+      );
+
+    }
+
+    return _output;
+  }
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static BzModel? deleteProduct({
+    required BzModel? bzModel,
+    required ProductModel? product,
+  }){
+    BzModel? _output = bzModel;
+
+    if (product != null && _output != null){
+
+      final Map<String, ProductModel> _productsMap = {..._output.products ?? {}};
+
+      _productsMap.remove(product.id);
+
+      _output = _output.copyWith(
+        products: _productsMap,
+      );
+
+    }
+
+    return _output;
+  }
+  // -----------------------------------------------------------------------------
+
   /// HELPERS
 
   // --------------------

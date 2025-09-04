@@ -17,6 +17,21 @@ class ProductModel {
   final String? description;
   final double? price;
   final String? currency;
+  // --------------------------------------------------------------------------
+
+  /// CONSTANT
+
+  // --------------------
+  ///
+  static ProductModel empty(){
+    return ProductModel(
+      id: _Idifier.createUniqueIDString(),
+      name: '',
+      price: 0,
+      description: '',
+      currency: 'EGP',
+    );
+  }
   // -----------------------------------------------------------------------------
 
   /// CLONING
@@ -284,5 +299,105 @@ ProductModel(
       price.hashCode^
       currency.hashCode^
       id.hashCode;
+  // -----------------------------------------------------------------------------
+}
+
+abstract class _Idifier {
+  // --------------------
+  /// TESTED : WORKS PERFECT
+  static String createUniqueIDString({
+    int maxDigitsCount = 16, // 8'640'000'000'000'000'000
+  }){
+    return _createUniqueIDInteger(maxDigitsCount: maxDigitsCount).toString();
+  }
+  // --------------------
+  /// AI TESTED
+  static int _createUniqueIDInteger({
+    int maxDigitsCount = 16, // 8'640'000'000'000'000'000
+  }) {
+    assert(maxDigitsCount > 0 && maxDigitsCount <= 16, 'Take care : 0 < maxDigitsCount <= 16',);
+
+    /// some smart ass stunt online said : DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    final String _string = DateTime.now().microsecondsSinceEpoch.toString();
+
+    final String? _trimmed = _removeNumberOfCharactersFromBeginningOfAString(
+      string: _string,
+      numberOfCharacters: _string.length - maxDigitsCount,
+    );
+
+    return _transformStringToInt(_trimmed)!;
+  }
+  // --------------------
+  /// AI TESTED
+  static String? _removeNumberOfCharactersFromBeginningOfAString({
+    required String? string,
+    required int? numberOfCharacters,
+  }) {
+
+    if (_isEmpty(string) == true){
+      return null;
+    }
+
+    else {
+
+      final int _numberOfCharacters = numberOfCharacters ?? 0;
+
+      if (_numberOfCharacters > 0) {
+
+        String? _stringTrimmed;
+
+        if (_numberOfCharacters > string!.length) {
+          // blog('can not remove ($numberOfCharacters) from the given string because : numberOfCharacters > string.length');
+          final Error _error = ArgumentError(
+              'can not remove ($numberOfCharacters) from the given string because',
+              'removeNumberOfCharactersFromBeginningOfAString');
+          throw _error;
+        }
+
+        else {
+          _stringTrimmed = string.isNotEmpty ? string.substring(_numberOfCharacters) : null;
+        }
+
+        return _stringTrimmed;
+      }
+
+      else {
+        return string;
+      }
+
+    }
+  }
+  // --------------------
+  /// AI TESTED
+  static bool _isEmpty(String? string) {
+
+    if (string == null || string == '' || string.isEmpty == true
+
+    // ||
+    // TextMod.cutFirstCharacterAfterRemovingSpacesFromAString(_string) == ''
+    // ||
+    // TextMod.cutFirstCharacterAfterRemovingSpacesFromAString(_string) == null
+
+    ) {
+      return true;
+    }
+
+    else {
+      return false;
+    }
+
+  }
+  // --------------------
+  /// AI TESTED
+  static int? _transformStringToInt(String? string) {
+    int? _value;
+
+    if (string != null) {
+      final double? _doubleValue = double.tryParse(string);
+      _value = _doubleValue?.toInt();
+    }
+
+    return _value;
+  }
   // -----------------------------------------------------------------------------
 }

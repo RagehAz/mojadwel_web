@@ -14,7 +14,7 @@ class DashboardController {
   Wire<bool>? mountedWire;
   bool get mounted => mountedWire?.value ?? false;
   // --------------------
-  BzModel? userModel;
+  BzModel? bzModel;
   AuthModel? authModel;
   // --------------------------------------------------------------------------
   /// --- LOADING
@@ -48,7 +48,7 @@ class DashboardController {
         );
         canBuild = true;
         if (_theUser != null){
-          userModel = _theUser;
+          bzModel = _theUser;
           authModel = _theUser.authModel;
         }
         refresh!();
@@ -102,7 +102,7 @@ class DashboardController {
       }
 
       else {
-        userModel = _bz;
+        bzModel = _bz;
       }
 
     }
@@ -136,7 +136,7 @@ class DashboardController {
 
       await BzProtocols.compose(model: _userModel);
 
-      userModel = _userModel;
+      bzModel = _userModel;
       refresh!();
 
     }
@@ -209,16 +209,16 @@ class DashboardController {
 
     final String? _name = await Keyboarder.getText(
         context: getTheMainContext(),
-        initialText: userModel?.ownerName,
+        initialText: bzModel?.ownerName,
         hintVerse: 'Owner name',
         headline: 'Owner name'
     );
 
-    final BzModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = bzModel?.copyWith(
       ownerName: _name,
     );
 
-    await _renovateTheModel(_updated);
+    await renovateTheModel(_updated);
 
   }
   // --------------------
@@ -227,16 +227,16 @@ class DashboardController {
 
     final String? _name = await Keyboarder.getText(
       context: getTheMainContext(),
-      initialText: userModel?.businessName,
+      initialText: bzModel?.businessName,
       hintVerse: 'Business name',
       headline: 'Business name'
     );
 
-    final BzModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = bzModel?.copyWith(
       businessName: _name,
     );
 
-    await _renovateTheModel(_updated);
+    await renovateTheModel(_updated);
 
   }
   // --------------------
@@ -250,16 +250,16 @@ class DashboardController {
 
     final String? _phone = await Keyboarder.getText(
         context: getTheMainContext(),
-        initialText: userModel?.phone,
+        initialText: bzModel?.phone,
         hintVerse: '+2 010 0000 0000',
         headline: 'Whats app number'
     );
 
-    final BzModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = bzModel?.copyWith(
       phone: _phone,
     );
 
-    await _renovateTheModel(_updated);
+    await renovateTheModel(_updated);
 
   }
   // --------------------
@@ -288,16 +288,16 @@ class DashboardController {
 
     final String? _phone = await Keyboarder.getParagraph(
         context: getTheMainContext(),
-        initialText: userModel?.extraBzInfo,
+        initialText: bzModel?.extraBzInfo,
         hintVerse: 'Company info',
         headline: 'Company info'
     );
 
-    final BzModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = bzModel?.copyWith(
       extraBzInfo: _phone,
     );
 
-    await _renovateTheModel(_updated);
+    await renovateTheModel(_updated);
 
   }
   // --------------------
@@ -321,16 +321,16 @@ class DashboardController {
 
     final String? _name = await Keyboarder.getText(
       context: getTheMainContext(),
-      initialText: userModel?.aiInstructions,
+      initialText: bzModel?.aiInstructions,
       hintVerse: 'Ai Instructions',
       headline: 'Ai Instructions',
     );
 
-    final BzModel? _updated = userModel?.copyWith(
+    final BzModel? _updated = bzModel?.copyWith(
       aiInstructions: _name,
     );
 
-    await _renovateTheModel(_updated);
+    await renovateTheModel(_updated);
 
   }
   // --------------------
@@ -348,17 +348,23 @@ class DashboardController {
   }
   // --------------------
   /// TESTED : WORKS PERFECT
-  Future<void> _renovateTheModel(BzModel? newUser) async {
+  Future<void> renovateTheModel(BzModel? newUser) async {
 
     if (newUser != null){
 
-      await BzProtocols.renovate(
-          oldModel: userModel,
+      final bool _success = await BzProtocols.renovate(
+          oldModel: bzModel,
           newModel: newUser
       );
 
-      userModel = newUser;
-      refresh!();
+      if (_success == true){
+        bzModel = newUser;
+        refresh!();
+      }
+      else {
+        await Dialogs.stateDialog(state: false);
+      }
+
 
     }
 

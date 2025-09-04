@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/the_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dash_provider.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/app/screens/c_terms_screens/legalizer.dart';
@@ -158,7 +158,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
 
           /// ADD ACCOUNT BUTTON
-          if (controller.authModel != null && controller.userModel == null)
+          if (controller.authModel != null && controller.bzModel == null)
             TheTile(
               headline: '',
               value: 'Create account',
@@ -167,11 +167,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
 
           /// THE FIELDS
-          if (controller.authModel != null && controller.userModel != null)
+          if (controller.authModel != null && controller.bzModel != null)
             Builder(
                 builder: (_) {
 
-                  final BzModel? _userModel = controller.userModel;
+                  final BzModel? _userModel = controller.bzModel;
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

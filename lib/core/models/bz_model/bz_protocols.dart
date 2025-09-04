@@ -1,6 +1,6 @@
 import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
-import 'package:mojadwel_web/core/services/ldb/ldb.dart';
+import 'package:mojadwel_web/core/services/ldb/ldb.dart' hide blog;
 
 abstract class BzFireOps {
   // -----------------------------------------------------------------------------
@@ -11,13 +11,14 @@ abstract class BzFireOps {
 
   // --------------------
   ///
-  static Future<void> create({
+  static Future<bool> create({
     required BzModel? model,
   }) async {
+    bool _success = false;
 
     if (model != null){
 
-      await OfficialFire.createDoc(
+      final String? _id = await OfficialFire.createDoc(
         coll: _fireColl,
         doc: model.id,
         input: model.toMap(
@@ -25,8 +26,11 @@ abstract class BzFireOps {
         ),
       );
 
+      _success = _id != null;
+
     }
 
+    return _success;
   }
   // -----------------------------------------------------------------------------
 
@@ -238,15 +242,18 @@ abstract class BzProtocols {
 
   // --------------------
   ///
-  static Future<void> compose({
+  static Future<bool> compose({
     required BzModel? model,
   }) async {
+    bool _success = false;
 
     if (model != null){
 
       await Future.wait(<Future>[
 
-        BzFireOps.create(model: model),
+        BzFireOps.create(model: model).then((bool success){
+          _success = success;
+        }),
 
         BzLDBOps.insert(model: model),
 
@@ -254,6 +261,7 @@ abstract class BzProtocols {
 
     }
 
+    return _success;
   }
   // -----------------------------------------------------------------------------
 
@@ -314,10 +322,11 @@ abstract class BzProtocols {
 
   // --------------------
   ///
-  static Future<void> renovate({
+  static Future<bool> renovate({
     required BzModel? oldModel,
     required BzModel? newModel,
   }) async {
+    bool _success = false;
 
     if (newModel != null){
 
@@ -326,14 +335,19 @@ abstract class BzProtocols {
         model2: newModel,
       );
 
+      blog('_identical($_identical)');
+      blog('oldModel(${oldModel?.products})');
+      blog('newModel(${newModel.products})');
+
       if (_identical == false){
 
-        await compose(model: newModel);
+        _success = await compose(model: newModel);
 
       }
 
     }
 
+    return _success;
   }
   // -----------------------------------------------------------------------------
 

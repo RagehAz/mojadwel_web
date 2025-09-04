@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/profile_tile.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/the_tile.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dash_provider.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
+import 'package:mojadwel_web/app/screens/b_dashboard_screen/views/product_editor_screen.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
+import 'package:mojadwel_web/core/models/bz_model/bz_model.dart';
 import 'package:mojadwel_web/core/models/bz_model/product_model.dart';
-import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/bubble/bubble.dart';
 import 'package:mojadwel_web/core/shared_components/lists/super_list_view.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
@@ -76,6 +78,65 @@ class _ProductsScreenState extends State<ProductsScreen> {
     _loading.dispose();
     super.dispose();
   }
+  // --------------------------------------------------------------------------
+  Future<void> editProduct({
+    ProductModel? product,
+  }) async {
+
+    final dynamic _result = await Routing.push(
+      context: context,
+      screen: (_) => ProductEditorScreen(
+        product: product,
+      ),
+    );
+
+    if (_result == 'delete'){
+      await _deleteProduct(product);
+    }
+
+    else if (_result is ProductModel){
+      await _insertProduct(_result);
+    }
+
+  }
+  // --------------------
+  Future<void> _insertProduct(ProductModel product) async {
+
+    final DashboardController controller = DashPro.getController();
+
+    final BzModel? _newBz = BzModel.insertProduct(
+      product: product,
+      bzModel: controller.bzModel,
+    );
+
+    await controller.renovateTheModel(_newBz);
+
+    if (mounted){
+      setState(() {});
+    }
+
+  }
+  // --------------------
+  Future<void> _deleteProduct(ProductModel? product) async {
+
+    if (product != null){
+
+      final DashboardController controller = DashPro.getController();
+
+      final BzModel? _newBz = BzModel.deleteProduct(
+        product: product,
+        bzModel: controller.bzModel,
+      );
+
+      await controller.renovateTheModel(_newBz);
+
+      if (mounted){
+        setState(() {});
+      }
+
+    }
+
+  }
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
@@ -86,10 +147,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
     // --------------------
     final List<ProductModel> _products = ProductModel.toList(
-      productsMap: controller.userModel?.products,
+      productsMap: controller.bzModel?.products,
     );
-    // --------------------
-    _products.add(const ProductModel(id: 'id', name: 'name', description: 'description', price: 120.55, currency: 'EGP'));
     // --------------------
     return TheLayout(
       showMenu: false,
@@ -106,9 +165,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               value: 'Add product',
               bigIcon: true,
               icon: '+',
-              onTap: (){
-                blog('should add product');
-                },
+              onTap: () => editProduct(),
             );
           }
 
@@ -119,9 +176,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               value: _product.name,
               icon: Iconz.product,
               bigIcon: true,
-              onTap: (){
-                blog('product is tapped id(${_product.id})');
-                },
+              onTap: () => editProduct(product: _product),
             );
           }
 
