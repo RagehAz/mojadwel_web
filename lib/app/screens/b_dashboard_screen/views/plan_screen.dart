@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mojadwel_web/app/router/routing.dart';
-import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/page_headline.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/components/plan_card.dart';
 import 'package:mojadwel_web/app/screens/b_dashboard_screen/controllers/dashboard_controller.dart';
 import 'package:mojadwel_web/core/layout/the_layout.dart';
@@ -19,36 +18,32 @@ class PlanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // --------------------
-    final double _zoneWidth = context.screenWidth;
     const double _spacing = 10;
     // --------------------
     return TheLayout(
       backgroundColor: Colorz.light1.withAlpha(230),
       hasAppBar: false,
+      title: 'Pricing',
+      showMenu: false,
       child: (ScreenDim screen) => TapLayer(
-        width: _zoneWidth,
-        height: context.screenHeight,
+        width: screen.screenWidth,
+        height: screen.screenHeight,
         splashColor: Colorz.greyDark,
         onTap: () async {
           await Routing.goBack(context: context);
         },
         child: VerticalFloatingList(
-          width: _zoneWidth,
-          height: context.screenHeight,
+          width: screen.bodyWidth,
+          height: screen.screenHeight,
           boxColor: Colorz.nothing,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            /// PAGE HEADLINE
-            PageHeadline(
-              text: 'Pricing',
-              width: _zoneWidth,
-              centered: true,
-            ),
+            const Spacing(size: 20),
 
             /// CARDS
             Container(
-              width: _zoneWidth,
+              width: screen.bodyWidth,
               alignment: Alignment.center,
               child: Wrap(
                 spacing: _spacing,
@@ -57,7 +52,7 @@ class PlanView extends StatelessWidget {
 
                   /// STARTED
                   PlanCard(
-                    zoneWidth: _zoneWidth,
+                    bodyWidth: screen.bodyWidth,
                     headline: 'Starter',
                     secondLine: 'Perfect for small clinics or doctors starting out. Everything you need to connect WhatsApp, Calendar, and Sheets in one simple package.',
                     bullets: const <String>[
@@ -73,7 +68,7 @@ class PlanView extends StatelessWidget {
 
                   /// PRO
                   PlanCard(
-                    zoneWidth: _zoneWidth,
+                    bodyWidth: screen.bodyWidth,
                     headline: 'Professional',
                     secondLine: 'For growing clinics that need more control, deeper insights, and advanced automation.',
                     bullets: const <String>[
@@ -127,7 +122,7 @@ class TheCards extends StatelessWidget {
 
           /// STARTED
           PlanCard(
-            zoneWidth: _zoneWidth,
+            bodyWidth: _zoneWidth,
             headline: 'Starter',
             secondLine: 'Perfect for small clinics or doctors starting out. Everything you need to connect WhatsApp, Calendar, and Sheets in one simple package.',
             bullets: const <String>[
@@ -143,7 +138,7 @@ class TheCards extends StatelessWidget {
 
           /// PRO
           PlanCard(
-            zoneWidth: _zoneWidth,
+            bodyWidth: _zoneWidth,
             headline: 'Professional',
             secondLine: 'For growing clinics that need more control, deeper insights, and advanced automation.',
             bullets: const <String>[

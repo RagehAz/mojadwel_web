@@ -4,7 +4,6 @@ import 'package:mojadwel_web/core/shared_components/super_box/super_box.dart';
 import 'package:mojadwel_web/core/shared_components/super_text/super_text.dart';
 import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
-import 'package:mojadwel_web/core/utilities/contextual.dart';
 
 class PlanCard extends StatelessWidget {
   // --------------------------------------------------------------------------
@@ -13,7 +12,7 @@ class PlanCard extends StatelessWidget {
     required this.secondLine,
     required this.bullets,
     required this.price,
-    required this.zoneWidth,
+    required this.bodyWidth,
     this.onTap,
     super.key
   });
@@ -23,16 +22,27 @@ class PlanCard extends StatelessWidget {
   final List<String> bullets;
   final String price;
   final Function? onTap;
-  final double zoneWidth;
+  final double bodyWidth;
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     // --------------------
-    final double _value = zoneWidth * 0.45;
-    final double _boxWidth = _value; //_value > _min ? _value : _min;
+    final double _currentWidth = bodyWidth * 0.45;
+    const double _max = 600;
+    const double _min = 450;
+    // --------------------
+    final double _boxWidth =
+    _currentWidth > _min && _currentWidth < _max ? _currentWidth
+        :
+    _currentWidth < _min ? _min
+        :
+    _currentWidth > _max ? _max
+        :
+    _currentWidth
+    ;
     // --------------------
     return Container(
-      width: context.screenWidth * 0.5,
+      width: _boxWidth,
       height: 600,
       decoration: BoxDecoration(
         color: Colorz.light1,
@@ -51,7 +61,6 @@ class PlanCard extends StatelessWidget {
             textColor: Colorz.black255,
             maxLines: 2,
             lineSpacingFactor: 0.6,
-            centered: false,
             margins: const EdgeInsets.only(
               left: 10,
               right: 10,
@@ -61,9 +70,9 @@ class PlanCard extends StatelessWidget {
           ),
 
           /// SECOND LINE
-          Container(
+          SizedBox(
             height: 120,
-            alignment: Alignment.topLeft,
+            // alignment: Alignment.topLeft,
             child: SuperText(
               text: secondLine,
               textHeight: 28,

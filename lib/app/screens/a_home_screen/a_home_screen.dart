@@ -173,43 +173,26 @@ class HomeScreen extends StatelessWidget {
                   const Spacing(size: 30),
 
                   /// FAQ TILES
-                  Builder(
-                    builder: (_){
+                  Column(
+                    children: <Widget>[
 
-                      final double _tileWidth = screen.bodyWidth * 0.6;
+                      FAQTile(
+                        bodyWidth: screen.bodyWidth,
+                      ),
 
-                      return Column(
-                        children: <Widget>[
+                      FAQTile(
+                        bodyWidth: screen.bodyWidth,
+                      ),
 
-                          Container(
-                            width: _tileWidth,
-                            height: 100,
-                            color: Colorz.dark2,
-                            margin: const EdgeInsets.all(5),
-                          ),
-                          Container(
-                            width: _tileWidth,
-                            height: 100,
-                            color: Colorz.dark2,
-                            margin: const EdgeInsets.all(5),
-                          ),
-                          Container(
-                            width: _tileWidth,
-                            height: 100,
-                            color: Colorz.dark2,
-                            margin: const EdgeInsets.all(5),
-                          ),
-                          Container(
-                            width: _tileWidth,
-                            height: 100,
-                            color: Colorz.dark2,
-                            margin: const EdgeInsets.all(5),
-                          ),
+                      FAQTile(
+                        bodyWidth: screen.bodyWidth,
+                      ),
 
-                        ],
-                      );
+                      FAQTile(
+                        bodyWidth: screen.bodyWidth,
+                      ),
 
-                    },
+                    ],
                   ),
 
                 ],
@@ -228,6 +211,35 @@ class HomeScreen extends StatelessWidget {
         );
 
       },
+    );
+    // --------------------
+  }
+  // -----------------------------------------------------------------------------
+}
+
+class FAQTile extends StatelessWidget {
+  // --------------------------------------------------------------------------
+  const FAQTile({
+    required this.bodyWidth,
+    super.key
+  });
+  // --------------------
+  final double bodyWidth;
+  // -----------------------------------------------------------------------------
+  @override
+  Widget build(BuildContext context) {
+    // --------------------
+    final double _tileWidth = bodyWidth * 0.7;
+    // --------------------
+    return Container(
+      width: _tileWidth,
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colorz.light2,
+        borderRadius: BorderRadius.circular(20),
+        border: BoxBorder.all(color: Colorz.light3),
+      ),
+      margin: const EdgeInsets.all(5),
     );
     // --------------------
   }
