@@ -17,6 +17,7 @@ import 'package:mojadwel_web/core/theme/colorz.dart';
 import 'package:mojadwel_web/core/theme/fonts.dart';
 import 'package:mojadwel_web/core/theme/iconz.dart';
 import 'package:mojadwel_web/core/utilities/contextual.dart';
+import 'package:mojadwel_web/core/utilities/scale.dart';
 
 class DashboardScreen extends StatefulWidget {
   // --------------------------------------------------------------------------
@@ -87,6 +88,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         boxColor: Colorz.light2,
         boxAlignment: Alignment.topCenter,
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: controller.canBuild == false ? [] : <Widget>[
 
           /// GOOGLE SIGN IN BOX
@@ -118,7 +120,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             textHeight: 60,
                             font: MojadwelFonts.headline,
                             textColor: Colorz.black255,
-                            maxLines: 3,
+                            maxLines: 5,
                             lineSpacingFactor: 0.6,
                           ),
 
@@ -173,120 +175,163 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                   final BzModel? _userModel = controller.bzModel;
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                  return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                      /// PAGE HEADLINE
-                      const PageHeadline(
-                        text: 'PROFILE',
-                      ),
-
-                      /// NAME
-                      TheTile(
-                        headline: 'Owner name',
-                        value: _userModel?.ownerName,
-                        icon: Iconz.user,
-                        redDot: _userModel?.ownerName == null,
-                        onTap: controller.onOwnerNameTap,
-                      ),
-
-                      /// COMPANY NAME
-                      TheTile(
-                        headline: 'Company name',
-                        value: _userModel?.businessName,
-                        icon: Iconz.company,
-                        redDot: _userModel?.businessName == null,
-                        onTap: controller.onBusinessNameTap,
-                      ),
-
-                      /// Email
-                      TheTile(
-                        headline: 'Email',
-                        value: _userModel?.email,
-                        icon: Iconz.email,
-                        redDot: _userModel?.email == null,
-                        // onTap: controller.onEmailTap,
-                      ),
-
-                      /// PHONE
-                      TheTile(
-                        headline: 'Phone',
-                        value: _userModel?.phone,
-                        icon: Iconz.whatsapp,
-                        redDot: _userModel?.phone == null,
-                        onTap: controller.onPhoneTap,
-                      ),
-
-                      /// PLAN
-                      TheTile(
-                        headline: 'Plan',
-                        value: _userModel?.plan,
-                        icon: Iconz.plan,
-                        redDot: _userModel?.plan == null,
-                        onTap: () => controller.onPlanTileTap(
-                          context: context,
+                        /// PAGE HEADLINE
+                        const PageHeadline(
+                          text: 'PROFILE',
                         ),
-                      ),
 
-                      /// EXTRA BZ INFO
-                      TheTile(
-                        headline: 'Extra Business info',
-                        value: _userModel?.extraBzInfo,
-                        icon: Iconz.info,
-                        redDot: _userModel?.extraBzInfo == null,
-                        onTap: controller.onExtraBzInfoTap,
-                      ),
+                        /// NAME
+                        TheTile(
+                          headline: 'Owner name',
+                          value: _userModel?.ownerName,
+                          icon: Iconz.user,
+                          redDot: _userModel?.ownerName == null,
+                          onTap: controller.onOwnerNameTap,
+                        ),
 
-                      /// GOOGLE SHEET
-                      TheTile(
-                        headline: 'Google sheet',
-                        value: null,
-                        icon: Iconz.sheets,
-                        redDot: true,
-                        onTap: controller.onSheetsTileTap,
-                      ),
+                        /// COMPANY NAME
+                        TheTile(
+                          headline: 'Company name',
+                          value: _userModel?.businessName,
+                          icon: Iconz.company,
+                          redDot: _userModel?.businessName == null,
+                          onTap: controller.onBusinessNameTap,
+                        ),
 
-                      /// GOOGLE CALENDAR
-                      TheTile(
-                        headline: 'Google Calendar',
-                        value: null,
-                        icon: Iconz.calendar,
-                        redDot: true,
-                        onTap: controller.onCalendarTileTap,
-                      ),
+                        /// Email
+                        TheTile(
+                          headline: 'Email',
+                          value: _userModel?.email,
+                          icon: Iconz.email,
+                          redDot: _userModel?.email == null,
+                          // onTap: controller.onEmailTap,
+                        ),
 
-                      /// REMINDERS
-                      TheTile(
-                        headline: 'Auto-reminders',
-                        value: null,
-                        icon: Iconz.notification,
-                        redDot: true,
-                        onTap: controller.onRemindersTileTap,
-                      ),
+                        /// PHONE
+                        TheTile(
+                          headline: 'Phone',
+                          value: _userModel?.phone,
+                          icon: Iconz.whatsapp,
+                          redDot: _userModel?.phone == null,
+                          onTap: controller.onPhoneTap,
+                        ),
 
-                      /// AI INSTRUCTIONS
-                      TheTile(
-                        headline: 'Ai Instructions',
-                        value: _userModel?.aiInstructions,
-                        icon: Iconz.scholar,
-                        redDot: _userModel?.aiInstructions == null,
-                        onTap: controller.onAiInstructionsTap,
-                      ),
+                        /// PLAN
+                        TheTile(
+                          headline: 'Plan',
+                          value: _userModel?.plan,
+                          icon: Iconz.plan,
+                          redDot: _userModel?.plan == null,
+                          onTap: () => controller.onPlanTileTap(
+                            context: context,
+                          ),
+                        ),
 
-                      /// PRODUCTS
-                      TheTile(
-                        headline: 'Products',
-                        value: '${_userModel?.products?.keys.length ?? 0} Products',
-                        icon: Iconz.product,
-                        redDot: checkCanLoop(_userModel?.products?.keys.toList()) == false,
-                        onTap: controller.onProductsTileTap,
-                      ),
+                        /// EXTRA BZ INFO
+                        TheTile(
+                          headline: 'Extra Business info',
+                          value: _userModel?.extraBzInfo,
+                          icon: Iconz.info,
+                          redDot: _userModel?.extraBzInfo == null,
+                          onTap: controller.onExtraBzInfoTap,
+                        ),
 
-                      /// SPACING
-                      const Spacing(size: 100),
+                        /// GOOGLE SHEET
+                        TheTile(
+                          headline: 'Google sheet',
+                          value: null,
+                          icon: Iconz.sheets,
+                          redDot: true,
+                          onTap: controller.onSheetsTileTap,
+                        ),
 
-                    ],
+                        /// GOOGLE CALENDAR
+                        TheTile(
+                          headline: 'Google Calendar',
+                          value: null,
+                          icon: Iconz.calendar,
+                          redDot: true,
+                          onTap: controller.onCalendarTileTap,
+                        ),
+
+                        /// REMINDERS
+                        TheTile(
+                          headline: 'Auto-reminders',
+                          value: null,
+                          icon: Iconz.notification,
+                          redDot: true,
+                          onTap: controller.onRemindersTileTap,
+                        ),
+
+                        /// AI INSTRUCTIONS
+                        TheTile(
+                          headline: 'Ai Instructions',
+                          value: _userModel?.aiInstructions,
+                          icon: Iconz.scholar,
+                          redDot: _userModel?.aiInstructions == null,
+                          onTap: controller.onAiInstructionsTap,
+                        ),
+
+                        /// PRODUCTS
+                        TheTile(
+                          headline: 'Products',
+                          value: '${_userModel?.products?.keys.length ?? 0} Products',
+                          icon: Iconz.product,
+                          redDot: checkCanLoop(_userModel?.products?.keys.toList()) == false,
+                          onTap: controller.onProductsTileTap,
+                        ),
+
+                        /// CONFIRM
+                        SizedBox(
+                          width: Scale.theBodyWidth(context) * 0.9,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+
+                              SuperBox(
+                                height: 80,
+                                width: screen.bodyWidth * 0.3,
+                                text: 'Reload profile',
+                                textScaleFactor: 0.7,
+                                textColor: Colorz.light1,
+                                textFont: MojadwelFonts.headline,
+                                color: Colorz.black,
+                                onTap: () async {
+
+                                  await controller.refetchBzModel();
+
+                                },
+                              ),
+
+                              const Spacing(size: 5),
+
+                              SuperBox(
+                                height: 80,
+                                width: screen.bodyWidth * 0.3,
+                                text: 'Sign Out',
+                                textScaleFactor: 0.7,
+                                textColor: Colorz.light1,
+                                textFont: MojadwelFonts.headline,
+                                color: Colorz.black,
+                                onTap: () async {
+                                  await controller.signOut();
+                                },
+                              ),
+
+                            ],
+                          ),
+                        ),
+
+                        /// SPACING
+                        const Spacing(size: 100),
+
+                      ],
+                    ),
                   );
                 }
             ),

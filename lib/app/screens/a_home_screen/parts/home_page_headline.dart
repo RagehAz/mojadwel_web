@@ -20,7 +20,7 @@ class HomePageHeadline extends StatelessWidget {
       textHeight: 100,
       font: MojadwelFonts.headline,
       textColor: Colorz.black255,
-      maxLines: 2,
+      maxLines: 4,
       lineSpacingFactor: 0.6,
       margins: 5,
     );

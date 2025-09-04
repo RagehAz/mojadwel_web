@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mojadwel_web/app/router/routing.dart';
 import 'package:mojadwel_web/core/services/fire/fire.dart';
 import 'package:mojadwel_web/core/shared_components/lists/expander.dart';
 import 'package:mojadwel_web/core/shared_components/lists/separator_line.dart';
@@ -19,6 +20,9 @@ class HomePageFooter extends StatelessWidget {
   // -----------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+
+    final double _spacing = width * 0.0005 * 0;
+
     // --------------------
     return Column(
       children: [
@@ -38,6 +42,35 @@ class HomePageFooter extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+
+              /// SPACING
+              const Spacing(size: 20),
+
+              /// LOGO
+              const SuperBox(
+                height: 40,
+                // width: _appBarHeight,
+                // icon: Iconz.logoPng,
+                text: theBrandName,
+                textColor: Colorz.black255,
+                textFont: MojadwelFonts.headline,
+                textWeight: FontWeight.w500,
+                textScaleFactor: 1.5 / 0.7,
+                iconSizeFactor: 0.7,
+                splashColor: Colorz.nothing,
+                margins: EdgeInsets.symmetric(horizontal: 10),
+              ),
+
+              /// SPACING
+              Spacing(size: _spacing),
+
+              /// COPY RIGHTS
+              const _SmallText(
+                text: 'V0.1',
+              ),
+
+              /// EXPANDER
+              const Expander(),
 
               /// FOLLOW US
               const SuperBox(
@@ -98,49 +131,30 @@ class HomePageFooter extends StatelessWidget {
           child: Row(
             children: <Widget>[
 
-              /// LOGO
-              const SuperBox(
-                height: 40,
-                // width: _appBarHeight,
-                // icon: Iconz.logoPng,
-                text: theBrandName,
-                textColor: Colorz.black255,
-                textFont: MojadwelFonts.headline,
-                textWeight: FontWeight.w500,
-                textScaleFactor: 1.5 / 0.7,
-                iconSizeFactor: 0.7,
-                splashColor: Colorz.nothing,
-                margins: EdgeInsets.symmetric(horizontal: 10),
-              ),
-
-              /// EXPANDER
-              const Expander(),
+              /// SPACING
+              const Spacing(size: 20),
 
               /// COPY RIGHTS
               const _SmallText(
                 text: '©2025 $theCompanyName',
               ),
 
-              /// SPACING
-              const Spacing(size: 5),
+              /// EXPANDER
+              const Expander(),
 
               /// LEGAL
               _SmallText(
                 text: 'Legal',
-                onTap: (){
-                  blog('should go to legal terms and regulations page');
-                },
+                onTap: () => Routing.goTo(route: Routing.routeTerms),
               ),
 
               /// SPACING
-              const Spacing(size: 5),
+              Spacing(size: _spacing),
 
               /// PRIVACY
               _SmallText(
                 text: 'Privacy',
-                onTap: (){
-                  blog('should go to privacy policy page');
-                },
+                onTap: () => Routing.goTo(route: Routing.routePrivacy),
               ),
 
               /// SPACING
@@ -176,12 +190,12 @@ class _SmallText extends StatelessWidget {
     return SuperBox(
       text: text,
       textColor: Colorz.black255,
-      height: 25,
+      height: 30,
       corners: 4,
-      textScaleFactor: 1.1,
       textFont: MojadwelFonts.body,
       onTap: onTap,
       splashColor: Colorz.bloodTest,
+      // color: Colorz.bloodTest,
     );
     // --------------------
   }

@@ -117,7 +117,7 @@ class DashboardController {
 
     if (authModel?.id != null){
 
-      final BzModel? _userModel = BzModel(
+      final BzModel? _bzModel = BzModel(
         id: authModel!.id!,
         createdAt: DateTime.now(),
         ownerName: authModel!.name,
@@ -134,9 +134,30 @@ class DashboardController {
         accountStatus: null,
       );
 
-      await BzProtocols.compose(model: _userModel);
+      await BzProtocols.compose(model: _bzModel);
 
-      bzModel = _userModel;
+      bzModel = _bzModel;
+      refresh!();
+
+    }
+
+  }
+  // --------------------
+  Future<void> refetchBzModel() async {
+    await BzLDBOps.delete(id: bzModel?.id);
+    final BzModel? _bzModel = await BzProtocols.fetch(id: bzModel?.id);
+    bzModel = _bzModel;
+    refresh!();
+  }
+  // --------------------
+  Future<void> signOut() async {
+
+    final bool _signedOut = await OfficialAuthing.signOut();
+
+    if (_signedOut == true){
+
+      bzModel = null;
+      authModel = null;
       refresh!();
 
     }

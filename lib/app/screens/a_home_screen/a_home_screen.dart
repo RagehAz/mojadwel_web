@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                   SuperBox(
                     height: 90,
                     width: screen.bodyWidth * 0.4,
-                    text: 'Start ..',
+                    text: 'Start !',
                     color: Colorz.black255,
                     textFont: MojadwelFonts.headline,
                     margins: 20,
